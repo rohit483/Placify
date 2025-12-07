@@ -1,0 +1,1768 @@
+[
+    {
+        "id": 1,
+        "name": "Accuknox",
+        "role": "Manual Test Engineer",
+        "location": "Remote",
+        "email": "careers@accuknox.com",
+        "skills": [
+            "System architecture",
+            "Stress testing",
+            "cloud security",
+            "Load testing",
+            "Testing tools",
+            "Performance testing",
+            "Vulnerability",
+            "Test cases",
+            "Penetration testing"
+        ],
+        "description": "Manual Test Engineer at Accuknox in Remote. Skills: System architecture, Stress testing, cloud security, Load testing, Testing tools, Performance testing, Vulnerability, Test cases, Penetration testing."
+    },
+    {
+        "id": 2,
+        "name": "Accenture",
+        "role": "Security Engineer / Analyst",
+        "location": "Indore",
+        "email": "careers@accenture.com",
+        "skills": [
+            "network security",
+            "sap security",
+            "access management",
+            "cyber security",
+            "threat management",
+            "information security",
+            "vulnerability assessment",
+            "security systems"
+        ],
+        "description": "Security Engineer / Analyst at Accenture in Indore. Skills: network security, sap security, access management, cyber security, threat management, information security, vulnerability assessment, security systems."
+    },
+    {
+        "id": 3,
+        "name": "Cyber Infrastructure",
+        "role": "Software Development - Other",
+        "location": "Indore",
+        "email": "careers@cyberinfrastructure.com",
+        "skills": [
+            "OOPS",
+            "C#",
+            "SQL Database",
+            ".Net"
+        ],
+        "description": "Software Development - Other at Cyber Infrastructure in Indore. Skills: OOPS, C#, SQL Database, .Net."
+    },
+    {
+        "id": 4,
+        "name": "Ditstek Innovation Pvt. Ltd.",
+        "role": "System Administrator / Engineer",
+        "location": "Indore",
+        "email": "careers@ditstekinnovationpvt.ltd..com",
+        "skills": [
+            "PowerShell",
+            "Backup Administration",
+            "Cyber Security",
+            "Ansible",
+            "HIPAA",
+            "IT Operations",
+            "Python"
+        ],
+        "description": "System Administrator / Engineer at Ditstek Innovation Pvt. Ltd. in Indore. Skills: PowerShell, Backup Administration, Cyber Security, Ansible, HIPAA, IT Operations, Python."
+    },
+    {
+        "id": 5,
+        "name": "Symbiosis University of Applied Sciences(SUAS)",
+        "role": "Academic Coordinator",
+        "location": "Indore( Bada Bangarda )",
+        "email": "careers@symbiosisuniversityofappliedsciences(suas).com",
+        "skills": [
+            "Communication Skills",
+            "Presentation Skills",
+            "Coordination",
+            "Facilitation",
+            "Coordination Skills",
+            "Interpersonal Skills"
+        ],
+        "description": "Academic Coordinator at Symbiosis University of Applied Sciences(SUAS) in Indore( Bada Bangarda ). Skills: Communication Skills, Presentation Skills, Coordination, Facilitation, Coordination Skills, Interpersonal Skills."
+    },
+    {
+        "id": 6,
+        "name": "NextGen Invent",
+        "role": "QA Team Manager",
+        "location": "Remote",
+        "email": "careers@nextgeninvent.com",
+        "skills": [
+            "ISMS",
+            "Internal audit",
+            "ISO 9001",
+            "Compliance",
+            "Information security management",
+            "HIPAA",
+            "ISO 27001",
+            "Management",
+            "Software quality assurance",
+            "SDLC"
+        ],
+        "description": "QA Team Manager at NextGen Invent in Remote. Skills: ISMS, Internal audit, ISO 9001, Compliance, Information security management, HIPAA, ISO 27001, Management, Software quality assurance, SDLC."
+    },
+    {
+        "id": 7,
+        "name": "Astra Security",
+        "role": "Application Security Engineer",
+        "location": "Remote",
+        "email": "careers@astrasecurity.com",
+        "skills": [
+            "French",
+            "Web technologies",
+            "cyber security",
+            "SAAS",
+            "Cloud",
+            "Vulnerability",
+            "Open source",
+            "Testing"
+        ],
+        "description": "Application Security Engineer at Astra Security in Remote. Skills: French, Web technologies, cyber security, SAAS, Cloud, Vulnerability, Open source, Testing."
+    },
+    {
+        "id": 8,
+        "name": "Microexcel",
+        "role": "Hardware Platform Engineer",
+        "location": "Remote",
+        "email": "careers@microexcel.com",
+        "skills": [
+            "SAN",
+            "KVM",
+            "Linux",
+            "Infrastructure management",
+            "Information security",
+            "Customer service",
+            "Troubleshooting",
+            "Open source",
+            "Information technology",
+            "Virtualization"
+        ],
+        "description": "Hardware Platform Engineer at Microexcel in Remote. Skills: SAN, KVM, Linux, Infrastructure management, Information security, Customer service, Troubleshooting, Open source, Information technology, Virtualization."
+    },
+    {
+        "id": 9,
+        "name": "phData",
+        "role": "Engineering Manager",
+        "location": "Remote",
+        "email": "careers@phdata.com",
+        "skills": [
+            "Automation",
+            "Product engineering",
+            "Performance management",
+            "Coding",
+            "Access management",
+            "Project management",
+            "Information security",
+            "SOC",
+            "Risk management",
+            "Auditing"
+        ],
+        "description": "Engineering Manager at phData in Remote. Skills: Automation, Product engineering, Performance management, Coding, Access management, Project management, Information security, SOC, Risk management, Auditing."
+    },
+    {
+        "id": 10,
+        "name": "Sentient Foundation",
+        "role": "Head - Information Security",
+        "location": "Remote",
+        "email": "careers@sentientfoundation.com",
+        "skills": [
+            "Backend",
+            "Front end",
+            "ISO",
+            "Cisa",
+            "Information security",
+            "ISO 27001",
+            "Incident management",
+            "Application security",
+            "Risk management",
+            "Penetration testing"
+        ],
+        "description": "Head - Information Security at Sentient Foundation in Remote. Skills: Backend, Front end, ISO, Cisa, Information security, ISO 27001, Incident management, Application security, Risk management, Penetration testing."
+    },
+    {
+        "id": 11,
+        "name": "Talent Corner Hr Services",
+        "role": "Cyber Security",
+        "location": "Mumbai, Indore",
+        "email": "careers@talentcornerhrservices.com",
+        "skills": [
+            "Firewalls",
+            "endpoint security",
+            "CEH",
+            "DLP",
+            "ITIL",
+            "IPS",
+            "NAC",
+            "PMP",
+            "SIEM",
+            "CISSP",
+            "IDS",
+            "CISM"
+        ],
+        "description": "Cyber Security at Talent Corner Hr Services in Mumbai, Indore. Skills: Firewalls, endpoint security, CEH, DLP, ITIL, IPS, NAC, PMP, SIEM, CISSP, IDS, CISM."
+    },
+    {
+        "id": 12,
+        "name": "Tufropes",
+        "role": "IT & Information Security - Other",
+        "location": "Indore, Mumbai (All Areas)",
+        "email": "careers@tufropes.com",
+        "skills": [
+            "Cyber Security",
+            "Infrastructure Management",
+            "IT Strategy Planning",
+            "IT Operations",
+            "Network Infrastructure Management",
+            "Solution Architecting",
+            "Data Center Management",
+            "IT Security Management",
+            "IT Infrastructure",
+            "IT Budgeting"
+        ],
+        "description": "IT & Information Security - Other at Tufropes in Indore, Mumbai (All Areas). Skills: Cyber Security, Infrastructure Management, IT Strategy Planning, IT Operations, Network Infrastructure Management, Solution Architecting, Data Center Management, IT Security Management, IT Infrastructure, IT Budgeting."
+    },
+    {
+        "id": 13,
+        "name": "Masai School",
+        "role": "Search Engineer",
+        "location": "Remote",
+        "email": "careers@masaischool.com",
+        "skills": [
+            "Cloud computing",
+            "LMS",
+            "Networking",
+            "Linux",
+            "Infrastructure management",
+            "GCP",
+            "devops",
+            "Cloud",
+            "System administration",
+            "Teaching"
+        ],
+        "description": "Search Engineer at Masai School in Remote. Skills: Cloud computing, LMS, Networking, Linux, Infrastructure management, GCP, devops, Cloud, System administration, Teaching."
+    },
+    {
+        "id": 14,
+        "name": "Einfochips",
+        "role": "Software Development - Other",
+        "location": "Indore, Pune, Ahmedabad",
+        "email": "careers@einfochips.com",
+        "skills": [
+            "CRM",
+            "C#",
+            "JavaScript"
+        ],
+        "description": "Software Development - Other at Einfochips in Indore, Pune, Ahmedabad. Skills: CRM, C#, JavaScript."
+    },
+    {
+        "id": 15,
+        "name": "Serosoft Solutions",
+        "role": "Full Stack Developer",
+        "location": "Indore",
+        "email": "careers@serosoftsolutions.com",
+        "skills": [
+            "Maven",
+            "Hibernate",
+            "ERP",
+            "Software design",
+            "Coding",
+            "Enterprise applications",
+            "MySQL",
+            "Oracle",
+            "ExtJS"
+        ],
+        "description": "Full Stack Developer at Serosoft Solutions in Indore. Skills: Maven, Hibernate, ERP, Software design, Coding, Enterprise applications, MySQL, Oracle, ExtJS."
+    },
+    {
+        "id": 16,
+        "name": "Rarr Technologies",
+        "role": "Search Engineer",
+        "location": "Remote",
+        "email": "careers@rarrtechnologies.com",
+        "skills": [
+            "Backend",
+            "GIT",
+            "orchestration",
+            "Production support",
+            "Integration testing",
+            "Selenium",
+            "Unit testing",
+            "Monitoring",
+            "Scripting",
+            "Python"
+        ],
+        "description": "Search Engineer at Rarr Technologies in Remote. Skills: Backend, GIT, orchestration, Production support, Integration testing, Selenium, Unit testing, Monitoring, Scripting, Python."
+    },
+    {
+        "id": 17,
+        "name": "Learneo Com",
+        "role": "DevOps Engineer",
+        "location": "remote",
+        "email": "careers@learneocom.com",
+        "skills": [
+            "Computer science",
+            "Automation",
+            "Linux",
+            "Networking",
+            "GCP",
+            "Analytical",
+            "Troubleshooting",
+            "Information technology",
+            "Distribution system",
+            "Python"
+        ],
+        "description": "DevOps Engineer at Learneo Com in remote. Skills: Computer science, Automation, Linux, Networking, GCP, Analytical, Troubleshooting, Information technology, Distribution system, Python."
+    },
+    {
+        "id": 18,
+        "name": "Swastika Investmart",
+        "role": "Network (Support) Engineer",
+        "location": "Indore",
+        "email": "careers@swastikainvestmart.com",
+        "skills": [
+            "Jenkins",
+            "AWS"
+        ],
+        "description": "Network (Support) Engineer at Swastika Investmart in Indore. Skills: Jenkins, AWS."
+    },
+    {
+        "id": 19,
+        "name": "Fiftyfive Technologies",
+        "role": "DevOps Engineer",
+        "location": "Indore, Jaipur",
+        "email": "careers@fiftyfivetechnologies.com",
+        "skills": [
+            "Computer science",
+            "Automation",
+            "Networking",
+            "Linux",
+            "GCP",
+            "Configuration management",
+            "Shell scripting",
+            "Cloud",
+            "Infrastructure",
+            "Python"
+        ],
+        "description": "DevOps Engineer at Fiftyfive Technologies in Indore, Jaipur. Skills: Computer science, Automation, Networking, Linux, GCP, Configuration management, Shell scripting, Cloud, Infrastructure, Python."
+    },
+    {
+        "id": 20,
+        "name": "Victrix Systems And Labs",
+        "role": "Full Stack Developer",
+        "location": "Indore",
+        "email": "careers@victrixsystemsandlabs.com",
+        "skills": [
+            ".Net",
+            "C#",
+            "AngularJS",
+            "Azure",
+            "Javascript",
+            "SQL Server",
+            "ASP"
+        ],
+        "description": "Full Stack Developer at Victrix Systems And Labs in Indore. Skills: .Net, C#, AngularJS, Azure, Javascript, SQL Server, ASP."
+    },
+    {
+        "id": 21,
+        "name": "emagine",
+        "role": "Release Manager",
+        "location": "Remote",
+        "email": "careers@emagine.com",
+        "skills": [
+            "continuous integration",
+            "cd",
+            "release management",
+            "software development",
+            "program management",
+            "coordination",
+            "software development life cycle",
+            "servicenow",
+            "git",
+            "stakeholder management",
+            "devops",
+            "scrum",
+            "communication skills",
+            "itil",
+            "jira"
+        ],
+        "description": "Release Manager at emagine in Remote. Skills: continuous integration, cd, release management, software development, program management, coordination, software development life cycle, servicenow, git, stakeholder management, devops, scrum, communication skills, itil, jira."
+    },
+    {
+        "id": 22,
+        "name": "Exavalu",
+        "role": "QA Team Manager",
+        "location": "remote",
+        "email": "careers@exavalu.com",
+        "skills": [
+            "Automation",
+            "Data validation",
+            "Front end",
+            "Analytical",
+            "Performance testing",
+            "Agile",
+            "Scrum",
+            "Risk management",
+            "Monitoring",
+            "SDLC"
+        ],
+        "description": "QA Team Manager at Exavalu in remote. Skills: Automation, Data validation, Front end, Analytical, Performance testing, Agile, Scrum, Risk management, Monitoring, SDLC."
+    },
+    {
+        "id": 23,
+        "name": "Shj International",
+        "role": "Back End Developer",
+        "location": "Indore, Delhi / NCR, Mumbai (All Areas)",
+        "email": "careers@shjinternational.com",
+        "skills": [
+            "Spring Boot",
+            "Java",
+            "Hibernate",
+            "Problem Solving",
+            "Mariadb",
+            "Communication Skills",
+            "Backend",
+            "GIT",
+            "Docker",
+            "JPA"
+        ],
+        "description": "Back End Developer at Shj International in Indore, Delhi / NCR, Mumbai (All Areas). Skills: Spring Boot, Java, Hibernate, Problem Solving, Mariadb, Communication Skills, Backend, GIT, Docker, JPA."
+    },
+    {
+        "id": 24,
+        "name": "Serigor",
+        "role": "System Administrator / Engineer",
+        "location": "Remote",
+        "email": "careers@serigor.com",
+        "skills": [
+            "Change management",
+            "Automation",
+            "LDAP",
+            "Access management",
+            "GCP",
+            "Powershell",
+            "Cloud",
+            "Active directory",
+            "microsoft",
+            "Python"
+        ],
+        "description": "System Administrator / Engineer at Serigor in Remote. Skills: Change management, Automation, LDAP, Access management, GCP, Powershell, Cloud, Active directory, microsoft, Python."
+    },
+    {
+        "id": 25,
+        "name": "Relq Technologies",
+        "role": "Test Architect",
+        "location": "REMOTE",
+        "email": "careers@relqtechnologies.com",
+        "skills": [
+            "github",
+            "GIT",
+            "Data management",
+            "Test strategy",
+            "TDD",
+            "Analytical",
+            "Integration testing",
+            "Performance testing",
+            "Selenium",
+            "Test cases"
+        ],
+        "description": "Test Architect at Relq Technologies in REMOTE. Skills: github, GIT, Data management, Test strategy, TDD, Analytical, Integration testing, Performance testing, Selenium, Test cases."
+    },
+    {
+        "id": 26,
+        "name": "Keeptruckin",
+        "role": "Site Reliability Engineer",
+        "location": "Remote",
+        "email": "careers@keeptruckin.com",
+        "skills": [
+            "Computer science",
+            "Architect",
+            "Automation",
+            "Backend",
+            "Incident management",
+            "Troubleshooting",
+            "Operations",
+            "Monitoring",
+            "Logistics",
+            "Python"
+        ],
+        "description": "Site Reliability Engineer at Keeptruckin in Remote. Skills: Computer science, Architect, Automation, Backend, Incident management, Troubleshooting, Operations, Monitoring, Logistics, Python."
+    },
+    {
+        "id": 27,
+        "name": "Milestone Technologies, Inc",
+        "role": "Site Reliability Engineer",
+        "location": "Remote",
+        "email": "careers@milestonetechnologies,inc.com",
+        "skills": [
+            "Performance tuning",
+            "Networking",
+            "Data management",
+            "Coding",
+            "JSON",
+            "Data quality",
+            "Distribution system",
+            "SQL",
+            "Python",
+            "Auditing"
+        ],
+        "description": "Site Reliability Engineer at Milestone Technologies, Inc in Remote. Skills: Performance tuning, Networking, Data management, Coding, JSON, Data quality, Distribution system, SQL, Python, Auditing."
+    },
+    {
+        "id": 28,
+        "name": "Nimesa Technology",
+        "role": "Enterprise & B2B Sales - Other",
+        "location": "Bhopal",
+        "email": "careers@nimesatechnology.com",
+        "skills": [
+            "Corporate Sales",
+            "Sales",
+            "IT Product Sales",
+            "B2B Sales",
+            "IT Sales"
+        ],
+        "description": "Enterprise & B2B Sales - Other at Nimesa Technology in Bhopal. Skills: Corporate Sales, Sales, IT Product Sales, B2B Sales, IT Sales."
+    },
+    {
+        "id": 29,
+        "name": "Tinvio Digital Services",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Indore",
+        "email": "careers@tinviodigitalservices.com",
+        "skills": [
+            "Python",
+            "Django",
+            "Cloud"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at Tinvio Digital Services in Indore. Skills: Python, Django, Cloud."
+    },
+    {
+        "id": 30,
+        "name": "Stanra Tech Solutions",
+        "role": "Full Stack Developer",
+        "location": "Bhopal",
+        "email": "careers@stanratechsolutions.com",
+        "skills": [
+            "SAP",
+            "Solution Integration",
+            "Apex",
+            "Salesforce"
+        ],
+        "description": "Full Stack Developer at Stanra Tech Solutions in Bhopal. Skills: SAP, Solution Integration, Apex, Salesforce."
+    },
+    {
+        "id": 31,
+        "name": "Clario",
+        "role": "Search Engineer",
+        "location": "Remote",
+        "email": "careers@clario.com",
+        "skills": [
+            "NUnit",
+            "github",
+            "Front end",
+            "Web technologies",
+            "RDBMS",
+            "Postgresql",
+            "data integrity",
+            "Test cases",
+            "Unit testing",
+            "SQL"
+        ],
+        "description": "Search Engineer at Clario in Remote. Skills: NUnit, github, Front end, Web technologies, RDBMS, Postgresql, data integrity, Test cases, Unit testing, SQL."
+    },
+    {
+        "id": 32,
+        "name": "HCLTech",
+        "role": "Technical Lead",
+        "location": "Bhopal, Nagpur, Pune",
+        "email": "careers@hcltech.com",
+        "skills": [
+            "Jenkins",
+            "Devops"
+        ],
+        "description": "Technical Lead at HCLTech in Bhopal, Nagpur, Pune. Skills: Jenkins, Devops."
+    },
+    {
+        "id": 33,
+        "name": "Techdome Solutions",
+        "role": "Automation Test Engineer",
+        "location": "Indore, Hyderabad",
+        "email": "careers@techdomesolutions.com",
+        "skills": [
+            "Maven",
+            "Automation",
+            "Load testing",
+            "Testing tools",
+            "Functional testing",
+            "Selenium",
+            "JIRA",
+            "SQL",
+            "Python"
+        ],
+        "description": "Automation Test Engineer at Techdome Solutions in Indore, Hyderabad. Skills: Maven, Automation, Load testing, Testing tools, Functional testing, Selenium, JIRA, SQL, Python."
+    },
+    {
+        "id": 34,
+        "name": "Ione It Solutions",
+        "role": "IT Infrastructure Services - Other",
+        "location": "Indore",
+        "email": "careers@ioneitsolutions.com",
+        "skills": [
+            "PMP",
+            "Agile",
+            "IT Project Management"
+        ],
+        "description": "IT Infrastructure Services - Other at Ione It Solutions in Indore. Skills: PMP, Agile, IT Project Management."
+    },
+    {
+        "id": 35,
+        "name": "Hvantage",
+        "role": "Front End Developer",
+        "location": "Indore",
+        "email": "careers@hvantage.com",
+        "skills": [
+            "CSS",
+            "Javascript",
+            "React.Js",
+            "Microservices",
+            "HTML"
+        ],
+        "description": "Front End Developer at Hvantage in Indore. Skills: CSS, Javascript, React.Js, Microservices, HTML."
+    },
+    {
+        "id": 36,
+        "name": "Kanerika Software",
+        "role": "DevOps Engineer",
+        "location": "Indore",
+        "email": "careers@kanerikasoftware.com",
+        "skills": [
+            "Jenkins",
+            "Docker",
+            "AWS",
+            "Azure",
+            "Ansible",
+            "Scripting Languages"
+        ],
+        "description": "DevOps Engineer at Kanerika Software in Indore. Skills: Jenkins, Docker, AWS, Azure, Ansible, Scripting Languages."
+    },
+    {
+        "id": 37,
+        "name": "Artemis Health",
+        "role": "Practice Manager / Head",
+        "location": "Remote",
+        "email": "careers@artemishealth.com",
+        "skills": [
+            "Process automation",
+            "Automation",
+            "Team management",
+            "Process improvement",
+            "Disaster recovery",
+            "Technical leadership",
+            "Healthcare",
+            "Operations",
+            "Service quality",
+            "Monitoring"
+        ],
+        "description": "Practice Manager / Head at Artemis Health in Remote. Skills: Process automation, Automation, Team management, Process improvement, Disaster recovery, Technical leadership, Healthcare, Operations, Service quality, Monitoring."
+    },
+    {
+        "id": 38,
+        "name": "Chapter247 Infotech",
+        "role": "Full Stack Developer",
+        "location": "Indore( Nipania )",
+        "email": "careers@chapter247infotech.com",
+        "skills": [
+            "Team Leading",
+            "Node.Js",
+            "MongoDB",
+            "AWS"
+        ],
+        "description": "Full Stack Developer at Chapter247 Infotech in Indore( Nipania ). Skills: Team Leading, Node.Js, MongoDB, AWS."
+    },
+    {
+        "id": 39,
+        "name": "Systango",
+        "role": "Technical Architect",
+        "location": "Indore",
+        "email": "careers@systango.com",
+        "skills": [
+            "Computer science",
+            "Automation",
+            "Product engineering",
+            "Postgresql",
+            "Django",
+            "MySQL",
+            "Machine learning",
+            "System design",
+            "Distribution system",
+            "Python"
+        ],
+        "description": "Technical Architect at Systango in Indore. Skills: Computer science, Automation, Product engineering, Postgresql, Django, MySQL, Machine learning, System design, Distribution system, Python."
+    },
+    {
+        "id": 40,
+        "name": "SmarTek21",
+        "role": "DevOps Engineer",
+        "location": "Remote",
+        "email": "careers@smartek21.com",
+        "skills": [
+            "remediation",
+            "PCI DSS",
+            "Automation",
+            "ISO 27001",
+            "Cloud",
+            "Vulnerability",
+            "Open source",
+            "Monitoring",
+            "Python",
+            "Penetration testing"
+        ],
+        "description": "DevOps Engineer at SmarTek21 in Remote. Skills: remediation, PCI DSS, Automation, ISO 27001, Cloud, Vulnerability, Open source, Monitoring, Python, Penetration testing."
+    },
+    {
+        "id": 41,
+        "name": "Akamai",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Remote",
+        "email": "careers@akamai.com",
+        "skills": [
+            "Backend",
+            "orchestration",
+            "Architecture",
+            "Internet security",
+            "Network security",
+            "HTML",
+            "Product support",
+            "Python",
+            "CSS3"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at Akamai in Remote. Skills: Backend, orchestration, Architecture, Internet security, Network security, HTML, Product support, Python, CSS3."
+    },
+    {
+        "id": 42,
+        "name": "Sterling Talent",
+        "role": "Head - Engineering",
+        "location": "Remote",
+        "email": "careers@sterlingtalent.com",
+        "skills": [
+            "Computer science",
+            "Performance tuning",
+            "Software design",
+            "Coding",
+            "Enterprise applications",
+            "GCP",
+            "Resource allocation",
+            "Agile",
+            "Application security",
+            "SDLC"
+        ],
+        "description": "Head - Engineering at Sterling Talent in Remote. Skills: Computer science, Performance tuning, Software design, Coding, Enterprise applications, GCP, Resource allocation, Agile, Application security, SDLC."
+    },
+    {
+        "id": 43,
+        "name": "Infogrowth",
+        "role": "IT Support - Other",
+        "location": "Indore, Pune, Bengaluru",
+        "email": "careers@infogrowth.com",
+        "skills": [
+            "Client Coordination",
+            "Salesforce",
+            "CSS",
+            "HTML",
+            "Client Interaction",
+            "Client Management",
+            "International Clients",
+            "Consulting",
+            "Client Engagement",
+            "CRM"
+        ],
+        "description": "IT Support - Other at Infogrowth in Indore, Pune, Bengaluru. Skills: Client Coordination, Salesforce, CSS, HTML, Client Interaction, Client Management, International Clients, Consulting, Client Engagement, CRM."
+    },
+    {
+        "id": 44,
+        "name": "Sand Technologies",
+        "role": "IT Support - Other",
+        "location": "Remote",
+        "email": "careers@sandtechnologies.com",
+        "skills": [
+            "Cisa",
+            "Access management",
+            "Analytical",
+            "Risk assessment",
+            "ISO 27001",
+            "IT risk management",
+            "Healthcare",
+            "Video conferencing",
+            "Scheduling",
+            "Vulnerability management"
+        ],
+        "description": "IT Support - Other at Sand Technologies in Remote. Skills: Cisa, Access management, Analytical, Risk assessment, ISO 27001, IT risk management, Healthcare, Video conferencing, Scheduling, Vulnerability management."
+    },
+    {
+        "id": 45,
+        "name": "Clarion Technologies",
+        "role": "Cloud System Administration",
+        "location": "Remote",
+        "email": "careers@clariontechnologies.com",
+        "skills": [
+            "Automation",
+            "Networking",
+            "Infrastructure management",
+            "Powershell",
+            "Disaster recovery",
+            "Active directory",
+            "Windows",
+            "RFP",
+            "Python",
+            "Technical documentation"
+        ],
+        "description": "Cloud System Administration at Clarion Technologies in Remote. Skills: Automation, Networking, Infrastructure management, Powershell, Disaster recovery, Active directory, Windows, RFP, Python, Technical documentation."
+    },
+    {
+        "id": 46,
+        "name": "World Courier",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Remote",
+        "email": "careers@worldcourier.com",
+        "skills": [
+            "ERP",
+            "Automation",
+            "SAP",
+            "Linux",
+            "Networking",
+            "Db2",
+            "JBoss",
+            "Windows",
+            "CRM",
+            "Python"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at World Courier in Remote. Skills: ERP, Automation, SAP, Linux, Networking, Db2, JBoss, Windows, CRM, Python."
+    },
+    {
+        "id": 47,
+        "name": "GTS Telecom Services",
+        "role": "IT Support - Other",
+        "location": "Bhopal",
+        "email": "careers@gtstelecomservices.com",
+        "skills": [
+            "PowerShell",
+            "Devops",
+            "IAM",
+            "Docker",
+            "Python"
+        ],
+        "description": "IT Support - Other at GTS Telecom Services in Bhopal. Skills: PowerShell, Devops, IAM, Docker, Python."
+    },
+    {
+        "id": 48,
+        "name": "Modernlogic Solutions",
+        "role": "Associate / Consultant",
+        "location": "Remote",
+        "email": "careers@modernlogicsolutions.com",
+        "skills": [
+            "Unix",
+            "Computer science",
+            "Redhat Linux",
+            "Networking",
+            "Consulting",
+            "Disaster recovery",
+            "Support services",
+            "Windows",
+            "System administration",
+            "Windows System Administration"
+        ],
+        "description": "Associate / Consultant at Modernlogic Solutions in Remote. Skills: Unix, Computer science, Redhat Linux, Networking, Consulting, Disaster recovery, Support services, Windows, System administration, Windows System Administration."
+    },
+    {
+        "id": 49,
+        "name": "Amazon",
+        "role": "Solution Architect",
+        "location": "Remote",
+        "email": "careers@amazon.com",
+        "skills": [
+            "SAP",
+            "Network design",
+            "Production support",
+            "Architecture",
+            "EDI",
+            "IT management",
+            "Oracle",
+            "Operations",
+            "Ariba"
+        ],
+        "description": "Solution Architect at Amazon in Remote. Skills: SAP, Network design, Production support, Architecture, EDI, IT management, Oracle, Operations, Ariba."
+    },
+    {
+        "id": 50,
+        "name": "Scientech Technologies",
+        "role": "Post Silicon Test Engineer",
+        "location": "Indore",
+        "email": "careers@scientechtechnologies.com",
+        "skills": [
+            "C++",
+            "VB.NET",
+            "Linux",
+            "MySQL",
+            "CAD",
+            "IT skills",
+            "PHP",
+            "HTML",
+            "Resource planning",
+            "Python"
+        ],
+        "description": "Post Silicon Test Engineer at Scientech Technologies in Indore. Skills: C++, VB.NET, Linux, MySQL, CAD, IT skills, PHP, HTML, Resource planning, Python."
+    },
+    {
+        "id": 51,
+        "name": "Veza Technologies",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Remote",
+        "email": "careers@vezatechnologies.com",
+        "skills": [
+            "Computer science",
+            "metadata",
+            "Backend",
+            "NoSQL",
+            "orchestration",
+            "Access management",
+            "Debugging",
+            "Distribution system",
+            "Monitoring",
+            "SQL"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at Veza Technologies in Remote. Skills: Computer science, metadata, Backend, NoSQL, orchestration, Access management, Debugging, Distribution system, Monitoring, SQL."
+    },
+    {
+        "id": 52,
+        "name": "LaunchPD",
+        "role": "Post Silicon Test Engineer",
+        "location": "Remote",
+        "email": "careers@launchpd.com",
+        "skills": [
+            "C++",
+            "Software design",
+            "Linux",
+            "Javascript",
+            "Packaging",
+            "Software Engineer",
+            "Firmware",
+            "Open source",
+            "Python"
+        ],
+        "description": "Post Silicon Test Engineer at LaunchPD in Remote. Skills: C++, Software design, Linux, Javascript, Packaging, Software Engineer, Firmware, Open source, Python."
+    },
+    {
+        "id": 53,
+        "name": "Emperen Technologies",
+        "role": "Automation Test Engineer",
+        "location": "Indore",
+        "email": "careers@emperentechnologies.com",
+        "skills": [
+            "Java",
+            "JUnit",
+            "Mobile Testing",
+            "TestNG",
+            "Automation Testing",
+            "Appium",
+            "Selenium",
+            "Testing"
+        ],
+        "description": "Automation Test Engineer at Emperen Technologies in Indore. Skills: Java, JUnit, Mobile Testing, TestNG, Automation Testing, Appium, Selenium, Testing."
+    },
+    {
+        "id": 54,
+        "name": "Mindteck",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Remote",
+        "email": "careers@mindteck.com",
+        "skills": [
+            "Performance tuning",
+            "C++",
+            "Automation",
+            "Software design",
+            "Coding",
+            "Data structures",
+            "Windows",
+            "Visual Studio",
+            "Unit testing",
+            "Python"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at Mindteck in Remote. Skills: Performance tuning, C++, Automation, Software design, Coding, Data structures, Windows, Visual Studio, Unit testing, Python."
+    },
+    {
+        "id": 55,
+        "name": "Infobyd Software Solutions",
+        "role": "Automation Test Engineer",
+        "location": "Indore",
+        "email": "careers@infobydsoftwaresolutions.com",
+        "skills": [
+            "IT services",
+            "QA",
+            "Software testing",
+            "Backend",
+            "Test strategy",
+            "Quality engineering",
+            "Software development life cycle",
+            "Test planning",
+            "ui automation",
+            "Selenium"
+        ],
+        "description": "Automation Test Engineer at Infobyd Software Solutions in Indore. Skills: IT services, QA, Software testing, Backend, Test strategy, Quality engineering, Software development life cycle, Test planning, ui automation, Selenium."
+    },
+    {
+        "id": 56,
+        "name": "Benovymed Healthcare Private Limited",
+        "role": "Engineering Manager",
+        "location": "Indore",
+        "email": "careers@benovymedhealthcareprivatelimited.com",
+        "skills": [
+            "Java",
+            "Appium",
+            "Robotium",
+            "MySQL",
+            "PHP",
+            ".Net",
+            "MongoDB",
+            "Selenium",
+            "Oracle",
+            "AWS",
+            "Ruby",
+            "Python"
+        ],
+        "description": "Engineering Manager at Benovymed Healthcare Private Limited in Indore. Skills: Java, Appium, Robotium, MySQL, PHP, .Net, MongoDB, Selenium, Oracle, AWS, Ruby, Python."
+    },
+    {
+        "id": 57,
+        "name": "Yodo1 Games",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Remote",
+        "email": "careers@yodo1games.com",
+        "skills": [
+            "Data validation",
+            "Debugging",
+            "Data collection",
+            "Data processing",
+            "Selenium",
+            "Troubleshooting",
+            "Gaming",
+            "IPS",
+            "Distribution system",
+            "Python"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at Yodo1 Games in Remote. Skills: Data validation, Debugging, Data collection, Data processing, Selenium, Troubleshooting, Gaming, IPS, Distribution system, Python."
+    },
+    {
+        "id": 58,
+        "name": "Twilio",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Remote",
+        "email": "careers@twilio.com",
+        "skills": [
+            "Data analysis",
+            "Operations Manager",
+            "Networking",
+            "SMS",
+            "Healthcare",
+            "VAS",
+            "Customer service",
+            "Troubleshooting",
+            "Monitoring",
+            "SQL"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at Twilio in Remote. Skills: Data analysis, Operations Manager, Networking, SMS, Healthcare, VAS, Customer service, Troubleshooting, Monitoring, SQL."
+    },
+    {
+        "id": 59,
+        "name": "Alphapoint",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Remote",
+        "email": "careers@alphapoint.com",
+        "skills": [
+            "Computer science",
+            "LMS",
+            "neo4j",
+            "GCP",
+            "Artificial Intelligence",
+            "Machine learning",
+            "query",
+            "Programming",
+            "Continuous improvement",
+            "Python"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at Alphapoint in Remote. Skills: Computer science, LMS, neo4j, GCP, Artificial Intelligence, Machine learning, query, Programming, Continuous improvement, Python."
+    },
+    {
+        "id": 60,
+        "name": "INFOCRATS Web Solutions",
+        "role": "QA Team Manager",
+        "location": "Indore",
+        "email": "careers@infocratswebsolutions.com",
+        "skills": [
+            "Mobile Application Testing",
+            "Team Handling",
+            "ERP",
+            "Manual Testing",
+            "SDLC",
+            "Leadership Skills",
+            "Agile Methodology",
+            "Performance Testing",
+            "Project Management",
+            "API Testing",
+            "Integration Testing",
+            "Automation Testing",
+            "Team Leading",
+            "Scrum",
+            "Selenium"
+        ],
+        "description": "QA Team Manager at INFOCRATS Web Solutions in Indore. Skills: Mobile Application Testing, Team Handling, ERP, Manual Testing, SDLC, Leadership Skills, Agile Methodology, Performance Testing, Project Management, API Testing, Integration Testing, Automation Testing, Team Leading, Scrum, Selenium."
+    },
+    {
+        "id": 61,
+        "name": "Pursuit Software Development",
+        "role": "Performance Testing Engineer",
+        "location": "Kolkata, Shillong, Indore",
+        "email": "careers@pursuitsoftwaredevelopment.com",
+        "skills": [
+            "JMeter",
+            "Performance Testing",
+            "Load Runner",
+            "Load Testing"
+        ],
+        "description": "Performance Testing Engineer at Pursuit Software Development in Kolkata, Shillong, Indore. Skills: JMeter, Performance Testing, Load Runner, Load Testing."
+    },
+    {
+        "id": 62,
+        "name": "People10",
+        "role": "Test Analyst",
+        "location": "Remote",
+        "email": "careers@people10.com",
+        "skills": [
+            "Test case execution",
+            "Test strategy",
+            "Test management",
+            "Agile",
+            "Test planning",
+            "Technology solutions",
+            "Stakeholder management",
+            "JIRA",
+            "digital transformation"
+        ],
+        "description": "Test Analyst at People10 in Remote. Skills: Test case execution, Test strategy, Test management, Agile, Test planning, Technology solutions, Stakeholder management, JIRA, digital transformation."
+    },
+    {
+        "id": 63,
+        "name": "Nagarro",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Remote",
+        "email": "careers@nagarro.com",
+        "skills": [
+            "Computer science",
+            "Postgresql",
+            "Django",
+            "Application development",
+            "Application security",
+            "High level design",
+            "JIRA",
+            "Information technology",
+            "Python",
+            "Technical documentation"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at Nagarro in Remote. Skills: Computer science, Postgresql, Django, Application development, Application security, High level design, JIRA, Information technology, Python, Technical documentation."
+    },
+    {
+        "id": 64,
+        "name": "Godaddy Operating Company, Llc",
+        "role": "Test Analyst",
+        "location": "Remote",
+        "email": "careers@godaddyoperatingcompany,llc.com",
+        "skills": [
+            "Performance tuning",
+            "Automation",
+            "Data analysis",
+            "Cisa",
+            "Data modeling",
+            "microsoft",
+            "Monitoring",
+            "SQL",
+            "Python",
+            "Auditing"
+        ],
+        "description": "Test Analyst at Godaddy Operating Company, Llc in Remote. Skills: Performance tuning, Automation, Data analysis, Cisa, Data modeling, microsoft, Monitoring, SQL, Python, Auditing."
+    },
+    {
+        "id": 65,
+        "name": "Geoconsultants India Services",
+        "role": "Full Stack Developer",
+        "location": "Remote",
+        "email": "careers@geoconsultantsindiaservices.com",
+        "skills": [
+            "Network analysis",
+            "Programming",
+            "Database administration",
+            "Arcgis desktop",
+            "GIS software",
+            "SDK",
+            "Licensing",
+            "Workflow analysis",
+            "Python"
+        ],
+        "description": "Full Stack Developer at Geoconsultants India Services in Remote. Skills: Network analysis, Programming, Database administration, Arcgis desktop, GIS software, SDK, Licensing, Workflow analysis, Python."
+    },
+    {
+        "id": 66,
+        "name": "Thermo Fisher Scientific India",
+        "role": "Software Development - Other",
+        "location": "Remote",
+        "email": "careers@thermofisherscientificindia.com",
+        "skills": [
+            "Computer science",
+            "Performance management",
+            "GCP",
+            "Process improvement",
+            "Clinical trials",
+            "Programming",
+            "SAS Programming",
+            "Management",
+            "Bioinformatics",
+            "clinical data"
+        ],
+        "description": "Software Development - Other at Thermo Fisher Scientific India in Remote. Skills: Computer science, Performance management, GCP, Process improvement, Clinical trials, Programming, SAS Programming, Management, Bioinformatics, clinical data."
+    },
+    {
+        "id": 67,
+        "name": "Taskus",
+        "role": "Assistant Manager",
+        "location": "Indore",
+        "email": "careers@taskus.com",
+        "skills": [
+            "accounts receivable",
+            "erlang",
+            "billing",
+            "workforce planning",
+            "tally",
+            "css",
+            "python",
+            "c++",
+            "software development",
+            "elixir",
+            "supply",
+            "javascript",
+            "jquery",
+            "sql",
+            "node.js",
+            "java",
+            "git",
+            "capacity planning",
+            "linux",
+            "html",
+            "mysql",
+            "data structures",
+            "shell scripting",
+            "mongodb"
+        ],
+        "description": "Assistant Manager at Taskus in Indore. Skills: accounts receivable, erlang, billing, workforce planning, tally, css, python, c++, software development, elixir, supply, javascript, jquery, sql, node.js, java, git, capacity planning, linux, html, mysql, data structures, shell scripting, mongodb."
+    },
+    {
+        "id": 68,
+        "name": "Oak Tree Cloud Software",
+        "role": "Software Development - Other",
+        "location": "Indore",
+        "email": "careers@oaktreecloudsoftware.com",
+        "skills": [
+            "Team Coordination",
+            "Project Documentation",
+            "Project Coordination"
+        ],
+        "description": "Software Development - Other at Oak Tree Cloud Software in Indore. Skills: Team Coordination, Project Documentation, Project Coordination."
+    },
+    {
+        "id": 69,
+        "name": "Bluesoft Software Solution",
+        "role": "Software Development - Other",
+        "location": "Remote",
+        "email": "careers@bluesoftsoftwaresolution.com",
+        "skills": [
+            "Supply chain",
+            "Backend",
+            "Data management",
+            "Artificial Intelligence",
+            "Consulting",
+            "System integration",
+            "Telecommunication",
+            "Financial services",
+            "Logistics"
+        ],
+        "description": "Software Development - Other at Bluesoft Software Solution in Remote. Skills: Supply chain, Backend, Data management, Artificial Intelligence, Consulting, System integration, Telecommunication, Financial services, Logistics."
+    },
+    {
+        "id": 70,
+        "name": "Newrocket",
+        "role": "Software Development - Other",
+        "location": "Remote",
+        "email": "careers@newrocket.com",
+        "skills": [
+            "Unix",
+            "System testing",
+            "Automation",
+            "Functional testing",
+            "Black Box Testing",
+            "Workflow",
+            "System administration",
+            "Remedy"
+        ],
+        "description": "Software Development - Other at Newrocket in Remote. Skills: Unix, System testing, Automation, Functional testing, Black Box Testing, Workflow, System administration, Remedy."
+    },
+    {
+        "id": 71,
+        "name": "Remotestar",
+        "role": "Search Engineer",
+        "location": "Remote",
+        "email": "careers@remotestar.com",
+        "skills": [
+            "Computer science",
+            "Automation",
+            "Networking",
+            "Configuration management",
+            "Postgresql",
+            "Machine learning",
+            "SSH",
+            "CCNA",
+            "Release management",
+            "Python"
+        ],
+        "description": "Search Engineer at Remotestar in Remote. Skills: Computer science, Automation, Networking, Configuration management, Postgresql, Machine learning, SSH, CCNA, Release management, Python."
+    },
+    {
+        "id": 72,
+        "name": "Aerosea Transworld Pvt. Ltd.",
+        "role": "Software Developer in Test (SDET)",
+        "location": "Indore",
+        "email": "careers@aeroseatransworldpvt.ltd..com",
+        "skills": [
+            ".Net",
+            "C#",
+            "Msql",
+            "ASP.Net",
+            "Entity Framework",
+            "JQuery",
+            "SQL"
+        ],
+        "description": "Software Developer in Test (SDET) at Aerosea Transworld Pvt. Ltd. in Indore. Skills: .Net, C#, Msql, ASP.Net, Entity Framework, JQuery, SQL."
+    },
+    {
+        "id": 73,
+        "name": "Advantal Technologies",
+        "role": "Solution Architect",
+        "location": "Indore",
+        "email": "careers@advantaltechnologies.com",
+        "skills": [
+            "architectural design",
+            "interior designing",
+            "project management",
+            "software development",
+            "enterprise architecture",
+            "microsoft azure",
+            "sketchup",
+            "presales",
+            "autocad",
+            "microservices",
+            "docker",
+            "working drawings",
+            "java",
+            "solution design",
+            "aws",
+            "cloud computing",
+            "architecture"
+        ],
+        "description": "Solution Architect at Advantal Technologies in Indore. Skills: architectural design, interior designing, project management, software development, enterprise architecture, microsoft azure, sketchup, presales, autocad, microservices, docker, working drawings, java, solution design, aws, cloud computing, architecture."
+    },
+    {
+        "id": 74,
+        "name": "iOPEX",
+        "role": "Software Development - Other",
+        "location": "Indore, Chennai, Bengaluru",
+        "email": "careers@iopex.com",
+        "skills": [
+            "Servicenow",
+            "Javascript",
+            "Scripting"
+        ],
+        "description": "Software Development - Other at iOPEX in Indore, Chennai, Bengaluru. Skills: Servicenow, Javascript, Scripting."
+    },
+    {
+        "id": 75,
+        "name": "Nrp Consultants",
+        "role": "IT & Information Security - Other",
+        "location": "Indore, Pune, Bengaluru",
+        "email": "careers@nrpconsultants.com",
+        "skills": [
+            "Strong Communication Skills",
+            "client communication",
+            "CSS",
+            "consulting",
+            "HTML"
+        ],
+        "description": "IT & Information Security - Other at Nrp Consultants in Indore, Pune, Bengaluru. Skills: Strong Communication Skills, client communication, CSS, consulting, HTML."
+    },
+    {
+        "id": 76,
+        "name": "syniti",
+        "role": "Search Engineer",
+        "location": "Remote",
+        "email": "careers@syniti.com",
+        "skills": [
+            "Product quality",
+            "Data management",
+            "Master data management",
+            "Architectural design",
+            "Mentor",
+            "Technical Lead",
+            "digital transformation",
+            "Analytics",
+            "System implementation",
+            "SQL"
+        ],
+        "description": "Search Engineer at syniti in Remote. Skills: Product quality, Data management, Master data management, Architectural design, Mentor, Technical Lead, digital transformation, Analytics, System implementation, SQL."
+    },
+    {
+        "id": 77,
+        "name": "Precision For Medicine",
+        "role": "Engineering Manager",
+        "location": "Remote",
+        "email": "careers@precisionformedicine.com",
+        "skills": [
+            "Linux",
+            "Coding",
+            "Shell scripting",
+            "Javascript",
+            "Application development",
+            "Information technology",
+            "Analytics",
+            "Monitoring",
+            "Python"
+        ],
+        "description": "Engineering Manager at Precision For Medicine in Remote. Skills: Linux, Coding, Shell scripting, Javascript, Application development, Information technology, Analytics, Monitoring, Python."
+    },
+    {
+        "id": 78,
+        "name": "Cointracker",
+        "role": "Engineering Manager",
+        "location": "Remote",
+        "email": "careers@cointracker.com",
+        "skills": [
+            "Usage",
+            "Software development",
+            "Compliance",
+            "Engineering management",
+            "GCP",
+            "Venture capital",
+            "HR",
+            "Taxation",
+            "tax compliance",
+            "Auditing"
+        ],
+        "description": "Engineering Manager at Cointracker in Remote. Skills: Usage, Software development, Compliance, Engineering management, GCP, Venture capital, HR, Taxation, tax compliance, Auditing."
+    },
+    {
+        "id": 79,
+        "name": "Inmar Technologies",
+        "role": "Blockchain Quality Assurance Engineer",
+        "location": "Remote",
+        "email": "careers@inmartechnologies.com",
+        "skills": [
+            "System architecture",
+            "Backend",
+            "Front end",
+            "Data modeling",
+            "Technical leadership",
+            "Healthcare",
+            "Application development",
+            "Continuous improvement",
+            "Recruitment",
+            "SQL"
+        ],
+        "description": "Blockchain Quality Assurance Engineer at Inmar Technologies in Remote. Skills: System architecture, Backend, Front end, Data modeling, Technical leadership, Healthcare, Application development, Continuous improvement, Recruitment, SQL."
+    },
+    {
+        "id": 80,
+        "name": "S P Infotech Indore",
+        "role": "UI / UX - Other",
+        "location": "Indore",
+        "email": "careers@spinfotechindore.com",
+        "skills": [
+            "Canva",
+            "User Experience Design",
+            "Wireframing",
+            "Illustrator",
+            "Prototyping",
+            "Typography"
+        ],
+        "description": "UI / UX - Other at S P Infotech Indore in Indore. Skills: Canva, User Experience Design, Wireframing, Illustrator, Prototyping, Typography."
+    },
+    {
+        "id": 81,
+        "name": "Markonic Solutions",
+        "role": "Graphic Designer",
+        "location": "Indore",
+        "email": "careers@markonicsolutions.com",
+        "skills": [
+            "Graphic Designing",
+            "Motion Graphics",
+            "Illustrator",
+            "Corel Draw",
+            "Adobe",
+            "Photoshop",
+            "Composing",
+            "Typography"
+        ],
+        "description": "Graphic Designer at Markonic Solutions in Indore. Skills: Graphic Designing, Motion Graphics, Illustrator, Corel Draw, Adobe, Photoshop, Composing, Typography."
+    },
+    {
+        "id": 82,
+        "name": "Techture",
+        "role": "Design Manager",
+        "location": "Indore",
+        "email": "careers@techture.com",
+        "skills": [
+            "Fabrication",
+            "Client handling",
+            "Architecture",
+            "AutoCAD",
+            "Mentor",
+            "REVIT",
+            "Interior designing",
+            "Site coordination"
+        ],
+        "description": "Design Manager at Techture in Indore. Skills: Fabrication, Client handling, Architecture, AutoCAD, Mentor, REVIT, Interior designing, Site coordination."
+    },
+    {
+        "id": 83,
+        "name": "True Choice",
+        "role": "Web Designer",
+        "location": "remote",
+        "email": "careers@truechoice.com",
+        "skills": [
+            "Graphics",
+            "Illustrator",
+            "Project management",
+            "Javascript",
+            "Production Manager",
+            "HTML",
+            "Web designing",
+            "Photoshop",
+            "Analytics",
+            "Automotive"
+        ],
+        "description": "Web Designer at True Choice in remote. Skills: Graphics, Illustrator, Project management, Javascript, Production Manager, HTML, Web designing, Photoshop, Analytics, Automotive."
+    },
+    {
+        "id": 84,
+        "name": "Talentxplore",
+        "role": "Product Designer",
+        "location": "Indore",
+        "email": "careers@talentxplore.com",
+        "skills": [
+            "Packaging Design",
+            "Time Management",
+            "Illustrator",
+            "Corel Draw",
+            "Adobe Creative Suite"
+        ],
+        "description": "Product Designer at Talentxplore in Indore. Skills: Packaging Design, Time Management, Illustrator, Corel Draw, Adobe Creative Suite."
+    },
+    {
+        "id": 85,
+        "name": "Lottiefiles",
+        "role": "Back End Developer",
+        "location": "Remote",
+        "email": "careers@lottiefiles.com",
+        "skills": [
+            "Graphics",
+            "Backend",
+            "Front end",
+            "Web development",
+            "Medical insurance",
+            "Management",
+            "Budgeting"
+        ],
+        "description": "Back End Developer at Lottiefiles in Remote. Skills: Graphics, Backend, Front end, Web development, Medical insurance, Management, Budgeting."
+    },
+    {
+        "id": 86,
+        "name": "Zennial Pro",
+        "role": "Interaction Designer",
+        "location": "Remote",
+        "email": "careers@zennialpro.com",
+        "skills": [
+            "interfaces",
+            "ux",
+            "adobe creative suite",
+            "adobe",
+            "prototype",
+            "research",
+            "sketching",
+            "user research",
+            "visual design",
+            "tool design",
+            "user experience design",
+            "portfolio",
+            "design",
+            "visual",
+            "interaction design",
+            "communication skills"
+        ],
+        "description": "Interaction Designer at Zennial Pro in Remote. Skills: interfaces, ux, adobe creative suite, adobe, prototype, research, sketching, user research, visual design, tool design, user experience design, portfolio, design, visual, interaction design, communication skills."
+    },
+    {
+        "id": 87,
+        "name": "Millipixels Interactive Llp",
+        "role": "Interaction Designer",
+        "location": "Remote",
+        "email": "careers@millipixelsinteractivellp.com",
+        "skills": [
+            "interfaces",
+            "ux",
+            "adobe creative suite",
+            "adobe",
+            "prototype",
+            "research",
+            "sketching",
+            "user research",
+            "visual design",
+            "tool design",
+            "user experience design",
+            "portfolio",
+            "design",
+            "visual",
+            "interaction design",
+            "communication skills"
+        ],
+        "description": "Interaction Designer at Millipixels Interactive Llp in Remote. Skills: interfaces, ux, adobe creative suite, adobe, prototype, research, sketching, user research, visual design, tool design, user experience design, portfolio, design, visual, interaction design, communication skills."
+    },
+    {
+        "id": 88,
+        "name": "Swatsan Tech",
+        "role": "UI / UX Designer",
+        "location": "Remote",
+        "email": "careers@swatsantech.com",
+        "skills": [
+            "ux",
+            "software testing",
+            "user interface designing",
+            "photoshop",
+            "prototype",
+            "research",
+            "user research",
+            "visual design",
+            "ui",
+            "user experience design",
+            "visual",
+            "html",
+            "interaction design",
+            "information architecture",
+            "usability analysis",
+            "illustrator"
+        ],
+        "description": "UI / UX Designer at Swatsan Tech in Remote. Skills: ux, software testing, user interface designing, photoshop, prototype, research, user research, visual design, ui, user experience design, visual, html, interaction design, information architecture, usability analysis, illustrator."
+    },
+    {
+        "id": 89,
+        "name": "Select Source Int",
+        "role": "UI / UX Designer",
+        "location": "Indore, Gurugram",
+        "email": "careers@selectsourceint.com",
+        "skills": [
+            "Illustrator",
+            "Photoshop"
+        ],
+        "description": "UI / UX Designer at Select Source Int in Indore, Gurugram. Skills: Illustrator, Photoshop."
+    },
+    {
+        "id": 90,
+        "name": "Measured Inc",
+        "role": "Product Designer",
+        "location": "Remote",
+        "email": "careers@measuredinc.com",
+        "skills": [
+            "User research",
+            "Product engineering",
+            "data science",
+            "Agile",
+            "Tool design",
+            "Genetics",
+            "Test planning",
+            "Medical insurance",
+            "Visual Design"
+        ],
+        "description": "Product Designer at Measured Inc in Remote. Skills: User research, Product engineering, data science, Agile, Tool design, Genetics, Test planning, Medical insurance, Visual Design."
+    },
+    {
+        "id": 91,
+        "name": "Changeleaders Consulting",
+        "role": "Research & Development - Other",
+        "location": "Bhopal",
+        "email": "careers@changeleadersconsulting.com",
+        "skills": [
+            "User Research",
+            "Product Research",
+            "Qualitative Research",
+            "Visual Design"
+        ],
+        "description": "Research & Development - Other at Changeleaders Consulting in Bhopal. Skills: User Research, Product Research, Qualitative Research, Visual Design."
+    },
+    {
+        "id": 92,
+        "name": "Benovymed Healthcare",
+        "role": "Program Manager - Technology / IT",
+        "location": "Indore",
+        "email": "careers@benovymedhealthcare.com",
+        "skills": [
+            "Product Development",
+            "telemedicine",
+            "project management",
+            "FDA",
+            "training and development",
+            "hipaa",
+            "teaching",
+            "Artificial intelligence"
+        ],
+        "description": "Program Manager - Technology / IT at Benovymed Healthcare in Indore. Skills: Product Development, telemedicine, project management, FDA, training and development, hipaa, teaching, Artificial intelligence."
+    },
+    {
+        "id": 93,
+        "name": "Buyframe & Co",
+        "role": "Full Stack Developer",
+        "location": "Remote",
+        "email": "careers@buyframe&co.com",
+        "skills": [
+            "MySQL",
+            "Node.Js",
+            "React.Js",
+            "AWS",
+            "CSS",
+            "Express",
+            "Javascript",
+            "HTML"
+        ],
+        "description": "Full Stack Developer at Buyframe & Co in Remote. Skills: MySQL, Node.Js, React.Js, AWS, CSS, Express, Javascript, HTML."
+    },
+    {
+        "id": 94,
+        "name": "Vichara Technologies",
+        "role": "Full Stack Developer",
+        "location": "Indore, Jaipur, Delhi / NCR",
+        "email": "careers@vicharatechnologies.com",
+        "skills": [
+            "Node.Js",
+            "Microservices",
+            "SQL",
+            "React.Js",
+            "Azure",
+            "LLM",
+            "Javascript",
+            "API"
+        ],
+        "description": "Full Stack Developer at Vichara Technologies in Indore, Jaipur, Delhi / NCR. Skills: Node.Js, Microservices, SQL, React.Js, Azure, LLM, Javascript, API."
+    }
+]
