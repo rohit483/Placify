@@ -56,9 +56,8 @@
     <header class="bg-white shadow-md">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-bold text-blue-800">Placify</div>
-            <div>
-                <a href="#" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800">Login</a>
-            </div>
+            <!-- Simple Single Page Header -->
+            <div class="text-sm text-gray-500">AI Placement Readiness</div>
         </nav>
     </header>
 
@@ -86,9 +85,9 @@
                     </div>
                     <h2 class="text-2xl font-semibold mb-3">Fast Mode</h2>
                     <p class="text-gray-600 mb-6">10 quick MCQs. Get a baseline readiness score in 5 minutes.</p>
-                    <a href="#" onclick="startAssessment('fast'); return false;"
+                    <button onclick="startAssessment('fast')"
                         class="w-full block py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">Start
-                        Fast Assessment</a>
+                        Fast Assessment</button>
                 </div>
 
                 <!-- Balanced Mode Card -->
@@ -102,9 +101,9 @@
                     </div>
                     <h2 class="text-2xl font-semibold mb-3">Balanced Mode</h2>
                     <p class="text-gray-600 mb-6">20 MCQs & short answers. Deeper analysis of your skills.</p>
-                    <a href="#" onclick="startAssessment('balanced'); return false;"
+                    <button onclick="startAssessment('balanced')"
                         class="w-full block py-3 px-6 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800">Start
-                        Balanced Assessment</a>
+                        Balanced Assessment</button>
                 </div>
 
                 <!-- Detailed Mode Card -->
@@ -118,9 +117,9 @@
                     </div>
                     <h2 class="text-2xl font-semibold mb-3">Detailed Mode</h2>
                     <p class="text-gray-600 mb-6">30+ questions. Upload your resume for a full RAG-driven analysis.</p>
-                    <a href="#" onclick="startAssessment('detailed'); return false;"
+                    <button onclick="startAssessment('detailed')"
                         class="w-full block py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">Start
-                        Detailed Assessment</a>
+                        Detailed Assessment</button>
                 </div>
             </div>
         </section>
@@ -132,12 +131,26 @@
         -->
         <section id="resume-section" class="bg-white rounded-lg shadow-lg p-8 md:p-12 my-16 max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-8">Upload Resume</h2>
-            <div class="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center">
-                <p class="text-gray-500">Drag & drop your resume (PDF, DOCX) or</p>
-                <a href="#" class="text-blue-600 font-semibold">browse files</a>
-                <p class="text-xs text-gray-400 mt-2">Privacy-First: Your resume is optional and is not stored without
-                    permission.</p>
+            <!-- File Upload Area -->
+            <div
+                class="flex flex-col items-center justify-center p-10 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 mb-4" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+                <p class="text-gray-600 mb-2">Drag & drop your resume (PDF/Docx)</p>
+                <input type="file" id="resume-upload" class="hidden" accept=".pdf,.doc,.docx" />
+                <button onclick="document.getElementById('resume-upload').click()"
+                    class="text-blue-600 font-semibold hover:underline">Browse Files</button>
             </div>
+
+            <div class="text-center mt-6">
+                <button onclick="uploadResume()"
+                    class="py-2 px-6 bg-blue-600 text-white rounded hover:bg-blue-700">Upload Resume</button>
+            </div>
+            <p class="text-xs text-gray-400 mt-2 text-center">Privacy-First: Your resume is optional and is not stored
+                without permission. Saved to web_data/resume.</p>
         </section>
 
         <!-- 
@@ -145,52 +158,25 @@
         SECTION 3: DETAILED ASSESSMENT / REPORT
         ==================================================
         -->
-        <section id="detailed-assessment" class="bg-white rounded-lg shadow-lg p-8 md:p-12 my-16 max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Balanced Assessment</h2>
+        <section id="detailed-assessment"
+            class="bg-white rounded-lg shadow-lg p-8 md:p-12 my-16 max-w-4xl mx-auto hidden">
+            <h2 class="text-3xl font-bold text-center mb-8">Personalized Assessment</h2>
 
-            <!-- Progress Bar -->
-            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
-                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 35%"></div>
-            </div>
-            <p class="text-center text-gray-600 mb-10">Question 7 of 20</p>
-
-            <!-- Mock Question (MCQ) -->
-            <div class="mb-10">
-                <h3 class="text-xl font-semibold mb-4">How would you rate your proficiency in Data Structures &
-                    Algorithms?</h3>
-                <div class="space-y-3">
-                    <label class="flex items-center p-4 border rounded-lg hover:bg-gray-50 cursor-pointer">
-                        <input type="radio" name="dsa" value="Beginner" class="h-5 w-5 text-blue-600">
-                        <span class="ml-3 text-gray-700">Beginner (I know basic concepts like arrays and lists)</span>
-                    </label>
-                    <label class="flex items-center p-4 border rounded-lg hover:bg-gray-50 cursor-pointer">
-                        <input type="radio" name="dsa" value="Intermediate" class="h-5 w-5 text-blue-600">
-                        <span class="ml-3 text-gray-700">Intermediate (I am comfortable with trees, graphs, and
-                            sorting)</span>
-                    </label>
-                    <label class="flex items-center p-4 border rounded-lg hover:bg-gray-50 cursor-pointer">
-                        <input type="radio" name="dsa" value="Advanced" class="h-5 w-5 text-blue-600">
-                        <span class="ml-3 text-gray-700">Advanced (I can solve complex dynamic programming
-                            problems)</span>
-                    </label>
+            <form id="assessment-form" onsubmit="event.preventDefault(); submitAssessment();">
+                <div id="questions-container" class="space-y-6">
+                    <!-- Questions will be loaded here dynamically -->
+                    <div class="text-center text-gray-500">Loading questions...</div>
                 </div>
-            </div>
 
-            <!-- Mock Question (Short Answer) -->
-            <div class="mb-10">
-                <h3 class="text-xl font-semibold mb-4">Describe a technical project you are proud of.</h3>
-                <textarea id="project-input" class="w-full p-4 border rounded-lg" rows="4"
-                    placeholder="Briefly describe the project, your role, and the technology used..."></textarea>
-            </div>
-
-            <!-- Navigation -->
-            <div class="flex justify-between">
-                <a href="#"
-                    class="py-3 px-8 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300">Back</a>
-                <button onclick="submitAssessment()"
-                    class="py-3 px-8 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">Generate
-                    Report</button>
-            </div>
+                <!-- Navigation -->
+                <div class="flex justify-between mt-10">
+                    <button type="button" onclick="location.reload()"
+                        class="py-3 px-8 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300">Cancel</button>
+                    <button type="submit"
+                        class="py-3 px-8 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">Submit
+                        Assessment</button>
+                </div>
+            </form>
         </section>
 
 
@@ -199,13 +185,13 @@
         SECTION 3.5: GENERATED REPORT (Part of Assessment flow)
         ==================================================
         -->
-        <section id="report" class="bg-white rounded-lg shadow-lg p-8 md:p-12 my-16">
+        <section id="report" class="bg-white rounded-lg shadow-lg p-8 md:p-12 my-16 hidden">
             <h2 class="text-3xl font-bold text-center mb-4">Your Personalized Career Report</h2>
             <div class="text-center mb-10">
-                <button
-                    class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 font-semibold shadow-md transition duration-300">
+                <a href="/api/report/pdf" download="Placement_Report.pdf"
+                    class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 font-semibold shadow-md transition duration-300 inline-block">
                     Download PDF Report
-                </button>
+                </a>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
@@ -214,24 +200,20 @@
                     <div class="bg-gray-50 p-6 rounded-lg text-center">
                         <h3 class="text-lg font-semibold text-gray-600 mb-4">Readiness Score</h3>
                         <div class="progress-circle mx-auto">
-                            <span>82%</span>
+                            <span id="readiness-score-display">0%</span>
                         </div>
-                        <p class="mt-4 text-gray-600">Well Done! You're on the right track for a Data Analyst role.</p>
+                        <p class="mt-4 text-gray-600">Based on your answers and analysis.</p>
                     </div>
                     <div class="bg-gray-50 p-6 rounded-lg">
                         <h3 class="text-lg font-semibold mb-4">Key Strengths</h3>
                         <ul class="list-disc list-inside space-y-2 text-green-700">
-                            <li>Python & Pandas</li>
-                            <li>ML Fundamentals (Ensemble)</li>
-                            <li>Strong Project Work</li>
+                            <!-- Dynamic Strengths -->
                         </ul>
                     </div>
                     <div class="bg-gray-50 p-6 rounded-lg">
                         <h3 class="text-lg font-semibold mb-4">Improvement Gaps</h3>
                         <ul class="list-disc list-inside space-y-2 text-red-700">
-                            <li>Data Structures (Trees)</li>
-                            <li>System Design Basics</li>
-                            <li>SQL Query Optimization</li>
+                            <!-- Dynamic Gaps -->
                         </ul>
                     </div>
                 </div>
@@ -241,44 +223,14 @@
                     <div class="bg-gray-50 p-6 rounded-lg">
                         <h3 class="text-xl font-semibold mb-4">Your AI-Generated Action Plan</h3>
                         <ol class="list-decimal list-inside space-y-3">
-                            <li class="text-gray-700"><b>DSA Practice:</b> Focus on tree traversal and graph problems
-                                (e.g., 5 medium problems on LeetCode).</li>
-                            <li class="text-gray-700"><b>Resume:</b> Add quantifiable metrics to your "Placify" project
-                                (e.g., "improved accuracy by 15%").</li>
-                            <li class="text-gray-700"><b>SQL:</b> Review advanced JOINs and window functions.</li>
+                            <!-- Dynamic Action Plan -->
                         </ol>
                     </div>
 
                     <div class="bg-gray-50 p-6 rounded-lg">
                         <h3 class="text-xl font-semibold mb-4">Top Job Recommendations (RAG-Powered)</h3>
                         <div class="space-y-4">
-                            <!-- Job 1 -->
-                            <div class="flex justify-between items-center p-4 border rounded-lg">
-                                <div>
-                                    <h4 class="text-lg font-semibold text-blue-700">Data Analyst</h4>
-                                    <p class="text-gray-600">TCS (Indore) - 92% Match</p>
-                                </div>
-                                <a href="#"
-                                    class="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">View</a>
-                            </div>
-                            <!-- Job 2 -->
-                            <div class="flex justify-between items-center p-4 border rounded-lg">
-                                <div>
-                                    <h4 class="text-lg font-semibold text-blue-700">AI/ML Intern</h4>
-                                    <p class="text-gray-600">Wipro (Pune) - 88% Match</p>
-                                </div>
-                                <a href="#"
-                                    class="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">View</a>
-                            </div>
-                            <!-- Job 3 -->
-                            <div class="flex justify-between items-center p-4 border rounded-lg">
-                                <div>
-                                    <h4 class="text-lg font-semibold text-blue-700">Jr. Software Engineer</h4>
-                                    <p class="text-gray-600">Infosys (Bangalore) - 81% Match</p>
-                                </div>
-                                <a href="#"
-                                    class="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">View</a>
-                            </div>
+                            <!-- Dynamic Jobs -->
                         </div>
                     </div>
                 </div>
@@ -298,15 +250,6 @@
                     <textarea id="email-draft-output" class="w-full p-3 border rounded-lg text-gray-600 h-40"
                         readonly>Your AI-generated email draft will appear here...</textarea>
                 </div>
-                <details class="border rounded-lg">
-                    <summary class="p-4 cursor-pointer font-semibold text-blue-700">Draft: Resume Summary
-                        Improvement</summary>
-                    <div class="p-4 border-t bg-white">
-                        <p class="text-gray-600">"Aspiring AI/ML Engineer with a strong foundation in Python and
-                            ensemble models, seeking to apply data-driven insights to solve complex problems..."
-                        </p>
-                    </div>
-                </details>
             </div>
         </section>
 
@@ -314,7 +257,7 @@
 
     <!-- =========== FOOTER =========== -->
     <footer class="bg-gray-800 text-gray-300 text-center p-6 mt-16">
-        <p>&copy; 2025 Placify - A Major Project by Rohit C., Vishal J., Gourav B., and Rohit C.</p>
+        <p>&copy; 2025 Placify</p>
         <p class="text-sm">Acropolis Institute of Technology and Research, Indore</p>
     </footer>
 
