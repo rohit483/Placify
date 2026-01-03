@@ -1,6 +1,7 @@
 import os
 import json
 import random
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
@@ -16,7 +17,11 @@ API_KEY_FILE = "placify_env/gemini_api.txt"
 def load_api_key():
     try:
         with open(API_KEY_FILE, "r") as f:
-            return f.read().strip()
+            content = f.read().strip()
+            # Handle cases where the file contains "GEMINI_API_KEY = ..."
+            if "=" in content:
+                return content.split("=", 1)[1].strip()
+            return content
     except FileNotFoundError:
         print(f"Error: API key file not found at {API_KEY_FILE}")
         return None
@@ -25,7 +30,7 @@ GEMINI_API_KEY = load_api_key()
 
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel('gemini-pro')
+    model = genai.GenerativeModel('gemini-2.0-flash-lite')
 else:
     print("Warning: Gemini API Key not loaded. AI features will not work.")
     model = None
@@ -46,8 +51,11 @@ companies_data = load_companies()
 # --- Storage Setup ---
 RESUME_DIR = "web_data/resume"
 PDF_DIR = "web_data/pdf"
+ANALYSIS_DIR = "web_data/analysis"
+
 os.makedirs(RESUME_DIR, exist_ok=True)
 os.makedirs(PDF_DIR, exist_ok=True)
+os.makedirs(ANALYSIS_DIR, exist_ok=True)
 
 
 # --- Question Bank ---
@@ -90,10 +98,60 @@ QUESTIONS_DB = {
         {"id": 30, "text": "Any specific companies in Indore/Bhopal you are targeting?", "type": "text"}
     ]
 }
-
 # Logic to combine questions for modes
 QUESTIONS_DB["balanced"] = QUESTIONS_DB["fast"] + QUESTIONS_DB["balanced"]
 QUESTIONS_DB["detailed"] = QUESTIONS_DB["balanced"] + QUESTIONS_DB["detailed"]
+
+import pypdf
+
+# Helper: Extract Text from Resume
+def extract_resume_text(filename):
+    path = os.path.join(RESUME_DIR, filename)
+    text = ""
+    try:
+        if not os.path.exists(path): return ""
+        if filename.endswith('.pdf'):
+            reader = pypdf.PdfReader(path)
+            for page in reader.pages:
+                text += page.extract_text() + "\n"
+        else:
+            # Fallback for text/other files if supported later
+            pass
+    except Exception as e:
+        print(f"Error reading resume: {e}")
+    return text
+
+# Helper: Rank Companies (Basic Logic)
+def rank_companies(user_profile, companies):
+    print(f"Ranking {len(companies)} companies...")
+    scored_companies = []
+    
+    # Simple keyword scoring
+    profile_lower = user_profile.lower()
+    
+    for company in companies:
+        score = 0
+        # Text to search in
+        company_text = (company['name'] + " " + company['description'] + " " + " ".join(company['skills'])).lower()
+        
+        # Check for overlaps (Naive Approach for Prototype)
+        
+        # 1. Skill overlap
+        for skill in company['skills']:
+            if skill.lower() in profile_lower:
+                score += 2
+                
+        # 2. Key role matching
+        if company['role'].lower() in profile_lower:
+            score += 5
+            
+        scored_companies.append((score, company))
+        
+    # Sort descending
+    scored_companies.sort(key=lambda x: x[0], reverse=True)
+    
+    # Return top 5
+    return [c[1] for c in scored_companies[:5]]
 
 # --- FastAPI Setup ---
 app = FastAPI()
@@ -102,7 +160,7 @@ app.mount("/static", StaticFiles(directory="."), name="static")
 class AssessmentSubmission(BaseModel):
     mode: str
     answers: Dict[str, Any]
-    resume_filename: str = None # Optional resume linkage
+    resume_filename: Optional[str] = None # Optional resume linkage
 
 # --- PDF Generation Report ---
 class PDFReport(FPDF):
@@ -135,6 +193,7 @@ def generate_pdf(data, filename="report.pdf"):
 
     # Introduction
     pdf.chapter_title(f"Assessment Mode: {data.get('mode', 'Unknown').capitalize()}")
+    pdf.chapter_body(f"Candidate: {data.get('candidate_name', 'Student')}")
     pdf.chapter_body(f"Readiness Score: {data.get('readiness_score')}%")
     
     # Strengths
@@ -163,6 +222,13 @@ def generate_pdf(data, filename="report.pdf"):
     return output_path
 
 # --- Routes ---
+@app.get("/api/report/pdf")
+async def get_report(filename: str):
+    file_path = os.path.join(PDF_DIR, filename)
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    return JSONResponse(status_code=404, content={"error": "File not found"})
+
 @app.post("/api/upload_resume")
 async def upload_resume(file: UploadFile = File(...)):
     try:
@@ -205,110 +271,134 @@ async def generate_assessment(submission: AssessmentSubmission):
         
         # Proceed to job matching with mock data context
         user_context = f"Assessment Mode: {submission.mode}\n" # minimal context
+        
+        # Mock jobs for fallback
+        top_jobs = [
+            {"company": "Mock Co A", "role": "Dev", "location": "Indore", "match": "90%"},
+            {"company": "Mock Co B", "role": "Tester", "location": "Remote", "match": "85%"},
+            {"company": "Mock Co C", "role": "Analyst", "location": "Bhopal", "match": "80%"}
+        ]
     else:
         # 1. Format User Context from Answers
         mode = submission.mode
-
-    answers = submission.answers
-    
-    # Map Question IDs to their text for context
-    questions_list = QUESTIONS_DB.get(mode, [])
-    user_context = f"Assessment Mode: {mode}\n"
-    
-    # Creating a context string
-    search_keywords = [] # For job matching
-    
-    for q in questions_list:
-        key = f"q_{q['id']}"
-        ans = answers.get(key, "Not Answered")
-        user_context += f"Q: {q['text']}\nA: {ans}\n"
+        answers = submission.answers
         
-        # Collect keywords for simple RAG
-        if q['id'] in [1, 2, 11, 14, 18]: # Tech related questions
-             if ans != "Not Answered":
-                 search_keywords.append(str(ans))
+        # Map Question IDs to their text for context
+        questions_list = QUESTIONS_DB.get(mode, [])
+        user_context = f"Assessment Mode: {mode}\n"
+        
+        search_keywords = [] 
+        
+        for q in questions_list:
+            key = f"q_{q['id']}"
+            ans = answers.get(key, "Not Answered")
+            user_context += f"Q: {q['text']}\nA: {ans}\n"
+            
+            # Collect keywords for simple RAG
+            if q['id'] in [1, 2, 11, 14, 18]: # Tech related questions
+                 if ans != "Not Answered":
+                     search_keywords.append(str(ans))
 
-    prompt = f"""
-    Act as a career counselor. Analyze the following student profile based on their assessment answers:
-    
-    {user_context}
-    
-    Generate a JSON object with:
-    - readiness_score: Integer (0-100)
-    - strengths: List of 3 strings
-    - gaps: List of 3 strings
-    - action_plan: List of 3 actionable steps
-    - email_draft: A professional email to a recruiter text
-    
-    Return ONLY valid JSON.
-    """
+        # 1.5 Extract Resume Text if available
+        resume_text = ""
+        if submission.resume_filename:
+            resume_text = extract_resume_text(submission.resume_filename)
+            user_context += f"\n--- RESUME CONTENT ---\n{resume_text[:2000]}..." # Limit context size
 
-    try:
-        if model:
-            # 2. Call Gemini API
+        # 2. Pre-Filter Companies (RAG Lite)
+        top_candidates = rank_companies(user_context, companies_data)
+        candidates_json = json.dumps([{
+            "id": c['id'], "name": c['name'], "role": c['role'], 
+            "skills": c['skills'], "email": c['email']
+        } for c in top_candidates])
+
+        prompt = f"""
+        Act as a career counselor. Analyze the following student profile and the provided list of matched companies.
+        
+        STUDENT PROFILE:
+        {user_context}
+        
+        MATCHED COMPANIES (Select top 3 from this list ONLY):
+        {candidates_json}
+        
+        Generate a JSON object with:
+        - candidate_name: String (Extract full name from resume, or return "Dear Student" if unknown)
+        - readiness_score: Integer (0-100)
+        - strengths: List of 3 strings (Student's strengths)
+        - gaps: List of 3 strings (Missing skills for these roles)
+        - action_plan: List of 3 actionable steps
+        - job_recommendations: List of 3 Objects from the "MATCHED COMPANIES" list provided above. Do NOT hallucinate companies.
+          For each object include:
+          - company: Name (Must exist in MATCHED COMPANIES)
+          - role: Role
+          - location: Location
+          - match: Match Reason (Short string)
+          - email_draft: A specific cold email draft to this company's HR. 
+            The email must be professional, mention the specific role, and highlight the student's relevant strengths.
+        
+        - email_draft: (Legacy field, keep generic) "Generic inquiry..."
+        
+        Return ONLY valid JSON.
+        """
+
+        try:
+            # 3. Call Gemini API
+            print("Sending prompt to Gemini...")
             response = model.generate_content(prompt)
+            print("Received response.")
             text_response = response.text.replace('```json', '').replace('```', '').strip()
+            # Clean potential markdown issues
+            if text_response.startswith('json'): text_response = text_response[4:].strip()
+            
             ai_data = json.loads(text_response)
-
-        # 3. Enhanced RAG Job Matching
-        # Filter companies based on keywords found in answers
-        recommended_jobs = []
-        keyword_string = " ".join(search_keywords).lower()
-        
-        # If no specific tech keywords found (e.g. Fast mode might be sparse), use generic matching
-        if not keyword_string and "Web Development" in user_context: keyword_string = "html css react"
-        
-        for company in companies_data:
-            match_score = 0
-            company_text = (company['description'] + " " + " ".join(company['skills'])).lower()
             
-            # Simple term overlap
-            company_skills = [s.lower() for s in company['skills']]
-            for kw in keyword_string.split():
-                # Allow partial matches e.g. "java" in "javascript" is a false positive risk, but good for prototype
-                if kw in company_text: 
-                    match_score += 10
+            # Extract jobs from AI response
+            top_jobs = ai_data.get("job_recommendations", [])
             
-            # Location preference check (simple)
-            if "Indore" in user_context and company['location'] == "Indore":
-                match_score += 20
-                
-            # Random jitter for variety if score is low
-            if match_score == 0: match_score = random.randint(30, 60)
-            else: match_score = min(99, 50 + match_score)
+            # --- Persistence: Save Analysis ---
+            import time
+            timestamp = int(time.time())
+            analysis_filename = f"analysis_{timestamp}.json"
+            analysis_path = os.path.join(ANALYSIS_DIR, analysis_filename)
+            
+            with open(analysis_path, "w") as f:
+                json.dump({
+                    "timestamp": timestamp,
+                    "mode": mode,
+                    "submission": answers,
+                    "resume_extracted": bool(resume_text),
+                    "candidates_provided": json.loads(candidates_json),
+                    "gemini_response": ai_data
+                }, f, indent=4)
+            print(f"Analysis saved to {analysis_path}")
+            
+        except Exception as e:
+            print(f"Gemini Error: {e}")
+            # Fallback if AI fails
+            top_jobs = [] 
+            ai_data = {"candidate_name": "Student", "readiness_score": 0, "strengths": [], "gaps": [], "action_plan": [], "email_draft": "Error generating report."}
 
-            job_entry = {
-                "role": company['role'],
-                "company": company['name'],
-                "location": company['location'],
-                "match": f"{match_score}%"
-            }
-            recommended_jobs.append(job_entry)
-
-        # Sort by match score
-        recommended_jobs.sort(key=lambda x: int(x['match'].strip('%')), reverse=True)
-        top_jobs = recommended_jobs[:3]
-
-        # 4. Generate PDF
-        # Use timestamp to make filename unique
-        import time
-        report_filename = f"Placement_Report_{int(time.time())}.pdf"
+    # 4. Generate PDF
+    # Use timestamp to make filename unique
+    import time
+    report_filename = f"Placement_Report_{int(time.time())}.pdf"
         
-        final_data = {
-            "mode": mode,
-            **ai_data,
-            "job_recommendations": top_jobs
-        }
+    final_data = {
+        "mode": submission.mode,
+        **ai_data,
+        "job_recommendations": top_jobs
+    }
+    try:
         generate_pdf(final_data, filename=report_filename)
-        
-        # Add pdf_url to response
-        final_data["pdf_url"] = f"/api/report/pdf?filename={report_filename}"
-
-        return final_data
-
     except Exception as e:
-        print(f"Error: {e}")
-        return JSONResponse(content={"error": str(e)}, status_code=500)
+        print(f"PDF Error: {e}")
+
+    # Add pdf_url to response
+    final_data["pdf_url"] = f"/api/report/pdf?filename={report_filename}"
+
+    return final_data
+
+
 
 if __name__ == "__main__":
     import uvicorn

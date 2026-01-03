@@ -5,6 +5,10 @@ pydantic
 numpy
 pandas
 scikit-learn
+google
 google-generativeai
+google-genai
 python-dotenv
 fpdf
+pypdf
+dotenv
