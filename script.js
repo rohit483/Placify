@@ -106,27 +106,41 @@ async function startAssessment(mode) {
     }
 }
 
-async function submitAssessment() {
-    const form = document.getElementById('assessment-form');
-    const formData = new FormData(form);
-    const answers = {};
+async function submitAssessment(modeOverride = null) {
+    const finalMode = modeOverride || selectedMode;
+    if (!finalMode) {
+        alert("Please select an assessment mode first!");
+        return;
+    }
 
-    // Collect answers
-    for (let [key, value] of formData.entries()) {
-        answers[key] = value;
+    // Handle form data safely
+    const form = document.getElementById('assessment-form');
+    let answers = {};
+    if (form) {
+        const formData = new FormData(form);
+        for (let [key, value] of formData.entries()) {
+            answers[key] = value;
+        }
     }
 
     const requestData = {
-        mode: selectedMode,
+        mode: finalMode,
         answers: answers,
         resume_filename: uploadedResumeName
     };
 
     try {
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = "Analyzing Profile...";
-        submitBtn.disabled = true;
+        let submitBtn = null;
+        let originalText = "";
+
+        if (form) {
+            submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                originalText = submitBtn.textContent;
+                submitBtn.textContent = "Analyzing Profile...";
+                submitBtn.disabled = true;
+            }
+        }
 
         const response = await fetch('/api/assess', {
             method: 'POST',
@@ -140,14 +154,18 @@ async function submitAssessment() {
         updateReportUI(data);
 
         // Show Report, Hide Assessment
-        document.getElementById('detailed-assessment').style.display = 'none';
+        const assessmentSection = document.getElementById('detailed-assessment');
+        if (assessmentSection) assessmentSection.style.display = 'none';
+
         const reportSection = document.getElementById('report');
         reportSection.classList.remove('hidden');
         reportSection.style.display = 'block';
         reportSection.scrollIntoView({ behavior: 'smooth' });
 
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+        if (submitBtn) {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
 
     } catch (error) {
         console.error("Error:", error);
@@ -170,7 +188,7 @@ function updateReportUI(data) {
             if (h2) {
                 scoreEl = document.createElement('div');
                 scoreEl.id = 'readiness-score-display';
-                scoreEl.className = "text-4xl font-bold text-center text-blue-800 my-4";
+                scoreEl.className = "text-4xl font-bold text-center text-blue-900 my-4";
                 h2.after(scoreEl);
             }
         }
@@ -204,16 +222,22 @@ function updateReportUI(data) {
     // Job Recommendations
     const jobsContainer = document.querySelector('#report .space-y-4');
     if (jobsContainer && data.job_recommendations) {
-        jobsContainer.innerHTML = data.job_recommendations.map(job => `
+        jobsContainer.innerHTML = data.job_recommendations.map((job, index) => `
             <div class="flex justify-between items-center p-4 border rounded-lg hover:shadow-md transition">
                 <div>
                     <h4 class="text-lg font-semibold text-blue-700">${job.role}</h4>
                     <p class="text-gray-600 font-medium">${job.company}</p>
                     <p class="text-sm text-gray-500">${job.location} • Match: <span class="text-green-600 font-bold">${job.match}</span></p>
                 </div>
-                <button class="py-2 px-4 bg-gray-100 text-blue-600 font-semibold rounded-lg hover:bg-gray-200">View</button>
+                <button onclick="copyToDraft(${index})" class="py-2 px-4 bg-blue-100 text-blue-600 font-semibold rounded-lg hover:bg-blue-200">
+                    Draft Email
+                </button>
             </div>
         `).join('');
+
+        // Store drafts globally for access
+        window.currentJobDrafts = data.job_recommendations.map(j => j.email_draft || data.email_draft);
+        window.scrollIntoViewDraft = () => document.getElementById('email-drafts').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Email Draft
@@ -221,4 +245,50 @@ function updateReportUI(data) {
     if (emailTextarea) {
         emailTextarea.value = data.email_draft;
     }
+}
+// Helper to draft email
+function copyToDraft(index) {
+    const draft = window.currentJobDrafts[index];
+    const textarea = document.getElementById('email-draft-output');
+    if (textarea && draft) {
+        textarea.value = draft;
+        document.getElementById('email-drafts').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+// Helper to copy draft to clipboard
+function copyDraftText() {
+    const textarea = document.getElementById('email-draft-output');
+    if (!textarea || !textarea.value) return;
+    navigator.clipboard.writeText(textarea.value).then(() => {
+        const feedback = document.getElementById('copy-feedback');
+        if (feedback) {
+            feedback.classList.remove('hidden');
+            setTimeout(() => feedback.classList.add('hidden'), 2000);
+        }
+    }).catch(err => {
+        console.error('Failed to copy text: ', err);
+    });
+}
+
+// Analyze Resume Only Mode
+function analyzeResumeOnly() {
+    console.log("Analyze Resume Only Clicked");
+    if (!uploadedResumeName) {
+        alert("Please upload a resume first!");
+        return;
+    }
+    // Show Loading
+    document.getElementById('detailed-assessment').classList.add('hidden');
+    document.getElementById('report').classList.add('hidden');
+    const reportSection = document.getElementById('report');
+    reportSection.classList.remove('hidden');
+    reportSection.style.display = 'block';
+    reportSection.scrollIntoView({ behavior: 'smooth' });
+
+    // Minimal loading UI inside report
+    const scoreEl = document.getElementById('readiness-score-display');
+    if (scoreEl) scoreEl.textContent = "...";
+
+    // Trigger assessment with override
+    submitAssessment('resume-only');
 }
