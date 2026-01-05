@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
-import google.generativeai as genai
+from google import genai
 from fpdf import FPDF
 import glob
 
@@ -29,10 +29,11 @@ def load_api_key():
 GEMINI_API_KEY = load_api_key()
 
 if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel('gemini-2.0-flash-lite')
+    client = genai.Client(api_key=GEMINI_API_KEY)
+    model = 'gemini-2.5-flash'
 else:
     print("Warning: Gemini API Key not loaded. AI features will not work.")
+    client = None
     model = None
 
 # --- Data Loading ---
@@ -342,13 +343,23 @@ async def generate_assessment(submission: AssessmentSubmission):
         """
 
         try:
-            # 3. Call Gemini API
+            # 3. Call Gemini API (UPDATED for google-genai SDK)
             print("Sending prompt to Gemini...")
-            response = model.generate_content(prompt)
+            
+            # Use 'client.models.generate_content' instead of 'model.generate_content'
+            response = client.models.generate_content(
+                model=model,    # This passes the string 'gemini-1.5-flash'
+                contents=prompt # This passes your prompt text
+            )
+            
             print("Received response.")
+            
+            # The new SDK still uses .text to get the string output
             text_response = response.text.replace('```json', '').replace('```', '').strip()
+            
             # Clean potential markdown issues
-            if text_response.startswith('json'): text_response = text_response[4:].strip()
+            if text_response.startswith('json'): 
+                text_response = text_response[4:].strip()
             
             ai_data = json.loads(text_response)
             
