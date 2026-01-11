@@ -1,7 +1,7 @@
 import json
 from app.config import COMPANIES_FILE
 
-# --- Question Bank ---
+# ===================================== Question Bank =====================================
 QUESTIONS_DB = {
     "fast": [
         {"id": 1, "text": "What is your primary area of interest?", "type": "mcq", "options": ["Web Development (Frontend/Backend/Fullstack)", "Data Science & AI/ML", "App Development (Android/iOS)", "Cybersecurity & Networks", "Non-Tech / Management"]},
@@ -41,10 +41,11 @@ QUESTIONS_DB = {
     ]
 }
 
-# Logic to combine questions for modes
+# ----------------------- Logic to combine questions for modes ----------------------
 QUESTIONS_DB["balanced"] = QUESTIONS_DB["fast"] + QUESTIONS_DB["balanced"]
 QUESTIONS_DB["detailed"] = QUESTIONS_DB["balanced"] + QUESTIONS_DB["detailed"]
 
+# ----------------------- Function to load companies from file ----------------------
 def load_companies():
     try:
         with open(COMPANIES_FILE, "r") as f:

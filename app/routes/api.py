@@ -1,85 +1,96 @@
 import os
 import json
 import time
-from fastapi import APIRouter, HTTPException, UploadFile, File
+from collections import defaultdict
+from fastapi import APIRouter, HTTPException, UploadFile, File, Request
 from fastapi.responses import FileResponse, JSONResponse
 
 from app.config import RESUME_DIR, PDF_DIR
 from app.models import AssessmentSubmission
-from app.quiz import QUESTIONS_DB, companies_data
-from app.services.resume_service import extract_resume_text
-from app.services.matching_service import rank_companies
-from app.services.ai_service import analyze_profile
-from app.services.pdf_service import generate_pdf
+from app.quiz import QUESTIONS_DB
+from app.services.ai_service import run_full_assessment
 
 router = APIRouter(prefix="/api")
 
-@router.get("/report/pdf")
+# ================================= Security: Rate Limiter =================================
+class RateLimiter:
+    def __init__(self, requests_per_minute=5):
+        self.limit = requests_per_minute
+        self.history = defaultdict(list)
+
+    # Function to check rate limit
+    def check(self, ip: str):
+        now = time.time() 
+        # Clean up old requests
+        self.history[ip] = [t for t in self.history[ip] if now - t < 60] # Keep last 60 seconds
+        
+        if len(self.history[ip]) >= self.limit:
+            raise HTTPException(status_code=429, detail="Rate limit exceeded. Please try again later.")
+        
+        self.history[ip].append(now) # Add new request
+
+limiter = RateLimiter(requests_per_minute=5)
+
+# ================================= Backend APIs =================================
+# ------------------- API that returns report(pdf) from server to client -------------------
+# activate when client presses "download button"
+@router.get("/report/pdf") 
 async def get_report(filename: str):
+    # Potential Path Traversal check (Simple)
+    if ".." in filename or "/" in filename or "\\" in filename:
+         return JSONResponse(status_code=400, content={"error": "Invalid filename"})
+
     file_path = os.path.join(PDF_DIR, filename)
+
     if os.path.exists(file_path):
         return FileResponse(file_path)
     return JSONResponse(status_code=404, content={"error": "File not found"})
 
-@router.post("/upload_resume")
-async def upload_resume(file: UploadFile = File(...)):
+# ------------------- API that uploads resume from client to server -------------------
+# activate when client presses "upload resume" button
+@router.post("/upload_resume") 
+async def upload_resume(request: Request, file: UploadFile = File(...)):
+    # 1. Rate Check
+    client_ip = request.client.host
+    limiter.check(client_ip)
+
+    # 2. PDF Check
+    if not file.filename.lower().endswith('.pdf'):
+        return JSONResponse(status_code=400, content={"error": "Only PDF files are allowed"})
+    
+    if file.content_type != "application/pdf": 
+        return JSONResponse(status_code=400, content={"error": "Invalid file type"})
+
     try:
         file_location = os.path.join(RESUME_DIR, file.filename)
         with open(file_location, "wb+") as file_object:
             file_object.write(file.file.read())
         return {"info": f"file '{file.filename}' saved at '{file_location}'", "filename": file.filename}
-    except Exception as e:
-        return JSONResponse(status_code=500, content={"error": str(e)})
 
-@router.get("/questions/{mode}")
+    except Exception as e:
+        print(f"Server Error (Upload): {str(e)}") # Log internal error
+        return JSONResponse(status_code=500, content={"error": "Internal Server Error"})
+
+# ------------------- API that returns(shows) questions from server to client -------------------
+# activate when client presses "fast", "balanced" or "detailed" button
+@router.get("/questions/{mode}") 
 async def get_questions(mode: str):
     if mode not in QUESTIONS_DB:
         raise HTTPException(status_code=404, detail="Invalid mode")
     return QUESTIONS_DB[mode]
 
-@router.post("/assess")
-async def generate_assessment(submission: AssessmentSubmission):
-    # 1. Format User Context
-    mode = submission.mode
-    answers = submission.answers
-    
-    questions_list = QUESTIONS_DB.get(mode, [])
-    user_context = f"Assessment Mode: {mode}\n"
-    
-    for q in questions_list:
-        key = f"q_{q['id']}"
-        ans = answers.get(key, "Not Answered")
-        user_context += f"Q: {q['text']}\nA: {ans}\n"
+# ------------------- API that return answers and user's resume back to server -------------------
+# activate when client presses "submit" button or "analyze resume" button
+@router.post("/assess") 
+async def generate_assessment(request: Request, submission: AssessmentSubmission):
+    # 1. Rate Check
+    client_ip = request.client.host
+    limiter.check(client_ip)
 
-    # 1.5 Extract Resume
-    resume_text = ""
-    if submission.resume_filename:
-        resume_text = extract_resume_text(submission.resume_filename)
-        user_context += f"\n--- RESUME CONTENT ---\n{resume_text[:2000]}..."
-
-    # 2. Rank Companies
-    top_candidates = rank_companies(user_context, companies_data)
-    candidates_json = json.dumps([{
-        "id": c['id'], "name": c['name'], "role": c['role'], 
-        "skills": c['skills'], "email": c['email']
-    } for c in top_candidates])
-
-    # 3. Call AI
-    ai_data = analyze_profile(user_context, candidates_json, mode, answers, bool(resume_text))
-    top_jobs = ai_data.get("job_recommendations", [])
-
-    # 4. Generate PDF
-    report_filename = f"Placement_Report_{int(time.time())}.pdf"
-    final_data = {
-        "mode": submission.mode,
-        **ai_data,
-        "job_recommendations": top_jobs
-    }
-    
     try:
-        generate_pdf(final_data, filename=report_filename)
-    except Exception as e:
-        print(f"PDF Error: {e}")
+        # 2. Delegate to AI Service (which handles the full orchestration)
+        return run_full_assessment(submission)
 
-    final_data["pdf_url"] = f"/api/report/pdf?filename={report_filename}"
-    return final_data
+    except Exception as e:
+        print(f"Server Error (Assess): {str(e)}")
+        return JSONResponse(status_code=500, content={"error": "Internal Server Error"})

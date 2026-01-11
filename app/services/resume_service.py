@@ -1,7 +1,9 @@
 import os
 import pypdf
+
 from app.config import RESUME_DIR
 
+# ============================= Function to extract resume text =============================
 def extract_resume_text(filename):
     path = os.path.join(RESUME_DIR, filename)
     text = ""

@@ -1,7 +1,9 @@
 import os
 from fpdf import FPDF
+
 from app.config import PDF_DIR
 
+#--------------------------- Function for formatting PDF ---------------------------
 class PDFReport(FPDF):
     def header(self):
         self.set_font('Arial', 'B', 16)
@@ -26,6 +28,7 @@ class PDFReport(FPDF):
         self.multi_cell(0, 10, body)
         self.ln()
 
+#--------------------------- Function for generating PDF ---------------------------
 def generate_pdf(data, filename="report.pdf"):
     pdf = PDFReport()
     pdf.add_page()
@@ -53,9 +56,10 @@ def generate_pdf(data, filename="report.pdf"):
     # Jobs
     pdf.chapter_title("Recommended Jobs")
     for job in data.get('job_recommendations', []):
-        pdf.chapter_body(f"Role: {job['role']}\nCompany: {job['company']}\nLocation: {job['location']}\nMatch: {job['match']}")
+        pdf.chapter_body(f"Role: {job.get('role', 'N/A')}\nCompany: {job.get('company', 'N/A')}\nLocation: {job.get('location', 'Remote/TBD')}\nMatch: {job.get('match', '')}")
         pdf.ln(2)
 
+    # Path to save PDF
     output_path = os.path.join(PDF_DIR, filename)
     pdf.output(output_path)
     return output_path

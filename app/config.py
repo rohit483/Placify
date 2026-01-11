@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+# =================================== PATHS ===================================
 # --- Base Paths ---
 # config.py is in app/, so parent is app, parent.parent is project root
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,7 @@ os.makedirs(RESUME_DIR, exist_ok=True)
 os.makedirs(PDF_DIR, exist_ok=True)
 os.makedirs(ANALYSIS_DIR, exist_ok=True)
 
-# --- API Keys ---
+# =================================== API Keys Setup ====================================
 API_KEY_FILE = ENV_DIR / "gemini_api.txt"
 
 def load_api_key():
