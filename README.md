@@ -1,10 +1,5 @@
 # Placify - AI-Driven Placement Readiness Platform
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python](https://img.shields.io/badge/python-3.9%2B-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.95%2B-green)
-![Status](https://img.shields.io/badge/Status-Beta-orange)
-
 Placify is an intelligent career readiness platform designed to bridge the gap between students and their dream jobs. By leveraging Generative AI (Google Gemini), Placify analyzes student profiles, resumes, and assessment responses to provide personalized career guidance, job recommendations, and actionable improvement plans.
 
 ## 🚀 Key Features
@@ -75,8 +70,8 @@ Placify-v1/
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/AbhiJeet4241/Placify-v1.git
-   cd Placify-v1
+   git clone https://github.com/rohit483/Placify.git
+   cd Placify
    ```
 2. **Set up Virtual Environment (Optional but Recommended)**
 
