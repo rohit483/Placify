@@ -34,7 +34,7 @@ Placify is an intelligent career readiness platform designed to bridge the gap b
 ## 📂 Project Structure
 
 ```bash
-Placify-v1/
+Placify/
 ├── app/                        # Application Core
 │   ├── routes/                 # API Endpoints (api.py, views.py)
 │   ├── services/               # Logic Layer (ai_service, matching, pdf, resume)
@@ -55,6 +55,9 @@ Placify-v1/
 ├── company_dataset/            # Data Sources
 │   └── companies.json          # Job/Company Database
 ├── main.py                     # Entry Point
+├── Dockerfile                  # Container Config
+├── docker-compose.yml          # Container Orchestration
+├── .dockerignore               # Docker Build Exclusions
 └── requirements.txt            # Python Dependencies
 ```
 
@@ -89,7 +92,7 @@ Placify-v1/
    ```
 4. **Configure Environment**
 
-   * Navigate to `venv/`.
+   * Navigate to `venv/` folder.
    * Create a file named `.env`.
    * Add your API key:
      ```env
@@ -112,6 +115,23 @@ Placify-v1/
 5. **View Report**: See your readiness score, strengths, and recommended jobs instantly.
 6. **Download PDF**: Click "Download PDF Report" to save a copy.
 7. **Draft Emails**: Select a recommended job to auto-generate a recruiter email.
+
+## 🐳 Docker Deployment
+
+The application is fully containerized with Nginx and ready for database integration.
+
+1. **Ensure Docker is installed**.
+2. **Environment Setup**:
+   Ensure your `.env` file exists at `venv/.env` (standard URL structure) or update `docker-compose.yml` to point to your custom location.
+3. **Run with Docker Compose**:
+
+   ```bash
+   docker-compose up -d --build
+   ```
+
+   The app will be accessible at:
+   *   **Frontend (Nginx)**: `http://localhost` (Recommended)
+   *   **Backend Direct**: `http://localhost:8000`
 
 ## 🔮 Future Scope
 

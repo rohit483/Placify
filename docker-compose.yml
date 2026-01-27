@@ -1,0 +1,62 @@
+services:
+  # -------------------------------------------------------------------------
+  # 1. WEB SERVICE (FastAPI App)
+  # -------------------------------------------------------------------------
+  web:
+    build: .
+    container_name: placify_backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/app
+    # Load environment variables from file
+    env_file:
+      #- ./placify_env/.env # if virtual environment have "custom" name
+      - ./venv/.env # if virtual environment name venv
+      #- .env               # if .env file is in the same directory
+    ports:
+      - "8000:8000" # Expose directly for debugging
+    networks:
+      - placify_network
+  # -------------------------------------------------------------------------
+  # 2. PROXY SERVICE (Nginx)
+  # -------------------------------------------------------------------------
+  nginx:
+    image: nginx:alpine
+    container_name: placify_nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./static:/app/static:ro # Serve static files directly
+    ports:
+      - "80:80" # Expose directly for production
+    depends_on:
+      - web
+    networks:
+      - placify_network
+  # -------------------------------------------------------------------------
+  # 3. DATABASE SERVICE (Future Placeholder - PostgreSQL)
+  # -------------------------------------------------------------------------
+  # Once you implement DB logic, uncomment lines below and in your config.py
+  # db:
+  #   image: postgres:15
+  #   container_name: placify_db
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_USER=placify_user
+  #     - POSTGRES_PASSWORD=placify_password
+  #     - POSTGRES_DB=placify_db
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - placify_network
+  # Optional: DB Admin Interface
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   ...
+
+networks:
+  placify_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
