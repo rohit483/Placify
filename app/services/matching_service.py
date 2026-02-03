@@ -32,7 +32,7 @@ def rank_companies(user_profile_text, companies, user_preferences=None):
             if location_pref:
                 company_location = company.get('location', '').lower()
                 
-                # If user wants "Remote", include remote jobs
+                # If user wants "Remote"
                 if 'remote' in location_pref:
                     if 'remote' not in company_location:
                         continue  # Skip non-remote if user wants remote

@@ -11,21 +11,22 @@ from app.config import GEMINI_API_KEY, GROQ_API_KEY, ANALYSIS_DIR
 gemini_client = None
 groq_client = None
 
-# Initialize Clients
+# Initialize Gemini Client
 if GEMINI_API_KEY:
     try:
         gemini_client = genai.Client(api_key=GEMINI_API_KEY)
     except Exception as e:
         print(f"Failed to init Gemini: {e}")
 
+# Initialize Groq Client
 if GROQ_API_KEY:
     try:
         groq_client = Groq(api_key=GROQ_API_KEY)
     except Exception as e:
         print(f"Failed to init Groq: {e}")
 
-# ========================= Helper Functions =========================
-
+# ============================== Helper Functions =============================
+# ----------------------- Function to call Gemini -----------------------
 def call_gemini(prompt):
     if not gemini_client:
         raise Exception("Gemini Client not initialized")
@@ -36,6 +37,7 @@ def call_gemini(prompt):
     )
     return response.text
 
+# ----------------------- Function to call Groq -----------------------
 def call_groq(prompt):
     if not groq_client:
         raise Exception("Groq Client not initialized")
@@ -45,16 +47,16 @@ def call_groq(prompt):
             {"role": "system", "content": "You are a JSON-only response bot. Output ONLY valid JSON."},
             {"role": "user", "content": prompt}
         ],
-        model="llama-3.3-70b-versatile", # High speed fallback
+        model="llama-3.3-70b-versatile",
         response_format={"type": "json_object"}
     )
     return chat_completion.choices[0].message.content
 
+# Function to call Ollama
 def call_ollama(prompt):
-    # Hardcoded local URL as requested
-    url = "http://localhost:11434/api/generate"
+    url = "http://localhost:11434/api/generate" #add localhost llm url
     payload = {
-        "model": "gemma3:4b", # correcting user's "gemma3" typo to likely available model, or stick to user input if insists. User said gemma3:4b. Assuming it exists.
+        "model": "gemma3:4b",
         "prompt": prompt + "\nRespond with JSON only.",
         "stream": False,
         "format": "json" 
@@ -67,7 +69,8 @@ def call_ollama(prompt):
             raise Exception(f"Ollama status: {response.status_code}")
     except Exception as e:
         raise Exception(f"Ollama connection failed: {e}")
-
+# ============================== Response Cleaning =============================
+# Function to clean JSON response
 def clean_json_response(text_response):
     try:
         text_response = text_response.replace('```json', '').replace('```', '').strip()
@@ -75,7 +78,7 @@ def clean_json_response(text_response):
             text_response = text_response[4:].strip()
         return json.loads(text_response)
     except:
-        # Last ditch cleanup attempt
+        # Last cleanup attempt
         start = text_response.find('{')
         end = text_response.rfind('}') + 1
         if start != -1 and end != -1:
@@ -134,7 +137,7 @@ def analyze_profile(user_context, candidates_json, mode, answers, resume_extract
             print(f"{name} Failed/Skipped: {e}")
             continue
 
-    # 4. Final Fallback (Mock) if all failed
+    # Final Fallback (Mock) if all failed
     if not ai_data:
         print("All AI Providers failed. Using Mock Data.")
         return {
@@ -155,7 +158,7 @@ def analyze_profile(user_context, candidates_json, mode, answers, resume_extract
             json.dump({
                 "timestamp": timestamp,
                 "mode": mode,
-                "provider_used": "unknown", # simplified
+                "provider_used": "unknown",
                 "response": ai_data
             }, f, indent=4)
     except:
@@ -174,7 +177,7 @@ def run_full_assessment(submission):
     Orchestrates the full assessment flow:
     1. Prepare Context (Answers + Resume)
     2. Rank Companies (Hard Filter + Regex Score)
-    3. Analyze with AI (Gemini)
+    3. Analyze with AI
     4. Generate PDF Report
     """
 

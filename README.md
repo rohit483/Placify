@@ -9,7 +9,7 @@ Placify is an intelligent career readiness platform designed to bridge the gap b
   * **Balanced Mode**: A mix of 20 MCQs and short answers for deeper insight.
   * **Detailed Mode**: Comprehensive analysis combining 30+ questions with resume parsing.
 * **Resume Analysis (RAG-Powered)**: Upload your PDF resume to get an resume-Only report or combine it with assessments for hyper-personalized results.
-* **AI-Driven Insights**: Utilizes Google Gemini to generate:
+* **AI-Driven Insights**: Utilizes Google Gemini and Groq to generate:
   * Readiness Scores (0-100%).
   * Key Strengths & Improvement Gaps.
   * Tailored Action Plans.
@@ -26,15 +26,27 @@ Placify is an intelligent career readiness platform designed to bridge the gap b
 ## 🛠️ Tech Stack
 
 * **Backend**: Python, FastAPI, Uvicorn.
-* **AI Engine**: Google Gemini API (`2.5-flash` model).
+* **AI Engine**: Triple-Layer System:
+  * **Primary**: Google Gemini (`2.5-flash`)
+  * **Secondary**: Groq (`llama-3.3-70b`)
+  * **Tertiary**: Ollama (`gemma3:4b` - Local)
 * **Frontend**: HTML5, Vanilla CSS (Modular), JavaScript (ES6+).
 * **Data Handling**: JSON-based datasets, PyPDF (Resume parsing).
 * **Reporting**: FPDF for dynamic PDF generation.
+
+## 🛡️ AI Resilience System
+
+Placify ensures zero downtime for AI features using a robust fallback mechanism:
+
+1. **Gemini (Primary)**: Fast, high-quality, free-tier.
+2. **Groq (Secondary)**: Ultra-fast inference if Gemini hits rate limits (`429`) or errors.
+3. **Ollama (Local)**: Private, offline-capable fallback if internet APIs fail.
 
 ## 📂 Project Structure
 
 ```bash
 Placify-v1/
+├── .github/                    # CI/CD Workflows
 ├── app/                        # Application Core
 │   ├── routes/                 # API Endpoints (api.py, views.py)
 │   ├── services/               # Logic Layer (ai_service, matching, pdf, resume)
@@ -90,10 +102,14 @@ Placify-v1/
 4. **Configure Environment**
 
    * Navigate to `venv/`.
-   * Create a file named `.env`.
-   * Add your API key:
+   * Configure `.env` with your keys:
      ```env
-     GEMINI_API_KEY=your_actual_api_key_here
+     GEMINI_API_KEY=your_gemini_key_here
+     GROQ_API_KEY=your_groq_key_here
+     ```
+   * **Optional**: Install [Ollama](https://ollama.com/) and pull the model for offline support:
+     ```bash
+     ollama pull gemma3:4b
      ```
 5. **Run the Application**
 
