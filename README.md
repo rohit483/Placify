@@ -1,6 +1,6 @@
 # Placify - AI-Driven Placement Readiness Platform
 
-Placify is an intelligent career readiness platform designed to bridge the gap between students and their dream jobs. By leveraging Generative AI (Google Gemini), Placify analyzes student profiles, resumes, and assessment responses to provide personalized career guidance, job recommendations, and actionable improvement plans.
+Placify is an intelligent career readiness platform designed to bridge the gap between students and their dream jobs. By leveraging Generative AI (Gemini, Groq, Ollama), Placify analyzes student profiles, resumes, and assessment responses to provide personalized career guidance, job recommendations, and actionable improvement plans.
 
 ## 🚀 Key Features
 
@@ -67,6 +67,10 @@ Placify-v1/
 ├── company_dataset/            # Data Sources
 │   └── companies.json          # Job/Company Database
 ├── main.py                     # Entry Point
+├── test/                        # Check LLM API
+│   ├── test_gemini.py          # Verify Gemini Connection
+│   ├── test_groq.py            # Verify Groq Connection
+│   └── test_ollama.py          # Verify Ollama Connection
 └── requirements.txt            # Python Dependencies
 ```
 

@@ -4,9 +4,9 @@ web_data/
 *.mermaid
 manual.txt
 security_audit.md.resolved
-test_ollama.py
-test_groq.py
-test_gemini.py
+# test_ollama.py
+# test_groq.py
+# test_gemini.py
 
 
 # Byte-compiled / optimized / DLL files
