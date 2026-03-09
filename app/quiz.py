@@ -1,6 +1,3 @@
-import json
-from app.config import COMPANIES_FILE
-
 # ===================================== Question Bank =====================================
 QUESTIONS_DB = {
     "fast": [
@@ -44,14 +41,3 @@ QUESTIONS_DB = {
 # ----------------------- Logic to combine questions for modes ----------------------
 QUESTIONS_DB["balanced"] = QUESTIONS_DB["fast"] + QUESTIONS_DB["balanced"]
 QUESTIONS_DB["detailed"] = QUESTIONS_DB["balanced"] + QUESTIONS_DB["detailed"]
-
-# ----------------------- Function to load companies from file ----------------------
-def load_companies():
-    try:
-        with open(COMPANIES_FILE, "r") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        print(f"Error: Companies file not found at {COMPANIES_FILE}")
-        return []
-
-companies_data = load_companies()

@@ -1,7 +1,4 @@
-import os
 from fpdf import FPDF
-
-from app.config import PDF_DIR
 
 #--------------------------- Function for formatting PDF ---------------------------
 class PDFReport(FPDF):
@@ -18,7 +15,7 @@ class PDFReport(FPDF):
     def chapter_title(self, title):
         self.set_font('Arial', 'B', 12)
         self.set_fill_color(200, 220, 255)
-        self.cell(0, 10, title, 0, 1, 'L', 1)
+        self.cell(0, 10, title, 0, 1, 'L', True)
         self.ln(4)
 
     def chapter_body(self, body):
@@ -59,7 +56,8 @@ def generate_pdf(data, filename="report.pdf"):
         pdf.chapter_body(f"Role: {job.get('role', 'N/A')}\nCompany: {job.get('company', 'N/A')}\nLocation: {job.get('location', 'Remote/TBD')}\nMatch: {job.get('match', '')}")
         pdf.ln(2)
 
-    # Path to save PDF
-    output_path = os.path.join(PDF_DIR, filename)
-    pdf.output(output_path)
-    return output_path
+    # Return PDF as bytes (no filesystem write)
+    raw = pdf.output(dest='S')
+    if isinstance(raw, (bytes, bytearray)):
+        return bytes(raw)
+    return raw.encode('latin-1')

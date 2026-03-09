@@ -1,21 +1,14 @@
-import os
+import io
 import pypdf
 
-from app.config import RESUME_DIR
-
 # ============================= Function to extract resume text =============================
-def extract_resume_text(filename):
-    path = os.path.join(RESUME_DIR, filename)
+def extract_resume_text_from_bytes(pdf_bytes: bytes) -> str:
+    """Extract text from PDF bytes (no filesystem needed)."""
     text = ""
     try:
-        if not os.path.exists(path): return ""
-        if filename.endswith('.pdf'):
-            reader = pypdf.PdfReader(path)
-            for page in reader.pages:
-                text += page.extract_text() + "\n"
-        else:
-            # Fallback for text/other files if supported later
-            pass
+        reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
+        for page in reader.pages:
+            text += page.extract_text() + "\n"
     except Exception as e:
         print(f"Error reading resume: {e}")
     return text

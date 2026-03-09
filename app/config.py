@@ -9,21 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # --- Configurable Paths ---
 COMPANY_DATASET_DIR = BASE_DIR / "company_dataset"
-WEB_DATA_DIR = BASE_DIR / "web_data"
 STATIC_DIR = BASE_DIR / "static"
 TEMPLATE_DIR = BASE_DIR / "template"
-#ENV_DIR = BASE_DIR / "placify_env"
 ENV_DIR = BASE_DIR / "venv"
+#ENV_DIR = BASE_DIR / "placify_env"  # if using custom env folder name
 
 COMPANIES_FILE = COMPANY_DATASET_DIR / "companies.json"
-RESUME_DIR = WEB_DATA_DIR / "resume"
-PDF_DIR = WEB_DATA_DIR / "pdf"
-ANALYSIS_DIR = WEB_DATA_DIR / "analysis"
-
-# Ensure directories exist
-os.makedirs(RESUME_DIR, exist_ok=True)
-os.makedirs(PDF_DIR, exist_ok=True)
-os.makedirs(ANALYSIS_DIR, exist_ok=True)
 
 # =================================== API Keys Setup ====================================
 ENV_FILES = [
@@ -44,8 +35,11 @@ if not loaded:
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not GEMINI_API_KEY:
     print("Warning: GEMINI_API_KEY not found under GEMINI_API_KEY.")
 if not GROQ_API_KEY:
     print("Warning: GROQ_API_KEY not found. Fallback to Groq will not work.")
+if not DATABASE_URL:
+    print("Warning: DATABASE_URL not found. Database features will not work.")

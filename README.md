@@ -8,125 +8,148 @@ Placify is an intelligent career readiness platform designed to bridge the gap b
   * **Fast Mode**: Quick 10-question MCQ baseline check.
   * **Balanced Mode**: A mix of 20 MCQs and short answers for deeper insight.
   * **Detailed Mode**: Comprehensive analysis combining 30+ questions with resume parsing.
-* **Resume Analysis (RAG-Powered)**: Upload your PDF resume to get an resume-Only report or combine it with assessments for hyper-personalized results.
+* **Resume Analysis (RAG-Powered)**: Upload your PDF resume to get a resume-only report or combine it with assessments for hyper-personalized results.
 * **AI-Driven Insights**: Utilizes Google Gemini and Groq to generate:
   * Readiness Scores (0-100%).
   * Key Strengths & Improvement Gaps.
   * Tailored Action Plans.
-  * Job Recommendations (based on local/remote datasets).
+  * Job Recommendations with personalized cold email drafts.
+* **Hybrid Job Matching Pipeline**:
+  * Phase 1: Hard filter (location, CTC, work mode)
+  * Phase 2: Quick score (skill/role keyword matching)
+  * Phase 3: LLM intelligent ranking (top 5 from 20)
+  * Phase 4: Full AI analysis with matched companies
 * **Professional Outputs**:
-  * **PDF Reports**: Downloadable, well-formatted career reports.
+  * **PDF Reports**: Downloadable, well-formatted career reports stored in database.
   * **Email Drafting**: Auto-generated cold email drafts for recruiters.
-* **Performance & Security**:
-  * Rate limiting API.
-  * Input sanitization.
-  * Secure environment variable management for API keys.
-* **Modern UI**: Clean, responsive interface built with semantic HTML5 and optimized CSS (No external frameworks).
+* **Full-Stack Docker Deployment**: Nginx + FastAPI + PostgreSQL, production-ready.
+* **Modern UI**: Clean, responsive interface with skeleton loading states.
 
 ## 🛠️ Tech Stack
 
-* **Backend**: Python, FastAPI, Uvicorn.
-* **AI Engine**: Triple-Layer System:
-  * **Primary**: Google Gemini (`2.5-flash`)
-  * **Secondary**: Groq (`llama-3.3-70b`)
-  * **Tertiary**: Ollama (`gemma3:4b` - Local)
-* **Frontend**: HTML5, Vanilla CSS (Modular), JavaScript (ES6+).
-* **Data Handling**: JSON-based datasets, PyPDF (Resume parsing).
-* **Reporting**: FPDF for dynamic PDF generation.
+| Layer | Technology |
+|-------|------------|
+| **Backend** | Python 3.11, FastAPI, Uvicorn, SQLAlchemy |
+| **Database** | PostgreSQL 15 (Docker) |
+| **AI Engine** | Gemini 2.5-flash → Groq llama-3.3-70b → Ollama gemma3:4b |
+| **Frontend** | HTML5, Vanilla CSS, JavaScript (ES6+) |
+| **PDF Generation** | FPDF |
+| **Reverse Proxy** | Nginx Alpine |
+| **CI/CD** | GitHub Actions |
 
 ## 🛡️ AI Resilience System
 
 Placify ensures zero downtime for AI features using a robust fallback mechanism:
 
-1. **Gemini (Primary)**: Fast, high-quality, free-tier.
-2. **Groq (Secondary)**: Ultra-fast inference if Gemini hits rate limits (`429`) or errors.
-3. **Ollama (Local)**: Private, offline-capable fallback if internet APIs fail.
+```
+Request → [Gemini] → 429/Error → [Groq] → Error → [Ollama (Local)]
+```
+
+Failed providers are automatically skipped in subsequent API calls within the same request.
 
 ## 📂 Project Structure
 
 ```bash
 Placify/
-├── .github/                    # CI/CD
-├── app/                        # Application Core
-│   ├── routes/                 # API Endpoints (api.py, views.py)
-│   ├── services/               # Logic Layer (ai_service, matching, pdf, resume)
-│   ├── config.py               # Configuration & Path Management
-│   ├── models.py               # Pydantic Data Models
-│   └── quiz.py                 # Question Bank & Assessment Logic
-├── static/                     # Static Assets
-│   ├── style.css               # Main Stylesheet
-│   └── script.js               # Frontend Logic
-├── template/                   # HTML Templates
-│   └── index.html              # Main Single-Page Interface
-├── web_data/                   # Runtime Data Storage
-│   ├── resume/                 # Uploaded Resumes (Temp)
-│   ├── pdf/                    # Generated Reports
-│   └── analysis/               # Raw JSON Analysis Logs
-├── venv/                       # Environment Variables (Secure)
-│   └── .env                    # API Keys (Not committed)
-├── company_dataset/            # Data Sources
-│   └── companies.json          # Job/Company Database
-├── main.py                     # Entry Point
-├── Dockerfile                  # Container Config
-├── docker-compose.yml          # Container Orchestration
-├── .dockerignore               # Docker Build Exclusions
-└── requirements.txt            # Python Dependencies
+├── .github/workflows/          # CI/CD (lint, test, docker build)
+├── app/
+│   ├── routes/                 # API endpoints (api.py, views.py)
+│   ├── services/               # AI, PDF, resume, matching services
+│   ├── config.py               # Configuration & environment loading
+│   ├── database.py             # SQLAlchemy engine & seeding
+│   ├── db_models.py            # ORM table definitions
+│   ├── models.py               # Pydantic validation models
+│   └── quiz.py                 # Question bank
+├── static/                     # CSS & JavaScript
+├── template/                   # HTML templates
+├── test/                       # Test files (pytest)
+├── company_dataset/
+│   └── companies.json          # Seed data (94 job listings)
+├── venv/
+│   └── .env                    # API keys (not committed)
+├── nginx/
+│   └── nginx.conf              # Reverse proxy configuration
+├── main.py                     # Application entry point
+├── Dockerfile                  # Backend container
+├── docker-compose.yml          # Full stack orchestration
+├── .env.example                # Template for environment setup
+├── .gitignore                  # Git ignore rules
+├── .dockerignore               # Docker build exclusions
+├── requirements.txt            # Python dependencies
+├── README.md                   # Project overview (this file)
+├── DEV_GUIDE.md                # 📖 Complete developer documentation
+└── LICENSE                     # MIT License
 ```
 
 ## ⚡ Getting Started
 
-### Prerequisites
+### Quick Start (Docker — Recommended)
 
-* Python 3.9 or higher.
-* A Google Gemini API Key (Get one [here](https://aistudio.google.com/)).
+```bash
+# 1. Clone the repository
+git clone https://github.com/rohit483/Placify.git
+cd Placify
 
-### Installation
+# 2. Set up environment variables
+cp .env.example venv/.env
+# Edit venv/.env with your API keys
 
-1. **Clone the Repository**
+# 3. Start everything
+docker compose up --build
 
-   ```bash
-   git clone https://github.com/rohit483/Placify.git
-   cd Placify
-   ```
-2. **Set up Virtual Environment (Optional but Recommended)**
+# 4. Open browser
+http://localhost
+```
 
-   ```bash
-   python -m venv venv
-   # Windows
-   .\venv\Scripts\activate
-   # Mac/Linux
-   source venv/bin/activate
-   ```
-3. **Install Dependencies**
+### Environment Variables
 
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. **Configure Environment**
+Create `venv/.env`:
 
-   * Navigate to `venv/` folder.
-   * Create a file named `.env`.
-   * Add your API key:
-     ```env
-     GEMINI_API_KEY=your_gemini_key_here
-     GROQ_API_KEY=your_groq_key_here #backup
-     ```
-   * **Optional**: Install [Ollama](https://ollama.com/) and pull the model for offline support:
-     ```bash
-     ollama pull gemma3:4b
-     ollama serve
-     ```
-5. **Run the Application**
+```env
+# Required
+GEMINI_API_KEY=your_gemini_key_here
+GROQ_API_KEY=your_groq_key_here
+POSTGRES_USER=username
+POSTGRES_PASSWORD=your_password
+POSTGRES_DB=placify_db
+DATABASE_URL=postgresql://username:your_password@db:5432/placify_db
 
-   ```bash
-   python main.py
-   ```
+# Optional (for production)
+SKIP_SEED=false
+```
 
-   The server will start at `http://127.0.0.1:8000`.
+Get API keys:
+* **Gemini**: [Google AI Studio](https://aistudio.google.com/)
+* **Groq**: [Groq Console](https://console.groq.com/)
+
+### Local Development (Without Docker)
+
+```bash
+# 1. Create virtual environment
+python -m venv venv
+.\venv\Scripts\activate  # Windows
+source venv/bin/activate  # Mac/Linux
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Set up PostgreSQL locally and configure DATABASE_URL
+
+# 4. Run
+python main.py
+```
+
+### Optional: Ollama (Local AI Fallback)
+
+```bash
+# Install Ollama from https://ollama.com/
+ollama pull gemma3:4b
+ollama serve
+```
 
 ## 📖 Usage
 
-1. Open your browser and visit `http://127.0.0.1:8000`.
+1. Open your browser and visit `http://localhost`.
 2. **Select a Mode**: Choose Fast, Balanced, or Detailed assessment.
 3. **Upload Resume**: Drag and drop your PDF resume for enhanced analysis.
 4. **Submit**: Answer the questions and submit.
@@ -134,29 +157,49 @@ Placify/
 6. **Download PDF**: Click "Download PDF Report" to save a copy.
 7. **Draft Emails**: Select a recommended job to auto-generate a recruiter email.
 
-## 🐳 Docker Deployment
+## 🐳 Docker Services
 
-The application is fully containerized with Nginx and ready for database integration.
+| Service | Port | Description |
+|---------|------|-------------|
+| `placify_nginx` | 80 | Reverse proxy, serves static files |
+| `placify_backend` | 8000 | FastAPI application |
+| `placify_db` | 5432 | PostgreSQL database |
 
-1. **Ensure Docker is installed**.
-2. **Environment Setup**:
-   Ensure your `.env` file exists at `venv/.env` (standard URL structure) or update `docker-compose.yml` to point to your custom location.
-3. **Run with Docker Compose**:
+### Useful Commands
 
-   ```bash
-   docker-compose up -d --build
-   ```
+```bash
+# Start
+docker compose up --build
 
-   The app will be accessible at:
+# Stop (keeps data)
+docker compose down
 
-   * **Frontend (Nginx)**: `http://localhost` (Recommended)
-   * **Backend Direct**: `http://localhost:8000`
+# Stop and delete all data (fresh start)
+docker compose down -v
+
+# View logs
+docker compose logs -f web
+
+# Access database
+docker exec -it placify_db psql -U $POSTGRES_USER -d placify_db
+```
+
+## 📚 Developer Documentation
+
+See **[DEV_GUIDE.md](DEV_GUIDE.md)** for complete documentation:
+
+* Database schema and seeding
+* API reference (all endpoints)
+* Security & validation details
+* Deployment checklist
+* Troubleshooting guide
 
 ## 🔮 Future Scope
 
-* **Database Integration**: Migrate from file-based storage (JSON/PDF) to a robust SQL/NoSQL database for scalable data handling and faster RAG retrieval.
-* **Pan-India Expansion**: Expand the company dataset to include opportunities across all major Indian tech hubs (Bangalore, Pune, Hyderabad, etc.), moving beyond the current Central India focus.
-* **Advanced RAG**: Implement vector embeddings (ChromaDB/FAISS) for more accurate resume-to-job matching.
+* **Advanced RAG**: Implement vector embeddings (ChromaDB/FAISS) for semantic resume-to-job matching.
+* **Pan-India Expansion**: Expand the company dataset beyond Central India to all major tech hubs.
+* **Admin Dashboard**: Web UI for managing companies without API calls.
+* **User Accounts**: Authentication and assessment history tracking.
 
 ## 🤝 Contributing
 

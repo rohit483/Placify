@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Placify - Home</title>
     <!-- Custom CSS (Replacing Tailwind) -->
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css?v=1.2">
     <!-- Load Inter font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,10 +143,22 @@
         SECTION 3.5: GENERATED REPORT (Part of Assessment flow)
         ==================================================
         -->
-        <section id="report" class="card-base my-16 hidden md-p-12 p-8">
+        <section id="report" class="card-base my-16 hidden md-p-12 p-8 report-loading">
             <h2 class="text-center mb-4">Your Personalized Career Report</h2>
+            
+            <!-- Loading Status Message -->
+            <p class="text-center text-gray-500 mb-6 skeleton-content">
+                <span class="loading-dots">Analyzing your profile with AI</span>
+            </p>
+            
+            <!-- Download Button -->
             <div class="text-center mb-10">
-                <a href="/api/report/pdf" download="Placement_Report.pdf" class="btn btn-success">
+                <!-- Skeleton Button -->
+                <div class="skeleton-content">
+                    <div class="skeleton skeleton-btn"></div>
+                </div>
+                <!-- Real Button -->
+                <a href="/api/report/pdf" download="Placement_Report.pdf" class="btn btn-success real-content" style="display:none;">
                     Download PDF Report
                 </a>
             </div>
@@ -154,22 +166,49 @@
             <div class="feature-grid md-grid-cols-3">
                 <!-- Left Column: Score and Stats -->
                 <div class="md-col-span-1 space-y-6">
+                    <!-- Readiness Score Box -->
                     <div class="text-center bg-gray-50 p-6 rounded-md">
                         <h3 class="mb-4 text-gray-600">Readiness Score</h3>
-                        <div class="progress-circle mx-auto">
-                            <span id="readiness-score-display">0%</span>
+                        <!-- Skeleton Circle -->
+                        <div class="skeleton-content">
+                            <div class="skeleton skeleton-circle"></div>
+                            <div class="skeleton skeleton-text-sm mt-4" style="width: 60%; margin: 1rem auto 0;"></div>
                         </div>
-                        <p class="mt-4">Based on your answers and analysis.</p>
+                        <!-- Real Content -->
+                        <div class="real-content" style="display:none;">
+                            <div class="progress-circle mx-auto">
+                                <span id="readiness-score-display">0%</span>
+                            </div>
+                            <p class="mt-4">Based on your answers and analysis.</p>
+                        </div>
                     </div>
+                    
+                    <!-- Key Strengths Box -->
                     <div class="bg-gray-50 p-6 rounded-md">
                         <h3 class="mb-4">Key Strengths</h3>
-                        <ul class="list-disc list-inside space-y-2 text-green-700">
+                        <!-- Skeleton List -->
+                        <div class="skeleton-content">
+                            <div class="skeleton skeleton-list-item"></div>
+                            <div class="skeleton skeleton-list-item"></div>
+                            <div class="skeleton skeleton-list-item"></div>
+                        </div>
+                        <!-- Real List -->
+                        <ul class="list-disc list-inside space-y-2 text-green-700 real-content" style="display:none;">
                             <!-- Dynamic Strengths -->
                         </ul>
                     </div>
+                    
+                    <!-- Improvement Gaps Box -->
                     <div class="bg-gray-50 p-6 rounded-md">
                         <h3 class="mb-4">Improvement Gaps</h3>
-                        <ul class="list-disc list-inside space-y-2 text-red-700">
+                        <!-- Skeleton List -->
+                        <div class="skeleton-content">
+                            <div class="skeleton skeleton-list-item"></div>
+                            <div class="skeleton skeleton-list-item"></div>
+                            <div class="skeleton skeleton-list-item"></div>
+                        </div>
+                        <!-- Real List -->
+                        <ul class="list-disc list-inside space-y-2 text-red-700 real-content" style="display:none;">
                             <!-- Dynamic Gaps -->
                         </ul>
                     </div>
@@ -177,16 +216,45 @@
 
                 <!-- Right Column: Action Plan and Jobs -->
                 <div class="md-col-span-2 space-y-6">
+                    <!-- Action Plan Box -->
                     <div class="bg-gray-50 p-6 rounded-md">
                         <h3 class="mb-4 text-lg">Your AI-Generated Action Plan</h3>
-                        <ol class="list-decimal list-inside space-y-3">
+                        <!-- Skeleton List -->
+                        <div class="skeleton-content">
+                            <div class="skeleton skeleton-text" style="width: 95%;"></div>
+                            <div class="skeleton skeleton-text" style="width: 85%;"></div>
+                            <div class="skeleton skeleton-text" style="width: 90%;"></div>
+                            <div class="skeleton skeleton-text" style="width: 75%;"></div>
+                        </div>
+                        <!-- Real List -->
+                        <ol class="list-decimal list-inside space-y-3 real-content" style="display:none;">
                             <!-- Dynamic Action Plan -->
                         </ol>
                     </div>
 
+                    <!-- Job Recommendations Box -->
                     <div class="bg-gray-50 p-6 rounded-md">
                         <h3 class="mb-4 text-lg">Top Job Recommendations (RAG-Powered)</h3>
-                        <div class="space-y-4">
+                        <!-- Skeleton Cards -->
+                        <div class="skeleton-content space-y-4">
+                            <div class="skeleton-card">
+                                <div class="skeleton skeleton-text-lg" style="width: 40%;"></div>
+                                <div class="skeleton skeleton-text" style="width: 30%;"></div>
+                                <div class="skeleton skeleton-text-sm" style="width: 50%;"></div>
+                            </div>
+                            <div class="skeleton-card">
+                                <div class="skeleton skeleton-text-lg" style="width: 45%;"></div>
+                                <div class="skeleton skeleton-text" style="width: 35%;"></div>
+                                <div class="skeleton skeleton-text-sm" style="width: 55%;"></div>
+                            </div>
+                            <div class="skeleton-card">
+                                <div class="skeleton skeleton-text-lg" style="width: 35%;"></div>
+                                <div class="skeleton skeleton-text" style="width: 25%;"></div>
+                                <div class="skeleton skeleton-text-sm" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        <!-- Real Jobs -->
+                        <div class="space-y-4 real-content" style="display:none;">
                             <!-- Dynamic Jobs -->
                         </div>
                     </div>
@@ -232,7 +300,7 @@
         </p>
     </footer>
 
-    <script src="script.js?v=1.1"></script>
+    <script src="script.js?v=1.2"></script>
 </body>
 
 </html>

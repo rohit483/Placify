@@ -9,3 +9,5 @@ python-multipart
 pandas
 groq
 requests
+psycopg2-binary
+sqlalchemy

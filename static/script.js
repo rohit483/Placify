@@ -142,6 +142,17 @@ async function submitAssessment(modeOverride = null) {
             }
         }
 
+        // Hide assessment, show report with skeleton loading
+        const assessmentSection = document.getElementById('detailed-assessment');
+        if (assessmentSection) assessmentSection.style.display = 'none';
+
+        const reportSection = document.getElementById('report');
+        reportSection.classList.remove('hidden');
+        reportSection.classList.remove('report-loaded');
+        reportSection.classList.add('report-loading');
+        reportSection.style.display = 'block';
+        reportSection.scrollIntoView({ behavior: 'smooth' });
+
         const response = await fetch('/api/assess', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -153,14 +164,9 @@ async function submitAssessment(modeOverride = null) {
         const data = await response.json();
         updateReportUI(data);
 
-        // Show Report, Hide Assessment
-        const assessmentSection = document.getElementById('detailed-assessment');
-        if (assessmentSection) assessmentSection.style.display = 'none';
-
-        const reportSection = document.getElementById('report');
-        reportSection.classList.remove('hidden');
-        reportSection.style.display = 'block';
-        reportSection.scrollIntoView({ behavior: 'smooth' });
+        // Switch from skeleton to real content
+        reportSection.classList.remove('report-loading');
+        reportSection.classList.add('report-loaded');
 
         if (submitBtn) {
             submitBtn.textContent = originalText;
@@ -169,21 +175,27 @@ async function submitAssessment(modeOverride = null) {
 
     } catch (error) {
         console.error("Error:", error);
+        // Hide report section on error
+        const reportSection = document.getElementById('report');
+        reportSection.classList.add('hidden');
+        reportSection.style.display = 'none';
         alert("Failed to submit assessment. Please try again.");
     }
 }
 
 function updateReportUI(data) {
+    // Show all real-content elements
+    document.querySelectorAll('#report .real-content').forEach(el => {
+        el.style.display = '';
+    });
+
     // 1. Update Readiness Score
-    // Using generic selection or creating element if missing
     let scoreEl = document.getElementById('readiness-score-display');
     if (!scoreEl) {
-        // Try to find the progress circle span
         const circleSpan = document.querySelector('.progress-circle span');
         if (circleSpan) {
             scoreEl = circleSpan;
         } else {
-            // Fallback: insert after H2
             const h2 = document.querySelector('#report h2');
             if (h2) {
                 scoreEl = document.createElement('div');
@@ -219,8 +231,8 @@ function updateReportUI(data) {
         actionPlanList.innerHTML = data.action_plan.map(plan => `<li class="text-gray-700">${plan}</li>`).join('');
     }
 
-    // Job Recommendations
-    const jobsContainer = document.querySelector('#report .space-y-4');
+    // Job Recommendations - use the real-content container
+    const jobsContainer = document.querySelector('#report .real-content.space-y-4');
     if (jobsContainer && data.job_recommendations) {
         jobsContainer.innerHTML = data.job_recommendations.map((job, index) => `
             <div class="flex justify-between items-center p-4 border rounded-lg hover:shadow-md transition">
@@ -277,17 +289,18 @@ function analyzeResumeOnly() {
         alert("Please upload a resume first!");
         return;
     }
-    // Show Loading
+    // Hide assessment section
     document.getElementById('detailed-assessment').classList.add('hidden');
-    document.getElementById('report').classList.add('hidden');
+    document.getElementById('mode-selection').style.display = 'none';
+    document.getElementById('resume-section').style.display = 'none';
+    
+    // Show report with skeleton loading
     const reportSection = document.getElementById('report');
     reportSection.classList.remove('hidden');
+    reportSection.classList.remove('report-loaded');
+    reportSection.classList.add('report-loading');
     reportSection.style.display = 'block';
     reportSection.scrollIntoView({ behavior: 'smooth' });
-
-    // Minimal loading UI inside report
-    const scoreEl = document.getElementById('readiness-score-display');
-    if (scoreEl) scoreEl.textContent = "...";
 
     // Trigger assessment with override
     submitAssessment('resume-only');

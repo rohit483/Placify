@@ -1,9 +1,7 @@
 # Git
 .git
 .gitignore
-
-# temporary nginx
-# nginx/
+.github/
 
 # Python
 __pycache__
@@ -30,12 +28,18 @@ coverage.xml
 .env
 placify_env/
 venv/
+.env.example
 
 # Docker
 docker-compose.yml
+docker-compose.prod.yml
 Dockerfile
 .dockerignore
 
 # Project Specific
 web_data/
-#company_dataset/
+test/
+*.md
+LICENSE
+docs/
+*.mermaid
