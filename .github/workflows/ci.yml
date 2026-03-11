@@ -2,9 +2,9 @@ name: Placify CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "placify_v2" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "placify_v2" ]
 
 jobs:
   python-quality:
