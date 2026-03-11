@@ -18,7 +18,7 @@ class PDFReport(FPDF):
     def chapter_title(self, title):
         self.set_font('Arial', 'B', 12)
         self.set_fill_color(200, 220, 255)
-        self.cell(0, 10, title, 0, 1, 'L', 1)
+        self.cell(0, 10, title, 0, 1, 'L', True)
         self.ln(4)
 
     def chapter_body(self, body):

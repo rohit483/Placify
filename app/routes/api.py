@@ -51,18 +51,18 @@ async def get_report(filename: str):
 @router.post("/upload_resume") 
 async def upload_resume(request: Request, file: UploadFile = File(...)):
     # 1. Rate Check
-    client_ip = request.client.host
+    client_ip = request.client.host if request.client else "unknown"
     limiter.check(client_ip)
 
     # 2. PDF Check
-    if not file.filename.lower().endswith('.pdf'):
+    if not file.filename or not file.filename.lower().endswith('.pdf'):
         return JSONResponse(status_code=400, content={"error": "Only PDF files are allowed"})
     
     if file.content_type != "application/pdf": 
         return JSONResponse(status_code=400, content={"error": "Invalid file type"})
 
     try:
-        file_location = os.path.join(RESUME_DIR, file.filename)
+        file_location = os.path.join(RESUME_DIR, file.filename)  # type: ignore[arg-type]
         with open(file_location, "wb+") as file_object:
             file_object.write(file.file.read())
         return {"info": f"file '{file.filename}' saved at '{file_location}'", "filename": file.filename}
@@ -84,7 +84,7 @@ async def get_questions(mode: str):
 @router.post("/assess") 
 async def generate_assessment(request: Request, submission: AssessmentSubmission):
     # 1. Rate Check
-    client_ip = request.client.host
+    client_ip = request.client.host if request.client else "unknown"
     limiter.check(client_ip)
 
     try:
