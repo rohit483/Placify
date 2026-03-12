@@ -25,29 +25,65 @@ if GROQ_API_KEY:
         print(f"Failed to init Groq: {e}")
 
 # ============================== Helper Functions =============================
-# ----------------------- Function to call Gemini -----------------------
+# ----------------------- Retry Configuration -----------------------
+GEMINI_MAX_RETRIES = 3
+GEMINI_RETRY_DELAY = 2  # seconds, will use exponential backoff
+
+# ----------------------- Function to call Gemini with retry -----------------------
 def call_gemini(prompt):
     if not gemini_client:
         raise Exception("Gemini Client not initialized")
     
-    response = gemini_client.models.generate_content(
-        model='gemini-2.0-flash-lite',
-        contents=prompt
-    )
-    return response.text
+    last_error = None
+    for attempt in range(GEMINI_MAX_RETRIES):
+        try:
+            response = gemini_client.models.generate_content(
+                model='gemini-2.0-flash-lite',
+                contents=prompt
+            )
+            return response.text
+        except Exception as e:
+            last_error = e
+            error_str = str(e)
+            
+            # Check if it's a rate limit/overload error (503, 429)
+            if '503' in error_str or '429' in error_str or 'UNAVAILABLE' in error_str or 'quota' in error_str.lower():
+                wait_time = GEMINI_RETRY_DELAY * (2 ** attempt)  # Exponential backoff: 2s, 4s, 8s
+                print(f"[Gemini] Rate limited, retry {attempt + 1}/{GEMINI_MAX_RETRIES} in {wait_time}s...")
+                time.sleep(wait_time)
+                continue
+            else:
+                # Non-retryable error
+                raise e
+    
+    # All retries exhausted
+    raise last_error if last_error else Exception("Gemini failed after retries")
 
 # ----------------------- Function to call Groq -----------------------
 def call_groq(prompt):
     if not groq_client:
         raise Exception("Groq Client not initialized")
     
+    # Enhanced system prompt for better email drafts
+    system_prompt = """You are an expert career counselor and professional email writer. 
+When generating email drafts, write COMPLETE, professional cold emails that include:
+- A compelling subject line suggestion
+- Proper greeting with company name
+- 1-2 paragraphs: introduction, relevant skills/experience, call to action
+- Professional closing with student's name
+- Be specific about WHY the student is a good fit based on their profile
+
+Output ONLY valid JSON. No markdown, no code blocks."""
+    
     chat_completion = groq_client.chat.completions.create(
         messages=[
-            {"role": "system", "content": "You are a JSON-only response bot. Output ONLY valid JSON."},
+            {"role": "system", "content": system_prompt},
             {"role": "user", "content": prompt}
         ],
         model="llama-3.3-70b-versatile",
-        response_format={"type": "json_object"}
+        response_format={"type": "json_object"},
+        temperature=0.7,  # Slightly more creative for better emails
+        max_tokens=4000   # Allow longer responses for complete emails
     )
     return chat_completion.choices[0].message.content
 

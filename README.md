@@ -16,8 +16,8 @@ Placify is an intelligent career readiness platform designed to bridge the gap b
   * Job Recommendations with personalized cold email drafts.
 * **Hybrid Job Matching Pipeline**:
   * Phase 1: Hard filter (location, CTC, work mode)
-  * Phase 2: Quick score (skill/role keyword matching)
-  * Phase 3: LLM intelligent ranking (top 5 from 20)
+  * Phase 2: TF-IDF + Cosine similarity (top 15 candidates)
+  * Phase 3: LLM re-ranking (top 5 from 15)
   * Phase 4: Full AI analysis with matched companies
 * **Professional Outputs**:
   * **PDF Reports**: Downloadable, well-formatted career reports stored in database.
@@ -29,7 +29,7 @@ Placify is an intelligent career readiness platform designed to bridge the gap b
 
 | Layer | Technology |
 |-------|------------|
-| **Backend** | Python 3.11, FastAPI, Uvicorn, SQLAlchemy |
+| **Backend** | Python 3.11, FastAPI, Uvicorn, SQLAlchemy, scikit-learn |
 | **Database** | PostgreSQL 15 (Docker) |
 | **AI Engine** | Gemini 2.5-flash → Groq llama-3.3-70b → Ollama gemma3:4b |
 | **Frontend** | HTML5, Vanilla CSS, JavaScript (ES6+) |
