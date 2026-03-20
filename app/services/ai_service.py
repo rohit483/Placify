@@ -37,11 +37,13 @@ def call_gemini(prompt):
     
     last_error = None
     for attempt in range(GEMINI_MAX_RETRIES):
+        print(f"  [Gemini] Attempt {attempt + 1}/{GEMINI_MAX_RETRIES}...")
         try:
             response = gemini_client.models.generate_content(
                 model='gemini-2.5-flash-lite',
                 contents=prompt
             )
+            print("  [Gemini] ✓ Successfully generated response")
             return response.text
         except Exception as e:
             last_error = e
@@ -76,6 +78,7 @@ When generating email drafts, write COMPLETE, professional cold emails that incl
 
 Output ONLY valid JSON. No markdown, no code blocks."""
     
+    print("  [Groq] Attempting generation...")
     chat_completion = groq_client.chat.completions.create(
         messages=[
             {"role": "system", "content": system_prompt},
@@ -86,6 +89,7 @@ Output ONLY valid JSON. No markdown, no code blocks."""
         temperature=0.7,  # Slightly more creative for better emails
         max_tokens=4000   # Allow longer responses for complete emails
     )
+    print("  [Groq] ✓ Successfully generated response")
     return chat_completion.choices[0].message.content
 
 # ------------------------ Function to call Ollama ------------------------
@@ -97,9 +101,11 @@ def call_ollama(prompt):
         "stream": False,
         "format": "json" 
     }
+    print("  [Ollama] Attempting generation...")
     try:
         response = requests.post(url, json=payload, timeout=60) # 60s timeout for local
         if response.status_code == 200:
+            print("  [Ollama] ✓ Successfully generated response")
             return response.json().get('response', '')
         else:
             raise Exception(f"Ollama status: {response.status_code}")
@@ -123,7 +129,7 @@ def clean_json_response(text_response):
         raise
 
 # ========================= Main Analysis Function ========================= 
-def analyze_profile(user_context, candidates_json, mode, answers, resume_extracted):
+def analyze_profile(user_context, candidates_json, mode):
     
     # Enhanced Prompt with better email instructions
     prompt = f"""
@@ -154,7 +160,6 @@ def analyze_profile(user_context, candidates_json, mode, answers, resume_extract
         * Skills/experience paragraph (specific skills matching the role)
         * Closing with call to action and professional sign-off
         * Use candidate's actual name if available
-    - email_draft: (Legacy field) A generic professional inquiry email template
     
     IMPORTANT: Email drafts must be COMPLETE and PROFESSIONAL, not just 1-2 sentences.
     
@@ -172,14 +177,22 @@ def analyze_profile(user_context, candidates_json, mode, answers, resume_extract
     
     for name, func in providers:
         try:
-            print(f"Attempting Provider: {name}")
+            print(f"\n--- Analyzing profile with {name} ---")
             raw_text = func(prompt)
+            print("  [System] Parsing LLM complete, parsing JSON array...")
             ai_data = clean_json_response(raw_text)
             if ai_data:
-                print(f"Success with {name}")
+                print(f"  [{name}] ✓ Success in extracting recommendations.")
+                recs = ai_data.get('job_recommendations', [])
+                if recs:
+                    print(f"  [{name}] Identified Top {len(recs)} matches:")
+                    for i, rec in enumerate(recs):
+                        print(f"     {i+1}. {rec.get('company', 'Unknown')} - {rec.get('role', 'Unknown')} (Draft generated: {bool(rec.get('email_draft'))})")
+                else:
+                    print(f"  [{name}] Warning: No recommendations returned in JSON array.")
                 break
         except Exception as e:
-            print(f"{name} Failed/Skipped: {e}")
+            print(f"  [{name}] Failed/Skipped: {e}")
             continue
 
     # Final Fallback (Mock) if all failed
@@ -214,50 +227,48 @@ def analyze_profile(user_context, candidates_json, mode, answers, resume_extract
 # ========================== Orchestration Logic =============================
 from app.quiz import QUESTIONS_DB, companies_data
 from app.services.resume_service import extract_resume_text
-from app.services.matching_service import rank_companies
 from app.services.pdf_service import generate_pdf
 
 def run_full_assessment(submission):
     """
-    Orchestrates the full assessment flow:
+    Orchestrates the full assessment flow (Autonomous Agent Mode):
     1. Prepare Context (Answers + Resume)
-    2. Rank Companies (Hard Filter + Regex Score)
+    2. Dump entire Company JSON
     3. Analyze with AI
     4. Generate PDF Report
     """
 
-    # 1. User Data variables
-    user_context_for_ranking = submission.get_formatted_context(QUESTIONS_DB)
-    user_preferences = submission.get_user_preferences()
-
-    # 2. Resume text extraction
+    # 1. Prepare User Context
+    user_context = submission.get_formatted_context(QUESTIONS_DB)
+    
     resume_text_full = ""
     if submission.resume_filename:
+        print(f"  [System] Loading resume file: {submission.resume_filename} ...")
         if not submission.resume_filename.lower().endswith('.pdf'):
-                print(f"Warning: Attempt to access non-pdf file {submission.resume_filename}")
+                print(f"  [Warning] Attempt to access non-pdf file {submission.resume_filename}")
         else:
             resume_text_full = extract_resume_text(submission.resume_filename)
-            user_context_for_ranking += f"\n--- RESUME CONTENT ---\n{resume_text_full}"
+            print(f"  [System] ✓ Successfully parsed {len(resume_text_full)} characters from Resume.")
+            # Add truncated resume to prevent massive token payloads if PDF is huge
+            user_context += f"\n--- RESUME CONTENT ---\n{resume_text_full[:4000]}..."
 
-    # 3. Company ranking variables
-    top_candidates = rank_companies(user_context_for_ranking, companies_data, user_preferences)
-    
-    # 4. Quiz and resume prompt for Gemini
-    user_context_for_gemini = submission.get_formatted_context(QUESTIONS_DB)
-    if resume_text_full:
-        user_context_for_gemini += f"\n--- RESUME CONTENT ---\n{resume_text_full[:4000]}..."
-    
-    # 5. Top 5 companies for Gemini
+    # 2. Dump all 94 companies for LLM reading
+    print(f"  [System] Encoding comprehensive dataset of {len(companies_data)} companies into context payload...")
     candidates_json = json.dumps([{
-        "id": c['id'], "name": c['name'], "role": c['role'], 
-        "skills": c['skills'], "email": c['email']
-    } for c in top_candidates])
-
-    # 6. Top 3 companies by Gemini
-    ai_data = analyze_profile(user_context_for_gemini, candidates_json, submission.mode, submission.answers, bool(resume_text_full))
+        "name": c.get('name', ''), 
+        "role": c.get('role', ''), 
+        "skills": c.get('skills', []), 
+        "email": c.get('email', ''),
+        "description": c.get('description', ''),
+        "ctc": c.get('ctc', 0),
+        "location": c.get('location', '')
+    } for c in companies_data])
+    
+    # 3. Analyze with AI (Removed unused parameters)
+    ai_data = analyze_profile(user_context, candidates_json, submission.mode)
     top_jobs = ai_data.get("job_recommendations", [])
 
-    # 7. PDF Generation
+    # 4. PDF Generation
     report_filename = f"Placement_Report_{int(time.time())}.pdf"
     final_data = {
         "mode": submission.mode,
