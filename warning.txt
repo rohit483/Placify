@@ -1,0 +1,4 @@
+Thier is difference in main and local branch so fix this given change before pushing or merging a branch!!!!
+
+config.py :-
+Swapped the active ENV_DIR from venv to placify_env (and commented out the venv line instead).

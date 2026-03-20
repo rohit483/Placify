@@ -142,6 +142,9 @@ async function submitAssessment(modeOverride = null) {
             }
         }
 
+        // Show skeleton loading in report section
+        showReportSkeleton();
+        
         const response = await fetch('/api/assess', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -188,7 +191,7 @@ function updateReportUI(data) {
             if (h2) {
                 scoreEl = document.createElement('div');
                 scoreEl.id = 'readiness-score-display';
-                scoreEl.className = "text-4xl font-bold text-center text-blue-900 my-4";
+                scoreEl.className = "text-4xl font-bold text-center text-green-900 my-4";
                 h2.after(scoreEl);
             }
         }
@@ -280,15 +283,79 @@ function analyzeResumeOnly() {
     // Show Loading
     document.getElementById('detailed-assessment').classList.add('hidden');
     document.getElementById('report').classList.add('hidden');
-    const reportSection = document.getElementById('report');
-    reportSection.classList.remove('hidden');
-    reportSection.style.display = 'block';
-    reportSection.scrollIntoView({ behavior: 'smooth' });
-
-    // Minimal loading UI inside report
-    const scoreEl = document.getElementById('readiness-score-display');
-    if (scoreEl) scoreEl.textContent = "...";
+    
+    // Show skeleton loading
+    showReportSkeleton();
 
     // Trigger assessment with override
     submitAssessment('resume-only');
+}
+
+// ==================== SKELETON LOADING ====================
+function showReportSkeleton() {
+    const reportSection = document.getElementById('report');
+    
+    // Hide assessment form
+    const assessmentSection = document.getElementById('detailed-assessment');
+    if (assessmentSection) assessmentSection.style.display = 'none';
+    
+    // Show report section with skeleton
+    reportSection.classList.remove('hidden');
+    reportSection.style.display = 'block';
+    reportSection.scrollIntoView({ behavior: 'smooth' });
+    
+    // Set skeleton content
+    const scoreEl = document.getElementById('readiness-score-display');
+    if (scoreEl) {
+        scoreEl.innerHTML = '<div class="skeleton-pulse" style="width: 60px; height: 40px; margin: 0 auto; border-radius: 8px;"></div>';
+    }
+    
+    // Skeleton for strengths
+    const strengthsList = document.querySelector('#report ul.text-green-700');
+    if (strengthsList) {
+        strengthsList.innerHTML = `
+            <li><div class="skeleton-pulse" style="width: 80%; height: 16px; border-radius: 4px;"></div></li>
+            <li><div class="skeleton-pulse" style="width: 70%; height: 16px; border-radius: 4px;"></div></li>
+            <li><div class="skeleton-pulse" style="width: 75%; height: 16px; border-radius: 4px;"></div></li>
+        `;
+    }
+    
+    // Skeleton for gaps
+    const gapsList = document.querySelector('#report ul.text-red-700');
+    if (gapsList) {
+        gapsList.innerHTML = `
+            <li><div class="skeleton-pulse" style="width: 75%; height: 16px; border-radius: 4px;"></div></li>
+            <li><div class="skeleton-pulse" style="width: 85%; height: 16px; border-radius: 4px;"></div></li>
+            <li><div class="skeleton-pulse" style="width: 65%; height: 16px; border-radius: 4px;"></div></li>
+        `;
+    }
+    
+    // Skeleton for action plan
+    const actionPlanList = document.querySelector('#report ol');
+    if (actionPlanList) {
+        actionPlanList.innerHTML = `
+            <li><div class="skeleton-pulse" style="width: 90%; height: 16px; border-radius: 4px;"></div></li>
+            <li><div class="skeleton-pulse" style="width: 85%; height: 16px; border-radius: 4px;"></div></li>
+            <li><div class="skeleton-pulse" style="width: 80%; height: 16px; border-radius: 4px;"></div></li>
+        `;
+    }
+    
+    // Skeleton for job recommendations (5 companies)
+    const jobsContainer = document.querySelector('#report .space-y-4');
+    if (jobsContainer) {
+        let skeletonJobs = '';
+        for (let i = 0; i < 5; i++) {
+            skeletonJobs += `
+                <div class="flex justify-between items-center p-4 border rounded-lg">
+                    <div style="flex: 1;">
+                        <div class="skeleton-pulse" style="width: 60%; height: 20px; border-radius: 4px; margin-bottom: 8px;"></div>
+                        <div class="skeleton-pulse" style="width: 40%; height: 16px; border-radius: 4px; margin-bottom: 6px;"></div>
+                        <div class="skeleton-pulse" style="width: 50%; height: 14px; border-radius: 4px;"></div>
+                    </div>
+                    <div class="skeleton-pulse" style="width: 100px; height: 36px; border-radius: 8px;"></div>
+                </div>
+            `;
+        }
+        jobsContainer.innerHTML = skeletonJobs;
+    }
 }

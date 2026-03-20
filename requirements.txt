@@ -10,3 +10,5 @@ pandas
 groq
 requests
 pytest
+scikit-learn
+jupyter
