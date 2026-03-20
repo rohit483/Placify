@@ -38,6 +38,7 @@ A build-free Vanilla JS approach eliminates the need for Node.js package manager
 
 **Backend: Python 3.11+ with FastAPI**
 Python is the non-negotiable language of choice due to its dominance in the AI/ML ecosystem. FastAPI is selected over Flask or Django for three specific reasons:
+
 1. **Asynchronous Concurrency:** AI pipelines involve I/O bound operations (reading files, calling AI APIs). FastAPI's async/await syntax handles these efficiently.
 2. **Data Validation:** Pydantic models strictly validate incoming data, preventing runtime errors from malformed inputs.
 3. **Documentation:** Automatic interactive API documentation (Swagger UI) for testing endpoints.
@@ -78,6 +79,7 @@ If the vectors point in the exact same direction (perfect match), the angle is 0
 While pure vector embedding approaches are theoretically elegant, the implemented system uses a **Hybrid Matching Algorithm** that offers several practical advantages:
 
 **Why Hybrid TF-IDF + LLM:**
+
 - **Mathematical Rigor:** TF-IDF provides industry-standard text similarity scoring
 - **Controllability:** Hard filters eliminate clearly unsuitable matches before scoring
 - **Scalability:** Efficient sparse matrix operations via scikit-learn
@@ -98,6 +100,7 @@ While pure vector embedding approaches are theoretically elegant, the implemente
 $$F_{\text{hard}}(s, c) = \begin{cases} 1 & \text{if } \text{loc}_c \in \text{pref}_s \land \text{ctc}_c \in \text{range}_s \land \text{mode}_c \in \text{pref}_s \\ 0 & \text{otherwise} \end{cases}$$
 
 Where:
+
 - $\text{loc}_c$ = company location (Indore, Bhopal, Remote)
 - $\text{pref}_s$ = student's location preferences
 - $\text{ctc}_c$ = company CTC offering
@@ -111,6 +114,7 @@ The system uses scikit-learn's `TfidfVectorizer` to transform text into weighted
 $$\text{TF-IDF}(t, d) = \text{TF}(t, d) \times \text{IDF}(t)$$
 
 Where:
+
 - $\text{TF}(t, d)$ = Term frequency of term $t$ in document $d$
 - $\text{IDF}(t) = \log\left(\frac{N}{df(t)}\right)$ where $df(t)$ = documents containing term $t$
 
@@ -119,6 +123,7 @@ Where:
 $$\text{sim}(\mathbf{S}, \mathbf{C}) = \frac{\mathbf{S} \cdot \mathbf{C}}{|\mathbf{S}| \times |\mathbf{C}|} = \frac{\sum_{i=1}^{n} S_i C_i}{\sqrt{\sum_{i=1}^{n} S_i^2} \times \sqrt{\sum_{i=1}^{n} C_i^2}}$$
 
 **Implementation:** Using unigrams + bigrams with 5000 max features:
+
 ```python
 vectorizer = TfidfVectorizer(
     lowercase=True,
@@ -130,6 +135,7 @@ vectorizer = TfidfVectorizer(
 
 **Stage 3: LLM Re-ranking**
 The top-15 TF-IDF candidates are passed to the LLM for semantic re-ranking considering:
+
 - Career trajectory alignment
 - Cultural fit indicators
 - Growth potential
@@ -146,11 +152,13 @@ The efficacy of any intelligent matching system is bounded by the quality of its
 The dataset targets the Indore-Bhopal-Jabalpur IT corridor with **94+ verified companies**.
 
 **Target Ecosystems:**
+
 - **Indore:** Crystal IT Park, Super Corridor, Electronic Complex
 - **Bhopal:** IT Park Badwai, MP Nagar Business District
 - **Jabalpur:** IT Park Bargi Hills, Emerging Tech Clusters
 
 **Data Acquisition Channels:**
+
 1. **Institutional Placement Records:** Placement Cell Archives containing verified recruiters
 2. **Regional NASSCOM & Industry Directories:** High-trust member lists
 3. **Geo-Targeted Professional Search:** LinkedIn filters for company discovery
@@ -178,6 +186,7 @@ The dataset targets the Indore-Bhopal-Jabalpur IT corridor with **94+ verified c
 ```
 
 **Schema Rationale:**
+
 - **Matching Fields:** `tech_stack`, `roles`, `description` are used for scoring
 - **Generation Fields:** `contact`, `verification_date` are passed to LLM for report generation
 - This separation of "Searchable Data" and "Payload Data" prevents hallucination
@@ -191,6 +200,7 @@ The dataset targets the Indore-Bhopal-Jabalpur IT corridor with **94+ verified c
 The "Resume Intelligence" module is built using the `PyPDF2` library for text extraction.
 
 **Implementation Logic:**
+
 ```python
 from PyPDF2 import PdfReader
 
@@ -217,6 +227,7 @@ def extract_resume_text(file_path: str) -> str:
 ```
 
 **Text Sanitization:**
+
 - Remove excessive whitespace via regex
 - Strip page numbers and headers
 - Normalize encoding artifacts
@@ -259,6 +270,7 @@ def get_ai_analysis(prompt: str) -> str:
 ```
 
 **Availability Analysis:**
+
 - With 3 independent providers at 95% individual availability:
 - Combined availability: $1 - (0.05)^3 = 99.9875\%$
 
@@ -287,6 +299,7 @@ Structured Markdown with clear sections."
 ### 6.3 Hallucination Mitigation
 
 By explicitly constraining the LLM with "Based ONLY on the provided Matched Opportunities," we minimize fabrication risk. The architecture ensures:
+
 - **Facts** (Company Data) come from verified JSON
 - **Reasoning** (Why is this a good fit?) comes from the LLM
 - **Contact Information** is never generated, only retrieved
@@ -300,6 +313,7 @@ By explicitly constraining the LLM with "Based ONLY on the provided Matched Oppo
 The `FPDF` library enables programmatic PDF creation with precise layout control.
 
 **Report Structure:**
+
 1. **Header:** Placify Branding, Generation Date
 2. **Executive Summary:** AI-generated overview
 3. **Matched Companies:** Ranked list with scores
@@ -308,6 +322,7 @@ The `FPDF` library enables programmatic PDF creation with precise layout control
 6. **Footer:** Prototype disclaimer
 
 **Implementation:**
+
 ```python
 from fpdf import FPDF
 
@@ -333,44 +348,44 @@ class PlacifyReport(FPDF):
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                         CLIENT LAYER                            │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐             │
-│  │  index.html │  │  style.css  │  │  script.js  │             │
-│  └──────┬──────┘  └─────────────┘  └──────┬──────┘             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │  index.html │  │  style.css  │  │  script.js  │              │
+│  └──────┬──────┘  └─────────────┘  └──────┬──────┘              │
 │         │              HTTP/REST          │                     │
 └─────────┼─────────────────────────────────┼─────────────────────┘
           │                                 │
           ▼                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                        API LAYER (FastAPI)                      │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐             │
-│  │  /api/      │  │  /api/      │  │  /api/      │             │
-│  │  upload     │  │  analyze    │  │  download   │             │
-│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │  /api/      │  │  /api/      │  │  /api/      │              │
+│  │  upload     │  │  analyze    │  │  download   │              │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘              │
 └─────────┼────────────────┼────────────────┼─────────────────────┘
           │                │                │
           ▼                ▼                ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                       SERVICE LAYER                             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
-│  │ ResumeService│  │ AIService    │  │ PDFService   │          │
-│  │ (PyPDF2)     │  │ (Gemini/Groq)│  │ (FPDF)       │          │
-│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │ ResumeService│  │ AIService    │  │ PDFService   │           │
+│  │ (PyPDF2)     │  │ (Gemini/Groq)│  │ (FPDF)       │           │
+│  └──────────────┘  └──────────────┘  └──────────────┘           │
 │                            │                                    │
-│                    ┌───────┴───────┐                           │
-│                    │MatchingService│                           │
-│                    │(TF-IDF+LLM)   │                           │
-│                    │(scikit-learn) │                           │
-│                    └───────────────┘                           │
+│                    ┌───────┴───────┐                            │
+│                    │MatchingService│                            │
+│                    │(TF-IDF+LLM)   │                            │
+│                    │(scikit-learn) │                            │
+│                    └───────────────┘                            │
 └─────────────────────────────────────────────────────────────────┘
           │                │                │
           ▼                ▼                ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                       DATA LAYER                                │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
-│  │ web_data/    │  │ company_     │  │ web_data/    │          │
-│  │ resume/      │  │ dataset/     │  │ analysis/    │          │
-│  │ (PDF files)  │  │ (JSON)       │  │ (JSON)       │          │
-│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │ web_data/    │  │ company_     │  │ web_data/    │           │
+│  │ resume/      │  │ dataset/     │  │ analysis/    │           │ 
+│  │ (PDF files)  │  │ (JSON)       │  │ (JSON)       │           │
+│  └──────────────┘  └──────────────┘  └──────────────┘           │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -412,6 +427,7 @@ class PlacifyReport(FPDF):
 **5. Critique: "What is the algorithmic complexity here?"**
 
 *Defense:* "The complexity lies in the Multi-Modal Integration. We orchestrate:
+
 - Structured quiz data processing
 - Unstructured resume text extraction (NLP)
 - Multi-stage matching algorithm

@@ -89,6 +89,7 @@ Placify-v1/
    git clone https://github.com/rohit483/Placify.git
    cd Placify
    ```
+  
 2. **Set up Virtual Environment (Optional but Recommended)**
 
    ```bash
@@ -98,23 +99,29 @@ Placify-v1/
    # Mac/Linux
    source venv/bin/activate
    ```
+
 3. **Install Dependencies**
 
    ```bash
    pip install -r requirements.txt
    ```
+
 4. **Configure Environment**
 
    * Navigate to `venv/`.
    * Configure `.env` with your keys:
+
      ```env
      GEMINI_API_KEY=your_gemini_key_here
      GROQ_API_KEY=your_groq_key_here
      ```
+
    * **Optional**: Install [Ollama](https://ollama.com/) and pull the model for offline support:
+
      ```bash
      ollama pull gemma3:4b
      ```
+
 5. **Run the Application**
 
    ```bash
