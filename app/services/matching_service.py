@@ -245,10 +245,10 @@ Return ONLY valid JSON."""
 
     # Try to get LLM ranking
     try:
-        from app.services.ai_service import call_gemini, call_groq, call_ollama, clean_json_response
+        from app.services.ai_service import call_gemini, call_groq, clean_json_response
         
         llm_response = None
-        for name, func in [("Gemini", call_gemini), ("Groq", call_groq), ("Ollama", call_ollama)]:
+        for name, func in [("Gemini", call_gemini), ("Groq", call_groq)]:
             try:
                 print(f"[LLM Ranking] Attempting {name}...")
                 raw = func(prompt)

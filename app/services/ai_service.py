@@ -325,8 +325,7 @@ Return ONLY the JSON array, nothing else.
 
     providers = [
         ("Gemini", call_gemini),
-        ("Groq", call_groq),
-        ("Ollama", call_ollama)
+        ("Groq", call_groq)
     ]
 
     failed_providers = set()

@@ -6,7 +6,7 @@ services:
     build: .
     image: placify-v3-web
     container_name: placify_v3_backend
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --workers 2
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
     volumes:
       - .:/app
     # Load environment variables from file
@@ -44,10 +44,10 @@ services:
     container_name: placify_v3_db
     restart: unless-stopped
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - placify_v3_postgres_data:/var/lib/postgresql/data
     env_file:
       - .env # root .env (recommended for production)
-      #- ./venv/.env         # if using venv folde
+      #- ./venv/.env         # if using venv folder
     ports:
       - "5432:5432"
     networks:
