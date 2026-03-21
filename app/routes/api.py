@@ -10,8 +10,30 @@ from app.quiz import QUESTIONS_DB
 from app.services.ai_service import run_full_assessment
 from app.database import get_db
 from app.db_models import ResumeUpload, Assessment, Company
+import os
 
 router = APIRouter(prefix="/api")
+
+# ================================= DB Admin Endpoint =================================
+@router.post("/admin/reseed")
+async def admin_reseed(secret: str):
+    """Secure endpoint to trigger re-reading companies.json and adding NEW companies to DB."""
+    admin_key = os.getenv("ADMIN_SECRET", "default_dev_secret")
+    if secret != admin_key:
+        raise HTTPException(status_code=403, detail="Invalid admin secret")
+        
+    from app.database import seed_companies_from_json
+    from app.config import COMPANIES_FILE
+    
+    # Store old skip_seed value, temporarily force false to run the seed
+    old_skip = os.environ.get("SKIP_SEED", "false")
+    os.environ["SKIP_SEED"] = "false"
+    
+    try:
+        seed_companies_from_json(str(COMPANIES_FILE))
+        return {"status": "success", "message": "Companies synchronized with JSON. Old data was kept, new data was added."}
+    finally:
+        os.environ["SKIP_SEED"] = old_skip
 
 # ================================= Security: Rate Limiter =================================
 class RateLimiter:

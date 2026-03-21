@@ -4,15 +4,16 @@ services:
   # -------------------------------------------------------------------------
   web:
     build: .
-    container_name: placify_backend
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload # Use --reload for development; remove for production
+    image: placify-v3-web
+    container_name: placify_v3_backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --workers 2
     volumes:
       - .:/app
     # Load environment variables from file
     env_file:
-      - ./venv/.env
-      #- ./placify_env/.env  # if using custom env folder name
-      #- .env               # if .env file is in the root directory
+      - .env # root .env (recommended for production)
+      #- ./venv/.env         # if using venv folder
+      #- ./placify_env/.env  # if using placify_env folder
     ports:
       - "8000:8000" # Expose directly for debugging
     depends_on:
@@ -25,7 +26,7 @@ services:
   # -------------------------------------------------------------------------
   nginx:
     image: nginx:alpine
-    container_name: placify_nginx
+    container_name: placify_v3_nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./static:/app/static:ro # Serve static files directly
@@ -40,20 +41,19 @@ services:
   # -------------------------------------------------------------------------
   db:
     image: postgres:15-alpine
-    container_name: placify_db
+    container_name: placify_v3_db
     restart: unless-stopped
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file:
-      - venv/.env
-      #- placify_env/.env   # if using custom env folder name
-      #- .env               # if .env file is in the root directory
+      - .env # root .env (recommended for production)
+      #- ./venv/.env         # if using venv folde
     ports:
       - "5432:5432"
     networks:
       - placify_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -63,4 +63,4 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
+  placify_v3_postgres_data:

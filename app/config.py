@@ -12,7 +12,6 @@ COMPANY_DATASET_DIR = BASE_DIR / "company_dataset"
 STATIC_DIR = BASE_DIR / "static"
 TEMPLATE_DIR = BASE_DIR / "template"
 ENV_DIR = BASE_DIR / "venv"
-#ENV_DIR = BASE_DIR / "placify_env"  # if using custom env folder name
 
 COMPANIES_FILE = COMPANY_DATASET_DIR / "companies.json"
 

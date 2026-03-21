@@ -2,9 +2,9 @@ name: Placify CI (Docker)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "placify_v3" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "placify_v3" ]
 
 jobs:
   python-quality:
@@ -32,9 +32,12 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
         
     - name: Test with pytest
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        DATABASE_URL: "sqlite:///:memory:"
       run: |
-        # Run tests, but don't fail if no tests are found yet
-        pytest || true
+        pytest
 
   docker-build:
     needs: python-quality

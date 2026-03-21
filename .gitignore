@@ -7,6 +7,7 @@ security_audit.md.resolved
 # test_ollama.py
 # test_groq.py
 # test_gemini.py
+#docs/
 
 
 # Byte-compiled / optimized / DLL files

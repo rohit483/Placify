@@ -43,3 +43,19 @@ test/
 LICENSE
 docs/
 *.mermaid
+quick_demo.ipynb
+
+# Notebooks (not needed in container)
+*.ipynb
+*.ipynb_checkpoints/
+
+# Editor & OS
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Build / temp
+build_*.py
+fix_*.py
+*.py.bak

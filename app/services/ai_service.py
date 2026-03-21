@@ -1,6 +1,5 @@
 import json
 import time
-import requests
 from google import genai
 from groq import Groq
 
@@ -87,23 +86,6 @@ Output ONLY valid JSON. No markdown, no code blocks."""
     )
     return chat_completion.choices[0].message.content
 
-# Function to call Ollama
-def call_ollama(prompt):
-    url = "http://localhost:11434/api/generate" #add localhost llm url
-    payload = {
-        "model": "gemma3:4b",
-        "prompt": prompt + "\nRespond with JSON only.",
-        "stream": False,
-        "format": "json" 
-    }
-    try:
-        response = requests.post(url, json=payload, timeout=60) # 60s timeout for local
-        if response.status_code == 200:
-            return response.json().get('response', '')
-        else:
-            raise Exception(f"Ollama status: {response.status_code}")
-    except Exception as e:
-        raise Exception(f"Ollama connection failed: {e}")
 # ============================== Response Cleaning =============================
 # Function to clean JSON response
 def clean_json_response(text_response):
@@ -159,11 +141,10 @@ def analyze_profile(user_context, candidates_json, mode, answers, resume_extract
     ai_data = None
     skip = skip_providers or set()
     
-    # Provider Chain
+    # Provider Chain — Gemini first, Groq as fallback
     providers = [
         ("Gemini", call_gemini),
-        ("Groq", call_groq),
-        ("Ollama", call_ollama)
+        ("Groq",   call_groq),
     ]
     
     for name, func in providers:
@@ -188,7 +169,7 @@ def analyze_profile(user_context, candidates_json, mode, answers, resume_extract
             "readiness_score": 0,
             "strengths": ["System Error"],
             "gaps": ["AI Service Unavailable"],
-            "action_plan": ["Please check API keys or local Ollama"],
+            "action_plan": ["Please check GEMINI_API_KEY and GROQ_API_KEY in .env"],
             "email_draft": "Error",
             "candidate_name": "Student",
             "job_recommendations": []

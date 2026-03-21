@@ -3,17 +3,31 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL environment variable is not set.")
-
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+# Engine and session are created lazily to avoid crashing at import
+# when DATABASE_URL has not yet been injected (e.g. before Docker env init)
+_engine = None
+SessionLocal = None
+
+def _get_engine():
+    global _engine, SessionLocal
+    if _engine is None:
+        DATABASE_URL = os.getenv("DATABASE_URL")
+        if not DATABASE_URL:
+            raise RuntimeError(
+                "DATABASE_URL environment variable is not set. "
+                "Make sure your .env file is loaded or env_file is configured in docker-compose."
+            )
+        ssl_args = {"sslmode": "require"} if "neon.tech" in DATABASE_URL else {}
+        _engine = create_engine(DATABASE_URL, pool_pre_ping=True, connect_args=ssl_args)
+        SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=_engine)
+    return _engine
 
 # ------------- Function to get DB session for FastAPI dependency injection ---------------
 def get_db():
     """FastAPI dependency that yields a DB session."""
+    _get_engine()  # ensure engine is initialised
     db = SessionLocal()
     try:
         yield db
@@ -24,6 +38,7 @@ def get_db():
 # ---------------- Function to initialize database tables -----------------------
 def init_db():
     """Create all tables. Call once at startup."""
+    engine = _get_engine()
     Base.metadata.create_all(bind=engine)
 
 
@@ -48,6 +63,7 @@ def seed_companies_from_json(json_path: str):
         print(f"Warning: {json_path} not found. Cannot seed companies.")
         return
 
+    _get_engine()
     db = SessionLocal()
     try:
         with open(json_path, "r", encoding="utf-8") as f:
