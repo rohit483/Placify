@@ -11,7 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 COMPANY_DATASET_DIR = BASE_DIR / "company_dataset"
 STATIC_DIR = BASE_DIR / "static"
 TEMPLATE_DIR = BASE_DIR / "template"
-ENV_DIR = BASE_DIR / "venv"
+#ENV_DIR = BASE_DIR / "venv"
+ENV_DIR = BASE_DIR / "placify_env"
 
 COMPANIES_FILE = COMPANY_DATASET_DIR / "companies.json"
 

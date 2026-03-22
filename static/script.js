@@ -5,41 +5,69 @@ document.addEventListener('DOMContentLoaded', () => {
 let selectedMode = 'balanced';
 let uploadedResumeName = null;
 
-async function uploadResume() {
+async function uploadAndAnalyze() {
     const fileInput = document.getElementById('resume-upload');
     const file = fileInput.files[0];
     if (!file) {
-        alert("Please select a file first.");
+        alert("Please browse and select a resume file first.");
         return;
     }
 
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-        const btn = document.querySelector('#resume-section button');
-        const originalText = btn.textContent;
+    const btn = document.getElementById('upload-analyze-btn');
+    if (btn) {
         btn.textContent = "Uploading...";
         btn.disabled = true;
+    }
 
-        const response = await fetch('/api/upload_resume', {
-            method: 'POST',
-            body: formData
-        });
+    try {
+        if (!uploadedResumeName) {
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            const response = await fetch('/api/upload_resume', {
+                method: 'POST',
+                body: formData
+            });
 
-        if (!response.ok) throw new Error("Upload failed");
+            if (!response.ok) {
+                let errText = "Upload failed";
+                try {
+                    const errData = await response.json();
+                    if (errData.detail) errText = errData.detail;
+                } catch(e) {}
+                throw new Error(errText);
+            }
 
-        const data = await response.json();
-        uploadedResumeName = data.filename;
-        alert("Resume uploaded successfully! We will use it for your assessment.");
+            const data = await response.json();
+            uploadedResumeName = data.filename;
+            console.log("Uploaded successfully:", uploadedResumeName);
+        }
 
-        btn.textContent = "Uploaded ✓";
+        if (btn) btn.textContent = "Analyzing...";
+        
+        // Hide assessment section
+        document.getElementById('detailed-assessment').classList.add('hidden');
+        document.getElementById('mode-selection').style.display = 'none';
+        document.getElementById('resume-section').style.display = 'none';
+        
+        // Show report with skeleton loading
+        const reportSection = document.getElementById('report');
+        reportSection.classList.remove('hidden');
+        reportSection.classList.remove('report-loaded');
+        reportSection.classList.add('report-loading');
+        reportSection.style.display = 'block';
+        reportSection.scrollIntoView({ behavior: 'smooth' });
+
+        // Trigger assessment
+        submitAssessment('resume-only');
 
     } catch (error) {
-        console.error("Error uploading resume:", error);
-        alert("Failed to upload resume.");
-        document.querySelector('#resume-section button').textContent = "Upload Resume";
-        document.querySelector('#resume-section button').disabled = false;
+        console.error("Error during upload/analyze:", error);
+        alert(error.message || "Failed to process resume.");
+        if (btn) {
+            btn.textContent = "Upload & Analyze Resume";
+            btn.disabled = false;
+        }
     }
 }
 
@@ -111,6 +139,25 @@ async function submitAssessment(modeOverride = null) {
     if (!finalMode) {
         alert("Please select an assessment mode first!");
         return;
+    }
+
+    // Attach resume implicitly if they picked one but decided to take the Detailed Quiz instead
+    const fileInput = document.getElementById('resume-upload');
+    const file = fileInput?.files[0];
+    if (file && !uploadedResumeName && finalMode === 'detailed') {
+        const formData = new FormData();
+        formData.append('file', file);
+        try {
+            const res = await fetch('/api/upload_resume', { method: 'POST', body: formData });
+            if (res.ok) {
+                const data = await res.json();
+                uploadedResumeName = data.filename;
+            } else {
+                alert("Upload Failed: Could not upload the attached resume. Submitting without it.");
+            }
+        } catch (e) {
+            console.error("Resume auto-upload failed", e);
+        }
     }
 
     // Handle form data safely
@@ -205,7 +252,15 @@ function updateReportUI(data) {
             }
         }
     }
-    if (scoreEl && data.readiness_score) scoreEl.textContent = `${data.readiness_score}%`;
+    if (scoreEl && data.readiness_score) {
+        scoreEl.textContent = `${data.readiness_score}%`;
+        
+        // Dynamically update the blue ring of the Donut Chart
+        const circleDiv = scoreEl.closest('.progress-circle');
+        if (circleDiv) {
+            circleDiv.style.background = `conic-gradient(#00467F ${data.readiness_score}%, #e0e0e0 ${data.readiness_score}% 100%)`;
+        }
+    }
 
     // Update PDF Link
     const pdfBtn = document.querySelector('#report a[download]');

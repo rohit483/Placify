@@ -15,15 +15,15 @@ class PDFReport(FPDF):
     def chapter_title(self, title):
         self.set_font('Arial', 'B', 12)
         self.set_fill_color(200, 220, 255)
-        self.cell(0, 10, title, 0, 1, 'L', True)
-        self.ln(4)
+        self.cell(0, 8, title, 0, 1, 'L', True)
+        self.ln(2)
 
     def chapter_body(self, body):
         self.set_font('Arial', '', 11)
         # Ensure unicode characters don't crash FPDF (basic handling)
         body = str(body).encode('latin-1', 'replace').decode('latin-1')
-        self.multi_cell(0, 10, body)
-        self.ln()
+        self.multi_cell(0, 5, body)
+        self.ln(3)
 
 #--------------------------- Function for generating PDF ---------------------------
 def generate_pdf(data, filename="report.pdf"):
@@ -37,18 +37,21 @@ def generate_pdf(data, filename="report.pdf"):
     
     # Strengths
     pdf.chapter_title("Key Strengths")
-    for s in data.get('strengths', []):
-        pdf.chapter_body(f"- {s}")
+    strengths_text = "\n".join([f"- {s}" for s in data.get('strengths', [])])
+    if strengths_text:
+        pdf.chapter_body(strengths_text)
 
     # Gaps
     pdf.chapter_title("Areas for Improvement")
-    for g in data.get('gaps', []):
-        pdf.chapter_body(f"- {g}")
+    gaps_text = "\n".join([f"- {g}" for g in data.get('gaps', [])])
+    if gaps_text:
+        pdf.chapter_body(gaps_text)
 
     # Action Plan
     pdf.chapter_title("Action Plan")
-    for i, p in enumerate(data.get('action_plan', [])):
-        pdf.chapter_body(f"{i+1}. {p}")
+    plan_text = "\n".join([f"{i+1}. {p}" for i, p in enumerate(data.get('action_plan', []))])
+    if plan_text:
+        pdf.chapter_body(plan_text)
 
     # Jobs
     pdf.chapter_title("Recommended Jobs")

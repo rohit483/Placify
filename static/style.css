@@ -329,10 +329,24 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    background: conic-gradient(#00467F 0%, #e0e0e0 0% 100%);
+}
+
+.progress-circle::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    background-color: var(--white);
+    border-radius: 50%;
+}
+
+.progress-circle span {
+    position: relative;
+    z-index: 10;
     font-size: 2.5rem;
     font-weight: bold;
     color: #00467F;
-    background: conic-gradient(#00467F 82%, #e0e0e0 82% 100%);
 }
 
 .list-disc {

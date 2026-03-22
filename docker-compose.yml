@@ -6,14 +6,12 @@ services:
     build: .
     image: placify-v3-web
     container_name: placify_v3_backend
-    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
       - .:/app
     # Load environment variables from file
     env_file:
       - .env # root .env (recommended for production)
-      #- ./venv/.env         # if using venv folder
-      #- ./placify_env/.env  # if using placify_env folder
     ports:
       - "8000:8000" # Expose directly for debugging
     depends_on:
@@ -47,7 +45,6 @@ services:
       - placify_v3_postgres_data:/var/lib/postgresql/data
     env_file:
       - .env # root .env (recommended for production)
-      #- ./venv/.env         # if using venv folder
     ports:
       - "5432:5432"
     networks:
