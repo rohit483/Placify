@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Placify - Home</title>
     <!-- Custom CSS (Replacing Tailwind) -->
-    <link rel="stylesheet" href="/static/style.css?v=1.7">
+    <link rel="stylesheet" href="/static/style.css?v=3.2">
     <!-- Load Inter font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,43 +17,153 @@
 
     <!-- =========== HEADER =========== -->
     <header class="app-header">
-        <nav class="container flex justify-between items-center py-4">
-            <div class="logo-text">Placify</div>
-            <!-- Simple Single Page Header -->
-            <div class="sub-header-text">AI Placement Readiness</div>
+        <nav class="container flex justify-between items-center py-3">
+            <div class="logo-container">
+                <img src="/image/placify_logo_light_mode_resize.png" alt="Placify Logo" class="logo-image logo-light">
+                <img src="/image/placify_logo_dark_mode_resize.png" alt="Placify Logo" class="logo-image logo-dark">
+            </div>
+            <div class="header-actions">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="/privacy-policy" class="nav-link">Policy</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
         </nav>
+        <div class="header-tagline">
+            <span class="tagline-text">PREPARE. <span class="tagline-highlight">MATCH.</span> SUCCEED.</span>
+        </div>
     </header>
 
     <!-- =========== MAIN CONTENT =========== -->
     <main class="container py-6">
 
-        <!-- 
+        <!--
+        ==================================================
+        SECTION: ABOUT US
+        ==================================================
+        -->
+        <section id="about" class="mt-3 mb-8">
+            <div class="about-content" style="max-width: 900px; margin: 0 auto;">
+                <div class="card-base p-6" style="text-align: center;">
+                    <div class="section-header text-center">
+                        <h2 class="mb-2">About Placify</h2>
+                        <p class="section-description">AI-powered placement readiness for Central India IT ecosystem</p>
+                    </div>
+                    <p style="line-height: 1.6; margin-bottom: 1rem;">
+                        Placify bridges the gap between academic curricula and professional employment in Central India's IT corridor. Our AI-powered platform provides <strong>grounded, actionable guidance</strong> tailored specifically to the Indore-Bhopal-Jabalpur region.
+                    </p>
+                    <p style="line-height: 1.6; margin-bottom: 2rem;">
+                        With <strong>100+ verified companies</strong> in our database, we deliver personalized career recommendations, skill gap analysis, and direct company contacts—transforming abstract career advice into real opportunities.
+                    </p>
+                    <button onclick="document.getElementById('mode-selection').scrollIntoView({ behavior: 'smooth' });" class="btn btn-primary" style="padding: 0.75rem 2rem; font-size: 1rem;">Try Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!--
+        ==================================================
+        SECTION: WHAT WE OFFER
+        ==================================================
+        -->
+        <section id="offer" class="my-8">
+            <div class="section-header text-center">
+                <h2 class="mb-2">What We Offer!</h2>
+            </div>
+
+            <div class="offer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <!-- AI Analysis -->
+                <div class="card-base card-hover p-6" style="text-align: center;">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; color: var(--blue-600);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem;">AI-Powered Analysis</h3>
+                    <p style="font-size: 0.9rem;">Advanced AI evaluates your skills and provides personalized career insights.</p>
+                </div>
+
+                <!-- Resume Intelligence -->
+                <div class="card-base card-hover p-6" style="text-align: center;">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(22, 163, 74, 0.1) 0%, rgba(21, 128, 61, 0.1) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; color: var(--green-600);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem;">Resume Intelligence</h3>
+                    <p style="font-size: 0.9rem;">Smart parsing extracts your skills and matches them with opportunities.</p>
+                </div>
+
+                <!-- Local Company Matching -->
+                <div class="card-base card-hover p-6" style="text-align: center;">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(126, 34, 206, 0.1) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; color: var(--purple-600);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem;">100+ Local Companies</h3>
+                    <p style="font-size: 0.9rem;">Verified companies in Indore-Bhopal IT corridor with direct contacts.</p>
+                </div>
+
+                <!-- Privacy First -->
+                <div class="card-base card-hover p-6" style="text-align: center;">
+                    <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(185, 28, 28, 0.1) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; color: var(--red-600);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem;">Privacy-First</h3>
+                    <p style="font-size: 0.9rem;">No login required. Your data stays secure and private.</p>
+                </div>
+            </div>
+        </section>
+
+        <!--
         ==================================================
         SECTION 1: ASSESSMENT MODE SELECTION
         ==================================================
         -->
-        <section id="mode-selection" class="text-center my-16">
-            <h1 class="mb-4">Welcome, Candidates!</h1>
-            <p class="mb-12 text-lg">Select your assessment mode to get a personalized, AI-driven
-                placement report.</p>
+        <section id="mode-selection" class="text-center my-8">
+            <div class="section-header">
+                <h1 class="mb-2">Welcome, Candidates!</h1>
+                <p class="section-description">Select your assessment mode to get a personalized, AI-driven placement report.</p>
+            </div>
 
             <div class="feature-grid md-grid-cols-3">
                 <!-- Fast Mode Card -->
-                <div class="card-base card-hover p-8">
+                <div class="card-base card-hover card-assessment p-8">
+                    <div class="card-badge">⚡ QUICK</div>
                     <div class="text-blue-600 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon-lg" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-                    <h2 class="mb-3">Fast Mode</h2>
-                    <p class="mb-6">10 quick MCQs. Get a baseline readiness score in 5 minutes.</p>
+                    <h2 class="mb-2">Fast Mode</h2>
+                    <p class="text-sm text-gray-500 mb-4">⏱️ ~5 minutes</p>
+                    <p class="mb-6">10 quick MCQs. Get a baseline readiness score quickly.</p>
                     <button onclick="startAssessment('fast')" class="btn btn-primary w-full">Start
                         Fast Assessment</button>
                 </div>
 
-                <!-- Balanced Mode Card -->
-                <div class="card-base card-hover p-8">
+                <!-- Balanced Mode Card (RECOMMENDED) -->
+                <div class="card-base card-hover card-assessment card-recommended p-8">
+                    <div class="card-badge card-badge-recommended">⭐ RECOMMENDED</div>
                     <div class="text-blue-600 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon-lg" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
@@ -61,14 +171,16 @@
                                 d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 0l-6 2m6-2l6 2" />
                         </svg>
                     </div>
-                    <h2 class="mb-3">Balanced Mode</h2>
+                    <h2 class="mb-2">Balanced Mode</h2>
+                    <p class="text-sm text-gray-500 mb-4">⏱️ ~15 minutes</p>
                     <p class="mb-6">20 MCQs & short answers. Deeper analysis of your skills.</p>
-                    <button onclick="startAssessment('balanced')" class="btn btn-primary w-full bg-blue-700">Start
+                    <button onclick="startAssessment('balanced')" class="btn btn-primary w-full btn-recommended-action">Start
                         Balanced Assessment</button>
                 </div>
 
                 <!-- Detailed Mode Card -->
-                <div class="card-base card-hover p-8">
+                <div class="card-base card-hover card-assessment p-8">
+                    <div class="card-badge">📋 COMPREHENSIVE</div>
                     <div class="text-blue-600 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon-lg" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
@@ -76,43 +188,68 @@
                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                     </div>
-                    <h2 class="mb-3">Detailed Mode</h2>
-                    <p class="mb-6">30+ questions for a detailed analysis. Optional Resume Upload below.</p>
+                    <h2 class="mb-2">Detailed Mode</h2>
+                    <p class="text-sm text-gray-500 mb-4">⏱️ ~25 minutes</p>
+                    <p class="mb-6">30+ questions for thorough analysis. Upload your resume for enhanced matching.</p>
                     <button onclick="startAssessment('detailed')" class="btn btn-primary w-full">Start
                         Detailed Assessment</button>
                 </div>
             </div>
         </section>
 
-        <!-- 
+        <!-- OR Divider -->
+        <div class="or-divider" style="display: flex; align-items: center; justify-content: center; margin: 2rem auto; max-width: 400px;">
+            <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gray-300), var(--gray-300));"></div>
+            <span style="padding: 0 1.25rem; font-size: 0.9rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em;">or</span>
+            <div style="flex: 1; height: 1px; background: linear-gradient(90deg, var(--gray-300), var(--gray-300), transparent);"></div>
+        </div>
+
+        <!--
         ==================================================
         SECTION 2: RESUME UPLOADER
         ==================================================
         -->
-        <section id="resume-section" class="card-base my-16 mx-auto md-p-12 max-w-4xl p-8">
-            <h2 class="text-center mb-8">Upload Resume</h2>
+        <section id="resume-section" class="card-base my-16 mx-auto md-p-12 max-w-4xl p-8" style="margin-top: 0 !important;">
+            <div class="section-header">
+                <h2 class="mb-2">Upload Your Resume</h2>
+                <p class="section-description">Enhance your profile matching with your resume.</p>
+            </div>
             <!-- File Upload Area -->
             <div class="upload-area flex flex-col items-center justify-center"
-                style="padding: 3rem; margin-bottom: 2rem;">
+                style="padding: 3rem; margin-bottom: 1rem; margin-top: 2rem;">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    style="height: 4rem; width: 4rem; color: #9CA3AF; margin-bottom: 1rem;" fill="none"
+                    style="height: 4rem; width: 4rem; color: #2563EB; margin-bottom: 1rem;" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                 </svg>
-                <p class="mb-2 text-gray-600">Drag & drop your resume (PDF/Docx)</p>
-                <input type="file" id="resume-upload" class="hidden" accept=".pdf,.doc,.docx" />
-                <button onclick="document.getElementById('resume-upload').click()" class="btn-link mt-4"
-                    style="margin-top: 0.5rem; font-size: 1.05rem;">Browse
-                    Files</button>
+                <p class="mb-2 text-gray-600 font-semibold">Drag & drop your resume (PDF/Docx)</p>
+                <p class="text-xs text-gray-400 mb-4">or</p>
+                <input type="file" id="resume-upload" class="hidden" accept=".pdf,.doc,.docx" onchange="showFilePreview(this)" />
+                <button onclick="document.getElementById('resume-upload').click()" class="btn-link"
+                    style="font-size: 1.05rem;">Browse Files</button>
+            </div>
+
+            <!-- File Preview (hidden by default) -->
+            <div id="file-preview" class="hidden" style="text-align: center; margin-bottom: 1.5rem;">
+                <div style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.25rem; background: linear-gradient(135deg, rgba(22, 163, 74, 0.1) 0%, rgba(21, 128, 61, 0.1) 100%); border: 1px solid rgba(22, 163, 74, 0.3); border-radius: 0.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="width: 1.25rem; height: 1.25rem; color: #16A34A;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span id="file-name" style="font-weight: 600; color: #16A34A;"></span>
+                    <button onclick="clearFileSelection()" style="background: none; border: none; cursor: pointer; color: #6B7280; padding: 0.25rem;" title="Remove file">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 1rem; height: 1rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <div class="flex justify-center items-center" style="gap: 1.5rem; margin-top: 2rem;">
                 <button id="upload-analyze-btn" onclick="uploadAndAnalyze()" class="btn btn-primary"
                     style="min-width: 160px;">Analyze Resume</button>
             </div>
-            <p class="mt-4 text-center text-xs text-gray-400">Privacy-First: Your resume
-                is optional.</p>
+            <p class="mt-4 text-center text-xs text-gray-400">✓ Privacy-First: Your resume is optional and temporarily stored.</p>
         </section>
 
         <!-- 
@@ -139,13 +276,17 @@
         </section>
 
 
-        <!-- 
+        <!--
         ==================================================
         SECTION 3.5: GENERATED REPORT (Part of Assessment flow)
         ==================================================
         -->
         <section id="report" class="card-base my-16 hidden md-p-12 p-8 report-loading">
-            <h2 class="text-center mb-4">Your Personalized Career Report</h2>
+            <div class="section-header">
+                <div class="section-indicator">✓</div>
+                <h2 class="mb-2">Your Personalized Career Report</h2>
+                <p class="section-description">AI-powered analysis of your placement readiness</p>
+            </div>
 
             <!-- Loading Status Message -->
             <p class="text-center text-gray-500 mb-6 skeleton-content">
@@ -161,7 +302,7 @@
                 <!-- Real Button -->
                 <a href="/api/report/pdf" download="Placement_Report.pdf" class="btn btn-success real-content"
                     style="display:none; width: max-content; margin: 0 auto; padding-left: 3rem; padding-right: 3rem;">
-                    Download PDF Report
+                    📥 Download PDF Report
                 </a>
             </div>
 
@@ -169,8 +310,8 @@
                 <!-- Left Column: Score and Stats -->
                 <div class="md-col-span-1 space-y-6">
                     <!-- Readiness Score Box -->
-                    <div class="text-center bg-gray-50 p-6 rounded-md">
-                        <h3 class="mb-4 text-gray-600">Readiness Score</h3>
+                    <div class="text-center bg-gradient-blue p-6 rounded-md">
+                        <h3 class="mb-4 text-gray-600">Overall Readiness Score</h3>
                         <!-- Skeleton Circle -->
                         <div class="skeleton-content">
                             <div class="skeleton skeleton-circle"></div>
@@ -181,13 +322,13 @@
                             <div class="progress-circle mx-auto">
                                 <span id="readiness-score-display">0%</span>
                             </div>
-                            <p class="mt-4">Based on your answers and analysis.</p>
+                            <p class="mt-4 text-sm text-gray-600">Based on your answers and analysis.</p>
                         </div>
                     </div>
 
                     <!-- Key Strengths Box -->
-                    <div class="bg-gray-50 p-6 rounded-md">
-                        <h3 class="mb-4">Key Strengths</h3>
+                    <div class="bg-gradient-green p-6 rounded-md">
+                        <h3 class="mb-4 text-gray-800">💪 Key Strengths</h3>
                         <!-- Skeleton List -->
                         <div class="skeleton-content">
                             <div class="skeleton skeleton-list-item"></div>
@@ -201,8 +342,8 @@
                     </div>
 
                     <!-- Improvement Gaps Box -->
-                    <div class="bg-gray-50 p-6 rounded-md">
-                        <h3 class="mb-4">Improvement Gaps</h3>
+                    <div class="bg-gradient-red p-6 rounded-md">
+                        <h3 class="mb-4 text-gray-800">🎯 Improvement Areas</h3>
                         <!-- Skeleton List -->
                         <div class="skeleton-content">
                             <div class="skeleton skeleton-list-item"></div>
@@ -219,8 +360,8 @@
                 <!-- Right Column: Action Plan and Jobs -->
                 <div class="md-col-span-2 space-y-6">
                     <!-- Action Plan Box -->
-                    <div class="bg-gray-50 p-6 rounded-md">
-                        <h3 class="mb-4 text-lg">Your AI-Generated Action Plan</h3>
+                    <div class="bg-gradient-purple p-6 rounded-md">
+                        <h3 class="mb-4 text-lg text-gray-800">📋 Your AI-Generated Action Plan</h3>
                         <!-- Skeleton List -->
                         <div class="skeleton-content">
                             <div class="skeleton skeleton-text" style="width: 95%;"></div>
@@ -235,8 +376,8 @@
                     </div>
 
                     <!-- Job Recommendations Box -->
-                    <div class="bg-gray-50 p-6 rounded-md">
-                        <h3 class="mb-4 text-lg">Top Job Recommendations (RAG-Powered)</h3>
+                    <div class="bg-white border-2 border-blue-200 p-6 rounded-md">
+                        <h3 class="mb-4 text-lg text-gray-800">🎯 Top Job Recommendations (AI-Powered Matching)</h3>
                         <!-- Skeleton Cards -->
                         <div class="skeleton-content space-y-4">
                             <div class="skeleton-card">
@@ -264,21 +405,25 @@
             </div>
         </section>
 
-        <!-- 
+        <!--
         ==================================================
         SECTION 4: DRAFT EMAIL BOX
         ==================================================
         -->
         <section id="email-drafts" class="card-base my-16 mx-auto md-p-12 max-w-4xl p-8">
-            <h2 class="text-center mb-8">Generated Email Drafts</h2>
-            <div class="bg-gray-50 p-6 rounded-md">
-                <div class="border-gray-200 rounded-md mb-2 p-4 bg-white">
-                    <h4 class="mb-2 font-semibold text-blue-700">Draft: Recruiter Email</h4>
+            <div class="section-header">
+                <h2 class="mb-2">Generated Email Drafts <img src="https://img.icons8.com/color/48/gmail--v1.png" alt="Email" style="width: 30px; height: 30px; display: inline-block; margin-left: 0.5rem; vertical-align: middle;"></h2>
+            </div>
+            <div class="bg-gradient-email p-6 rounded-md mt-6">
+                <div class="border-gray-200 rounded-md mb-4 p-4 bg-white">
+                    <h4 class="mb-3 font-semibold text-blue-700 flex items-center gap-2 justify-center">
+                        <text> Mail templates for Candidates </text>
+                    </h4>
                     <textarea id="email-draft-output" class="textarea-input"
                         placeholder="Select a job above to generate a draft email..." readonly></textarea>
                 </div>
                 <!-- Copy Button -->
-                <div class="text-right">
+                <div class="text-right flex justify-end gap-3">
                     <button onclick="copyDraftText()" class="btn btn-primary flex-center-gap">
                         <svg xmlns="http://www.w3.org/2000/svg" style="height: 1.25rem; width: 1.25rem;" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
@@ -287,8 +432,179 @@
                         </svg>
                         Copy to Clipboard
                     </button>
-                    <p id="copy-feedback" class="hidden mt-2 text-green-600 text-xs text-right">
-                        Copied to clipboard!</p>
+                    <p id="copy-feedback" class="hidden text-green-600 text-xs text-right self-center">
+                        ✓ Copied to clipboard!</p>
+                </div>
+            </div>
+        </section>
+
+        <!--
+        ==================================================
+        SECTION 5: THE TEAM
+        ==================================================
+        -->
+        <section id="team" class="my-8">
+            <div class="section-header text-center">
+                <h2 class="mb-2">Our Team</h2>
+                <p class="section-description">Meet our dedicated team behind Placify</p>
+            </div>
+
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="card-base card-hover p-4" style="text-align: center;">
+                    <a href="https://www.rohitchawda.me" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
+                        <h3 style="margin-bottom: 0.25rem; font-size: 1rem;">Rohit Chawda</h3>
+                        <p style="color: var(--gray-500); font-size: 0.8rem; margin-bottom: 0.75rem;">Backend Developer</p>
+                    </a>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <a href="mailto:rohitchawda4241@gmail.com" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.6rem; background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 0.4rem; text-decoration: none; color: var(--blue-600); font-size: 0.75rem; justify-content: center;">
+                            <img src="https://img.icons8.com/color/48/gmail--v1.png" alt="Email" style="width: 14px; height: 14px;">
+                            Email
+                        </a>
+                        <a href="https://github.com/rohit483" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.6rem; background: rgba(75, 85, 99, 0.1); border: 1px solid rgba(75, 85, 99, 0.3); border-radius: 0.4rem; text-decoration: none; color: var(--gray-700); font-size: 0.75rem; justify-content: center;">
+                            <img src="https://img.icons8.com/material-outlined/24/github.png" alt="GitHub" style="width: 14px; height: 14px; filter: invert(0.3);">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="card-base card-hover p-4" style="text-align: center;">
+                    <h3 style="margin-bottom: 0.25rem; font-size: 1rem;">Gourav Barod</h3>
+                    <p style="color: var(--gray-500); font-size: 0.8rem; margin-bottom: 0.75rem;">Frontend Developer</p>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <a href="mailto:gouravbarod231347@acropolis.in" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.6rem; background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 0.4rem; text-decoration: none; color: var(--blue-600); font-size: 0.75rem; justify-content: center;">
+                            <img src="https://img.icons8.com/color/48/gmail--v1.png" alt="Email" style="width: 14px; height: 14px;">
+                            Email
+                        </a>
+                        <a href="https://github.com/GouravBarod" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.6rem; background: rgba(75, 85, 99, 0.1); border: 1px solid rgba(75, 85, 99, 0.3); border-radius: 0.4rem; text-decoration: none; color: var(--gray-700); font-size: 0.75rem; justify-content: center;">
+                            <img src="https://img.icons8.com/material-outlined/24/github.png" alt="GitHub" style="width: 14px; height: 14px; filter: invert(0.3);">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="card-base card-hover p-4" style="text-align: center;">
+                    <h3 style="margin-bottom: 0.25rem; font-size: 1rem;">Vishal Jaiswal</h3>
+                    <p style="color: var(--gray-500); font-size: 0.8rem; margin-bottom: 0.75rem;">Application Manager</p>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <a href="mailto:vishaljaiswal220619@acropolis.in" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.6rem; background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 0.4rem; text-decoration: none; color: var(--blue-600); font-size: 0.75rem; justify-content: center;">
+                            <img src="https://img.icons8.com/color/48/gmail--v1.png" alt="Email" style="width: 14px; height: 14px;">
+                            Email
+                        </a>
+                        <a href="#" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.6rem; background: rgba(75, 85, 99, 0.1); border: 1px solid rgba(75, 85, 99, 0.3); border-radius: 0.4rem; text-decoration: none; color: var(--gray-700); font-size: 0.75rem; justify-content: center;">
+                            <img src="https://img.icons8.com/material-outlined/24/github.png" alt="GitHub" style="width: 14px; height: 14px; filter: invert(0.3);">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="card-base card-hover p-4" style="text-align: center;">
+                    <h3 style="margin-bottom: 0.25rem; font-size: 1rem;">Rohit Choudhary</h3>
+                    <p style="color: var(--gray-500); font-size: 0.8rem; margin-bottom: 0.75rem;">Database Manager</p>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <a href="mailto:rohitchoudhary220152@acropolis.in" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.6rem; background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 0.4rem; text-decoration: none; color: var(--blue-600); font-size: 0.75rem; justify-content: center;">
+                            <img src="https://img.icons8.com/color/48/gmail--v1.png" alt="Email" style="width: 14px; height: 14px;">
+                            Email
+                        </a>
+                        <a href="https://github.com/rohitchoudhary19" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.6rem; background: rgba(75, 85, 99, 0.1); border: 1px solid rgba(75, 85, 99, 0.3); border-radius: 0.4rem; text-decoration: none; color: var(--gray-700); font-size: 0.75rem; justify-content: center;">
+                            <img src="https://img.icons8.com/material-outlined/24/github.png" alt="GitHub" style="width: 14px; height: 14px; filter: invert(0.3);">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+        ==================================================
+        SECTION 6: FAQ
+        ==================================================
+        -->
+        <section id="faq" class="my-8">
+            <div class="section-header text-center">
+                <h2 class="mb-2">Frequently Asked Questions?</h2>
+            </div>
+
+            <div class="faq-container" style="max-width: 800px; margin: 0 auto; margin-top: 2.5rem;">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item card-base p-6 mb-4" style="border-left: 4px solid var(--blue-600);">
+                    <div class="faq-question" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(1)">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--gray-800);">What is Placify and how does it work?</h3>
+                        <svg id="faq-icon-1" style="width: 20px; height: 20px; transition: transform 0.3s ease;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div id="faq-answer-1" class="faq-answer" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
+                        <p>Placify is an AI-powered placement assistant specifically designed for the Central India IT ecosystem. It uses a hybrid matching algorithm that combines TF-IDF similarity scoring with Large Language Model analysis to match students with 100+ verified companies in the Indore-Bhopal-Jabalpur corridor.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item card-base p-6 mb-4" style="border-left: 4px solid var(--green-600);">
+                    <div class="faq-question" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(2)">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--gray-800);">Is my personal data secure and private?</h3>
+                        <svg id="faq-icon-2" style="width: 20px; height: 20px; transition: transform 0.3s ease;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div id="faq-answer-2" class="faq-answer" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
+                        <p>Yes! Placify prioritizes your data security. No login or user accounts are required to use our platform. Your resume and assessment data are securely stored in our Neon DB (serverless PostgreSQL) database with encrypted connections. You can access your data anytime via our secure API endpoints. We never share your personal information with third parties and implement industry-standard security practices to keep your data safe.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item card-base p-6 mb-4" style="border-left: 4px solid var(--purple-600);">
+                    <div class="faq-question" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(3)">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--gray-800);">What makes Placify different from other job platforms?</h3>
+                        <svg id="faq-icon-3" style="width: 20px; height: 20px; transition: transform 0.3s ease;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div id="faq-answer-3" class="faq-answer" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
+                        <p>Unlike generic platforms that provide abstract advice, Placify offers grounded, actionable guidance specific to Central India's IT market. We provide verified company data with actual contact information, location-specific opportunities, and AI analysis tailored to the regional hiring landscape.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item card-base p-6 mb-4" style="border-left: 4px solid var(--red-600);">
+                    <div class="faq-question" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(4)">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--gray-800);">What assessment modes are available?</h3>
+                        <svg id="faq-icon-4" style="width: 20px; height: 20px; transition: transform 0.3s ease;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div id="faq-answer-4" class="faq-answer" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
+                        <p>We offer three assessment modes: <strong>Fast Mode</strong> (~5 mins, 10 MCQs), <strong>Balanced Mode</strong> (~15 mins, 20 MCQs + short answers), and <strong>Detailed Mode</strong> (~25 mins, 30+ questions with optional resume upload for enhanced matching).</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item card-base p-6 mb-4" style="border-left: 4px solid var(--blue-600);">
+                    <div class="faq-question" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(5)">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--gray-800);">How accurate are the job matches and recommendations?</h3>
+                        <svg id="faq-icon-5" style="width: 20px; height: 20px; transition: transform 0.3s ease;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div id="faq-answer-5" class="faq-answer" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
+                        <p>Our matches are highly accurate because they're based on verified company data from the Indore-Bhopal IT corridor rather than generic information. The three-stage matching process (Hard Filters → TF-IDF Scoring → LLM Re-ranking) ensures you get relevant, localized recommendations with real company contacts.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="faq-item card-base p-6 mb-4" style="border-left: 4px solid var(--green-600);">
+                    <div class="faq-question" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(6)">
+                        <h3 style="margin: 0; font-size: 1.1rem; color: var(--gray-800);">Do I need to create an account to use Placify?</h3>
+                        <svg id="faq-icon-6" style="width: 20px; height: 20px; transition: transform 0.3s ease;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div id="faq-answer-6" class="faq-answer" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
+                        <p>No account required! Placify uses a stateless architecture with no user authentication. Simply visit the platform, complete your assessment, upload your resume if desired, and receive your personalized career report immediately.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -296,13 +612,48 @@
     </main>
 
     <!-- =========== FOOTER =========== -->
-    <footer class="text-center mt-16 bg-gray-800 p-6 text-gray-400">
-        <p class="text-gray-400">&copy; 2025 Placify</p>
-        <p class="text-xs text-gray-400">Acropolis Institute of Technology and Research, Indore
-        </p>
+    <footer class="footer-professional">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div style="margin-bottom: 0.25rem;">
+                        <img src="/image/placify_logo_dark_mode_resize.png" alt="Placify" class="footer-logo">
+                    </div>
+                    <p class="footer-description">AI-powered placement readiness platform for careers in Central India IT ecosystem.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms & Conditions</a></li>
+                        <li><a href="/license">License</a></li>
+                    </ul>
+                </div>
+                <div id="contact" class="footer-section">
+                    <h4 class="footer-title">Contact</h4>
+                    <p class="footer-text" style="margin-bottom: 0.4rem;"><img src="https://img.icons8.com/color/48/gmail--v1.png" alt="Email" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;"><a href="mailto:contact@placify.tech">rohitchawda4241@gmail.com</a></p>
+                    <p class="footer-text" style="margin-bottom: 0.4rem;"><img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;"><a href="tel:+917587904241">+91 7587904241</a></p>
+                    <p class="footer-text" style="margin-bottom: 0.4rem;"><img src="https://img.icons8.com/material-outlined/24/github.png" alt="GitHub" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px; filter: invert(1);"><a href="https://github.com/rohit483/Placify" target="_blank" rel="noopener noreferrer">placify_v3</a></p>
+                    <p class="footer-text" style="margin-bottom: 0;">📍 Indore, Madhya Pradesh</p>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p class="text-gray-400 text-sm">&copy; 2025-2026 Placify. All rights reserved.</p>
+                <p class="text-gray-500 text-xs">Acropolis Institute of Technology and Research, Indore</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="/static/script.js?v=1.7"></script>
+    <script src="/static/script.js?v=2.4"></script>
 </body>
 
 </html>

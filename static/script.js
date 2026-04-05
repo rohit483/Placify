@@ -1,9 +1,83 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Initial State: All sections are visible in the layout, but assessment form is hidden by css class '.hidden' initially
+
+    // Initialize theme toggle
+    initThemeToggle();
 });
+
+/**
+ * Theme Toggle Functionality
+ * Uses light-mode/dark-mode classes to OVERRIDE system preference
+ */
+function initThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    // Check if user has saved a theme preference
+    const savedTheme = localStorage.getItem('placify-theme');
+
+    // Apply saved theme (overrides system preference)
+    if (savedTheme === 'dark') {
+        htmlElement.classList.remove('light-mode');
+        htmlElement.classList.add('dark-mode');
+    } else if (savedTheme === 'light') {
+        htmlElement.classList.remove('dark-mode');
+        htmlElement.classList.add('light-mode');
+    }
+    // If no saved preference, let system preference apply (no classes added)
+
+    // Add click event to toggle button
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const isDark = htmlElement.classList.contains('dark-mode') ||
+                          (!htmlElement.classList.contains('light-mode') &&
+                           window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+            if (isDark) {
+                // Switch to light mode
+                htmlElement.classList.remove('dark-mode');
+                htmlElement.classList.add('light-mode');
+                localStorage.setItem('placify-theme', 'light');
+            } else {
+                // Switch to dark mode
+                htmlElement.classList.remove('light-mode');
+                htmlElement.classList.add('dark-mode');
+                localStorage.setItem('placify-theme', 'dark');
+            }
+        });
+    }
+}
 
 let selectedMode = 'balanced';
 let uploadedResumeName = null;
+
+/**
+ * Show file preview when a file is selected
+ */
+function showFilePreview(input) {
+    const filePreview = document.getElementById('file-preview');
+    const fileName = document.getElementById('file-name');
+
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        fileName.textContent = file.name;
+        filePreview.classList.remove('hidden');
+    } else {
+        filePreview.classList.add('hidden');
+    }
+}
+
+/**
+ * Clear file selection
+ */
+function clearFileSelection() {
+    const fileInput = document.getElementById('resume-upload');
+    const filePreview = document.getElementById('file-preview');
+
+    fileInput.value = '';
+    uploadedResumeName = null;
+    filePreview.classList.add('hidden');
+}
 
 async function uploadAndAnalyze() {
     const fileInput = document.getElementById('resume-upload');
@@ -359,4 +433,22 @@ function analyzeResumeOnly() {
 
     // Trigger assessment with override
     submitAssessment('resume-only');
+}
+
+/**
+ * Toggle FAQ item visibility
+ */
+function toggleFAQ(itemNumber) {
+    const answer = document.getElementById(`faq-answer-${itemNumber}`);
+    const icon = document.getElementById(`faq-icon-${itemNumber}`);
+
+    if (answer.style.display === 'none' || answer.style.display === '') {
+        // Show the answer
+        answer.style.display = 'block';
+        icon.style.transform = 'rotate(180deg)';
+    } else {
+        // Hide the answer
+        answer.style.display = 'none';
+        icon.style.transform = 'rotate(0deg)';
+    }
 }

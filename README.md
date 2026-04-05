@@ -51,34 +51,55 @@ Failed providers are automatically skipped in subsequent API calls within the sa
 
 ```bash
 Placify/
-├── .github/workflows/          # CI/CD (lint, test, docker build)
+├── .github/
+│   └── workflows/                  # CI/CD pipelines
 ├── app/
-│   ├── routes/                 # API endpoints (api.py, views.py)
-│   ├── services/               # AI, PDF, resume, matching services
-│   ├── config.py               # Configuration & environment loading
-│   ├── database.py             # SQLAlchemy engine & seeding
-│   ├── db_models.py            # ORM table definitions
-│   ├── models.py               # Pydantic validation models
-│   └── quiz.py                 # Question bank
-├── static/                     # CSS & JavaScript
-├── template/                   # HTML templates
-├── test/                       # Test files (pytest)
+│   ├── routes/
+│   │   ├── api.py                  # API endpoints
+│   │   └── views.py                # Frontend routes
+│   ├── services/
+│   │   ├── ai_service.py           # AI analysis (Gemini/Groq/Ollama)
+│   │   ├── pdf_service.py          # PDF report generation
+│   │   ├── resume_service.py       # Resume parsing
+│   │   └── matching_service.py     # Job matching algorithm
+│   ├── config.py                   # Configuration & environment
+│   ├── database.py                 # SQLAlchemy setup & seeding
+│   ├── db_models.py                # ORM table definitions
+│   ├── models.py                   # Pydantic validation schemas
+│   └── quiz.py                     # Assessment question bank
+├── static/
+│   ├── style.css                   # Main stylesheet (v3.2)
+│   └── script.js                   # Frontend JavaScript (v2.4)
+├── template/
+│   ├── index.html                  # Main application page
+│   ├── privacy-policy.html         # Privacy Policy page
+│   ├── terms.html                  # Terms & Conditions page
+│   └── license.html                # License page
+├── image/
+│   ├── placify_logo_light_mode_resize.png    # Light mode logo (5:4 ratio)
+│   └── placify_logo_dark_mode_resize.png     # Dark mode logo (5:4 ratio)
+├── web_data/
+│   ├── analysis/                   # Stored analysis JSON files
+│   ├── pdf/                        # Generated PDF reports
+│   └── resume/                     # Uploaded resumes
 ├── company_dataset/
-│   └── companies.json          # Seed data (94 job listings)
-├── venv/
-│   └── .env                    # API keys (not committed)
+│   └── companies.json              # 94+ company job listings
 ├── nginx/
-│   └── nginx.conf              # Reverse proxy configuration
-├── main.py                     # Application entry point
-├── Dockerfile                  # Backend container
-├── docker-compose.yml          # Full stack orchestration
-├── .env.example                # Template for environment setup
-├── .gitignore                  # Git ignore rules
-├── .dockerignore               # Docker build exclusions
-├── requirements.txt            # Python dependencies
-├── README.md                   # Project overview (this file)
-├── DEV_GUIDE.md                # 📖 Complete developer documentation
-└── LICENSE                     # MIT License
+│   └── nginx.conf                  # Reverse proxy configuration
+├── test/
+│   ├── test_gemini.py              # Gemini API tests
+│   └── test_groq.py                # Groq API tests
+├── docs/                           # Additional documentation
+├── main.py                         # Application entry point
+├── Dockerfile                      # Backend container definition
+├── docker-compose.yml              # Full stack orchestration
+├── .env.example                    # Environment variables template
+├── .dockerignore                   # Docker build exclusions
+├── .gitignore                      # Git ignore rules
+├── requirements.txt                # Python dependencies
+├── README.md                       # Project overview (this file)
+├── LICENSE                         # MIT License
+└── quick_demo.ipynb                # Demo notebook
 ```
 
 ## ⚡ Getting Started

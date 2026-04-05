@@ -44,6 +44,8 @@ LICENSE
 docs/
 *.mermaid
 quick_demo.ipynb
+privacy_policy.txt
+terms.txt
 
 # Notebooks (not needed in container)
 *.ipynb

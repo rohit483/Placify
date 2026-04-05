@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from app.config import STATIC_DIR, COMPANIES_FILE
+from app.config import STATIC_DIR, COMPANIES_FILE, BASE_DIR
 from app.database import init_db, seed_companies_from_json
 from app.routes import api, views
 
@@ -17,6 +17,11 @@ def on_startup():
 
 # Mount Static Files
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+# Mount Image Files
+IMAGE_DIR = BASE_DIR / "image"
+if IMAGE_DIR.exists():
+    app.mount("/image", StaticFiles(directory=str(IMAGE_DIR)), name="image")
 
 # Include Routers
 app.include_router(api.router)
