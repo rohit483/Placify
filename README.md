@@ -23,7 +23,8 @@ Placify is an intelligent career readiness platform designed to bridge the gap b
   * **PDF Reports**: Downloadable, well-formatted career reports stored in database.
   * **Email Drafting**: Auto-generated cold email drafts for recruiters.
 * **Full-Stack Docker Deployment**: Nginx + FastAPI + PostgreSQL, production-ready.
-* **Modern UI**: Clean, responsive interface with skeleton loading states.
+* **Modern UI**: Clean, responsive interface with a professional LinkedIn-inspired design, custom system fonts, and skeleton loading states.
+* **Privacy-First Approach**: Mandatory consent for resume processing, ensuring user data control.
 
 ## 🛠️ Tech Stack
 
@@ -73,11 +74,9 @@ Placify/
 ├── template/
 │   ├── index.html                  # Main application page
 │   ├── privacy-policy.html         # Privacy Policy page
-│   ├── terms.html                  # Terms & Conditions page
-│   └── license.html                # License page
+│   └── terms.html                  # Terms & Conditions page
 ├── image/
-│   ├── placify_logo_light_mode_resize.png    # Light mode logo (5:4 ratio)
-│   └── placify_logo_dark_mode_resize.png     # Dark mode logo (5:4 ratio)
+│   └── placify_logo.svg            # Unified vector logo
 ├── web_data/
 │   ├── analysis/                   # Stored analysis JSON files
 │   ├── pdf/                        # Generated PDF reports
@@ -207,7 +206,7 @@ docker exec -it placify_db psql -U $POSTGRES_USER -d placify_db
 
 ## 📚 Developer Documentation
 
-See **[DEV_GUIDE.md](DEV_GUIDE.md)** for complete documentation:
+See **[API_GUIDE.md](docs/API_GUIDE.md)** and **[DEV_GUIDE.md](docs/DEV_GUIDE.md)** for complete documentation:
 
 * Database schema and seeding
 * API reference (all endpoints)

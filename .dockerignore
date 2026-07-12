@@ -40,7 +40,6 @@ Dockerfile
 web_data/
 test/
 *.md
-LICENSE
 docs/
 *.mermaid
 quick_demo.ipynb

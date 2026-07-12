@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from fastapi.responses import FileResponse
-from app.config import TEMPLATE_DIR, STATIC_DIR
+from fastapi.responses import FileResponse, PlainTextResponse
+from app.config import TEMPLATE_DIR, STATIC_DIR, BASE_DIR
 
 router = APIRouter()
 
@@ -19,7 +19,7 @@ async def read_terms():
 
 @router.get("/license")
 async def read_license():
-    return FileResponse(TEMPLATE_DIR / 'license.html')
+    return FileResponse(BASE_DIR / 'LICENSE', media_type='text/plain')
 
 @router.get("/script.js")
 async def read_script():

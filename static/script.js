@@ -79,7 +79,24 @@ function clearFileSelection() {
     filePreview.classList.add('hidden');
 }
 
+/**
+ * Toggle the Analyze Resume button based on terms checkbox
+ */
+function toggleAnalyzeButton() {
+    const checkbox = document.getElementById('terms-checkbox');
+    const btn = document.getElementById('upload-analyze-btn');
+    if (checkbox && btn) {
+        btn.disabled = !checkbox.checked;
+    }
+}
+
 async function uploadAndAnalyze() {
+    const checkbox = document.getElementById('terms-checkbox');
+    if (checkbox && !checkbox.checked) {
+        alert("Please agree to the Privacy Policy and Terms to continue.");
+        return;
+    }
+
     const fileInput = document.getElementById('resume-upload');
     const file = fileInput.files[0];
     if (!file) {
