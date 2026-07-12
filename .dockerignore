@@ -46,6 +46,7 @@ docs/
 quick_demo.ipynb
 privacy_policy.txt
 terms.txt
+llm_context/
 
 # Notebooks (not needed in container)
 *.ipynb
