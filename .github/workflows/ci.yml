@@ -2,9 +2,9 @@ name: Placify CI (Docker)
 
 on:
   push:
-    branches: [ "placify_v3" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "placify_v3" ]
+    branches: [ "main" ]
 
 jobs:
   python-quality:
