@@ -34,7 +34,7 @@ For Placify, the removal of the login requirement enables a **Privacy-First desi
 The selection of the technology stack is driven by the dual needs of "minimalism" (ease of setup) and "capability" (supporting advanced AI operations).
 
 **Frontend: Vanilla HTML5, CSS3, and JavaScript (ES6+)**
-A build-free Vanilla JS approach eliminates the need for Node.js package managers (npm/yarn), transpilers (Babel), and bundlers (Webpack). The entire frontend is contained in simple HTML/CSS/JS files, allowing for instant "save-and-refresh" debugging.
+A build-free Vanilla JS approach eliminates the need for Node.js package managers (npm/yarn), transpilers (Babel), and bundlers (Webpack). The frontend utilizes a professional LinkedIn-inspired design with custom system fonts and privacy-first consent checks, all contained in simple HTML/CSS/JS files, allowing for instant "save-and-refresh" debugging.
 
 **Backend: Python 3.11+ with FastAPI**
 Python is the non-negotiable language of choice due to its dominance in the AI/ML ecosystem. FastAPI is selected over Flask or Django for three specific reasons:
@@ -486,11 +486,13 @@ The system serves as a potent demonstration of how modern AI technologies can be
 ## Appendix C: File Structure
 
 ```
-Placify-v1/
-├── main.py                 # Application entry point
-├── requirements.txt        # Python dependencies
+Placify/
+├── .github/
+│   └── workflows/          # CI/CD pipelines
 ├── app/
 │   ├── config.py           # Configuration and paths
+│   ├── database.py         # DB setup and seeding
+│   ├── db_models.py        # SQLAlchemy models
 │   ├── models.py           # Pydantic data models
 │   ├── quiz.py             # Quiz question definitions
 │   ├── routes/
@@ -503,10 +505,23 @@ Placify-v1/
 │       └── resume_service.py   # Resume text extraction
 ├── company_dataset/
 │   └── companies.json      # 94+ verified companies
+├── docs/                   # Developer & API documentation
+├── image/
+│   └── placify_logo.svg    # Unified vector logo
+├── nginx/                  # Nginx proxy configuration
+├── notebooks/              
+│   └── quick_demo.ipynb    # Hybrid engine demo for evaluators
+├── static/                 # Custom CSS and JavaScript
+├── template/               # HTML templates
+│   ├── index.html          # Main application page
+│   ├── privacy-policy.html # Privacy Policy page
+│   └── terms.html          # Terms & Conditions page
 ├── web_data/
 │   ├── resume/             # Uploaded PDF resumes
 │   ├── analysis/           # JSON analysis results
 │   └── pdf/                # Generated PDF reports
-├── static/                 # CSS and JavaScript
-└── template/               # HTML templates
+├── main.py                 # Application entry point
+├── requirements.txt        # Python dependencies
+├── Dockerfile              # Docker configuration
+└── docker-compose.yml      # Multi-container orchestration
 ```

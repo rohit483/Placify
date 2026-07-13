@@ -4,8 +4,8 @@ services:
   # -------------------------------------------------------------------------
   web:
     build: .
-    image: placify-v3-web
-    container_name: placify_v3_backend
+    image: placify-web
+    container_name: placify_backend
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
       - .:/app
@@ -24,7 +24,7 @@ services:
   # -------------------------------------------------------------------------
   nginx:
     image: nginx:alpine
-    container_name: placify_v3_nginx
+    container_name: placify_nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./static:/app/static:ro # Serve static files directly
@@ -39,10 +39,10 @@ services:
   # -------------------------------------------------------------------------
   db:
     image: postgres:15-alpine
-    container_name: placify_v3_db
+    container_name: placify_db
     restart: unless-stopped
     volumes:
-      - placify_v3_postgres_data:/var/lib/postgresql/data
+      - placify_postgres_data:/var/lib/postgresql/data
     env_file:
       - .env # root .env (recommended for production)
     ports:
@@ -60,4 +60,4 @@ networks:
     driver: bridge
 
 volumes:
-  placify_v3_postgres_data:
+  placify_postgres_data:

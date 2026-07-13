@@ -18,7 +18,7 @@ router = APIRouter(prefix="/api")
 @router.post("/admin/reseed")
 async def admin_reseed(secret: str):
     """Secure endpoint to trigger re-reading companies.json and adding NEW companies to DB."""
-    admin_key = os.getenv("ADMIN_SECRET", "default_dev_secret")
+    admin_key = os.getenv("ADMIN_SECRET")
     if secret != admin_key:
         raise HTTPException(status_code=403, detail="Invalid admin secret")
         
@@ -160,10 +160,19 @@ async def generate_assessment(request: Request, submission: AssessmentSubmission
         print(f"Server Error (Assess): {str(e)}")
         return JSONResponse(status_code=500, content={"error": "Internal Server Error"})
 
+
 # ================================= Developer / Admin APIs =================================
+def verify_admin(secret: str):
+    admin_key = os.getenv("ADMIN_SECRET")
+    if secret != admin_key:
+        raise HTTPException(status_code=403, detail="Invalid admin secret")
+    return True
+
+dev_router = APIRouter(prefix="/dev", dependencies=[Depends(verify_admin)])
+
 
 # ------------------- List all assessments (metadata only) -------------------
-@router.get("/dev/assessments")
+@dev_router.get("/assessments")
 async def list_assessments(db: Session = Depends(get_db)):
     rows = db.query(Assessment).order_by(Assessment.created_at.desc()).all()
     return [
@@ -181,7 +190,7 @@ async def list_assessments(db: Session = Depends(get_db)):
     ]
 
 # ------------------- Get full assessment detail by ID -------------------
-@router.get("/dev/assessments/{assessment_id}")
+@dev_router.get("/assessments/{assessment_id}")
 async def get_assessment_detail(assessment_id: int, db: Session = Depends(get_db)):
     record = db.query(Assessment).filter(Assessment.id == assessment_id).first()
     if not record:
@@ -201,7 +210,7 @@ async def get_assessment_detail(assessment_id: int, db: Session = Depends(get_db
     }
 
 # ------------------- Download PDF report from DB (no filesystem needed) -------------------
-@router.get("/dev/assessments/{assessment_id}/pdf")
+@dev_router.get("/assessments/{assessment_id}/pdf")
 async def get_assessment_pdf(assessment_id: int, db: Session = Depends(get_db)):
     record = db.query(Assessment).filter(Assessment.id == assessment_id).first()
     if not record or record.pdf_binary is None:
@@ -214,7 +223,7 @@ async def get_assessment_pdf(assessment_id: int, db: Session = Depends(get_db)):
     )
 
 # ------------------- List all uploaded resumes -------------------
-@router.get("/dev/resumes")
+@dev_router.get("/resumes")
 async def list_resumes(db: Session = Depends(get_db)):
     rows = db.query(ResumeUpload).order_by(ResumeUpload.uploaded_at.desc()).all()
     return [
@@ -230,7 +239,7 @@ async def list_resumes(db: Session = Depends(get_db)):
     ]
 
 # ------------------- Read extracted resume text by ID -------------------
-@router.get("/dev/resumes/{resume_id}/text")
+@dev_router.get("/resumes/{resume_id}/text")
 async def get_resume_text(resume_id: int, db: Session = Depends(get_db)):
     record = db.query(ResumeUpload).filter(ResumeUpload.id == resume_id).first()
     if not record:
@@ -242,7 +251,7 @@ async def get_resume_text(resume_id: int, db: Session = Depends(get_db)):
     }
 
 # ------------------- Download original resume PDF from DB -------------------
-@router.get("/dev/resumes/{resume_id}/pdf")
+@dev_router.get("/resumes/{resume_id}/pdf")
 async def get_resume_pdf(resume_id: int, db: Session = Depends(get_db)):
     record = db.query(ResumeUpload).filter(ResumeUpload.id == resume_id).first()
     if not record or record.pdf_binary is None:
@@ -255,7 +264,7 @@ async def get_resume_pdf(resume_id: int, db: Session = Depends(get_db)):
     )
 
 # ------------------- Search resumes by keyword -------------------
-@router.get("/dev/resumes/search")
+@dev_router.get("/resumes/search")
 async def search_resumes(q: str, db: Session = Depends(get_db)):
     if not q or len(q) < 2:
         raise HTTPException(status_code=400, detail="Query must be at least 2 characters")
@@ -274,13 +283,13 @@ async def search_resumes(q: str, db: Session = Depends(get_db)):
 # ================================= Company CRUD APIs =================================
 
 # ------------------- List all companies -------------------
-@router.get("/dev/companies")
+@dev_router.get("/companies")
 async def list_companies(db: Session = Depends(get_db)):
     rows = db.query(Company).order_by(Company.id).all()
     return [r.to_dict() for r in rows]
 
 # ------------------- Search companies by skill or name -------------------
-@router.get("/dev/companies/search")
+@dev_router.get("/companies/search")
 async def search_companies(q: str, db: Session = Depends(get_db)):
     if not q or len(q) < 2:
         raise HTTPException(status_code=400, detail="Query must be at least 2 characters")
@@ -292,7 +301,7 @@ async def search_companies(q: str, db: Session = Depends(get_db)):
     return [r.to_dict() for r in rows]
 
 # ------------------- Get single company by ID -------------------
-@router.get("/dev/companies/{company_id}")
+@dev_router.get("/companies/{company_id}")
 async def get_company(company_id: int, db: Session = Depends(get_db)):
     record = db.query(Company).filter(Company.id == company_id).first()
     if not record:
@@ -300,7 +309,7 @@ async def get_company(company_id: int, db: Session = Depends(get_db)):
     return record.to_dict()
 
 # ------------------- Create a new company -------------------
-@router.post("/dev/companies")
+@dev_router.post("/companies")
 async def create_company(data: dict, db: Session = Depends(get_db)):
     if not data.get("name") or not data.get("role"):
         raise HTTPException(status_code=400, detail="'name' and 'role' are required")
@@ -318,7 +327,7 @@ async def create_company(data: dict, db: Session = Depends(get_db)):
     return record.to_dict()
 
 # ------------------- Update a company -------------------
-@router.put("/dev/companies/{company_id}")
+@dev_router.put("/companies/{company_id}")
 async def update_company(company_id: int, data: dict, db: Session = Depends(get_db)):
     record = db.query(Company).filter(Company.id == company_id).first()
     if not record:
@@ -340,7 +349,7 @@ async def update_company(company_id: int, data: dict, db: Session = Depends(get_
     return record.to_dict()
 
 # ------------------- Delete a company -------------------
-@router.delete("/dev/companies/{company_id}")
+@dev_router.delete("/companies/{company_id}")
 async def delete_company(company_id: int, db: Session = Depends(get_db)):
     record = db.query(Company).filter(Company.id == company_id).first()
     if not record:
@@ -348,3 +357,6 @@ async def delete_company(company_id: int, db: Session = Depends(get_db)):
     db.delete(record)
     db.commit()
     return {"detail": f"Company '{record.name}' (ID {company_id}) deleted"}
+
+# Include the protected dev routes into the main router
+router.include_router(dev_router)

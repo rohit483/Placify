@@ -46,7 +46,7 @@ This spins up the FastAPI app **and** a local PostgreSQL database container exac
 ---
 
 ## ☁️ 2. Production Deployment (Live Server)
-*Use this when your code is tested and you are pushing the `placify_v3` branch live to Render + Neon.*
+*Use this when your code is tested and you are pushing the `main` branch live to Render + Neon.*
 
 > **Architecture Note**: In production, we actually **do not** use `docker-compose.yml` or the `nginx` folder. The cloud provider (Render) handles Nginx routing for us automatically and only looks at the `Dockerfile`.
 
@@ -55,7 +55,7 @@ This spins up the FastAPI app **and** a local PostgreSQL database container exac
    ```bash
    git add -A
    git commit -m "Update feature X"
-   git push origin placify_v3
+   git push origin main
    ```
 2. **Render Auto-Deploys**: Render detects the new push, rebuilds your Docker image from `Dockerfile`, and starts the server. 
 3. **Database Seeding**: On app startup, `seed_companies_from_json()` reads `companies.json` and ensures any new companies are added to the Neon Database automatically.
