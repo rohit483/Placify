@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placify - Support Us</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css?v=3.2">
+    <style>
+        .support-text {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        .upi-box {
+            background-color: var(--gray-50);
+            border: 1px solid var(--gray-200);
+        }
+
+        .transparency-box {
+            background-color: var(--blue-50);
+            border: 1px solid var(--blue-200);
+            color: var(--blue-900);
+        }
+
+        html.dark-mode .support-text {
+            color: #c8d0dc;
+        }
+
+        html.dark-mode .upi-box {
+            background-color: #1a1f2e;
+            /* Match card background */
+            border-color: #2d3748;
+            /* Slightly lighter border */
+            color: #e2e8f0;
+        }
+
+        html.dark-mode .transparency-box {
+            background-color: rgba(37, 99, 235, 0.1);
+            border-color: rgba(37, 99, 235, 0.3);
+            color: #93c5fd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========== HEADER =========== -->
+    <header class="app-header">
+        <nav class="container flex justify-between items-center py-3">
+            <div class="logo-container">
+                <a href="/"><img src="/image/placify_logo.svg" alt="Placify Logo" class="logo-image"></a>
+            </div>
+            <div class="header-actions">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#faq" class="nav-link">FAQ</a>
+                <a href="/privacy-policy" class="nav-link">Policy</a>
+                <a href="/support" class="nav-link">Support</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div class="header-tagline">
+            <span class="tagline-text">SUPPORT. <span class="tagline-highlight">SUSTAIN.</span> EMPOWER.</span>
+        </div>
+    </header>
+
+    <!-- =========== MAIN CONTENT =========== -->
+    <main class="container py-6">
+
+        <div class="section-header text-center mt-4">
+            <h1 class="mb-2">Support Placify</h1>
+            <p class="section-description">Help Build a Better Placement Platform</p>
+        </div>
+
+        <div
+            style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem;">
+
+            <!-- Section 1: Why We Need Donations -->
+            <section class="card-base p-6">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800); text-align: center;">Why Your
+                    Support Matters
+                </h2>
+                <div class="support-text">
+                    <p class="mb-4">Placify actually started out as my final-year engineering project with a simple
+                        goal: to help students prepare for campus placements using personalized AI guidance. After
+                        graduating, I decided to keep building it on my own and turn it into a practical, reliable
+                        platform for students.</p>
+
+                    <p class="mb-4">Today, Placify handles placement readiness analysis, resume evaluations,
+                        personalized career guidance, and company recommendations. While the platform is fully up and
+                        running, a few key features are currently held back by limited solo-developer resources.</p>
+
+                    <p class="mb-4">Right now, Placify relies on a manually curated database of companies across Central
+                        India. Even though I keep it updated, it's still static—it can't automatically reflect new job
+                        openings or changing hiring requirements. My plan is to integrate real-time job market APIs so
+                        company details, required skills, and hiring updates refresh automatically. This will make
+                        recommendations much more accurate and useful for everyone.</p>
+
+                    <p class="mb-4">Placify also relies on AI for resume checks and report generation. Right now, it
+                        runs on dev-tier AI models, which have usage caps and performance limits. Upgrading to
+                        production-grade AI will unlock faster response times, sharper analysis, better recommendations,
+                        and the ability to serve many more students at once.</p>
+
+                    <p class="mb-2">Here is where your support directly goes:</p>
+                    <ul style="list-style-type: disc; margin-left: 2rem; margin-bottom: 1.5rem;">
+                        <li><strong>Production AI Services</strong> – Sharper resume reviews, faster responses, and
+                            better career guidance.</li>
+                        <li><strong>Real-Time Job Data APIs</strong> – Live company updates and hiring requirements
+                            instead of manual lists.</li>
+                        <li><strong>Hosting & Infrastructure</strong> – Keeping the platform online, secure, fast, and
+                            reliable.</li>
+                        <li><strong>Database Expansion & Verification</strong> – Adding and double-checking company info
+                            for accurate matches.</li>
+                    </ul>
+
+                    <p class="mb-4">Every bit helps, no matter the amount. Your support goes straight into making
+                        Placify smarter, faster, and accessible to students and job seekers across India.</p>
+
+                    <p>Thanks for backing independent development and helping shape the future of Placify!</p>
+                </div>
+            </section>
+
+            <!-- Section 2: UPI Payment -->
+            <section class="card-base p-6" style="text-align: center;">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800);">Donate via UPI (India)</h2>
+                <p style="line-height: 1.6; color: var(--gray-600); margin-bottom: 1.5rem;">
+                    Scan the QR code below or use the UPI ID to send your contribution securely.
+                </p>
+                <div
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                    <div
+                        style="width: 200px; height: 200px; background-color: var(--gray-100); border: 1px solid var(--gray-300); display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-bottom: 1rem; overflow: hidden;">
+                        <img src="/image/QR.jpeg" alt="UPI QR Code"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="upi-box" style="padding: 0.75rem 1.5rem; border-radius: 6px;">
+                        <strong>UPI ID:</strong> <span
+                            style="font-family: monospace; font-size: 1.1rem; user-select: all;">7869457084@kotakbank</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: PayPal & Card (Ko-fi) -->
+            <section class="card-base p-6" style="text-align: center;">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--gray-800);">PayPal & Credit Card
+                    (Global)</h2>
+                <p style="line-height: 1.6; color: var(--gray-600); margin-bottom: 1.5rem;">
+                    For international supporters or those who prefer PayPal/Cards, you can support us on Ko-fi.
+                </p>
+                <a href="https://ko-fi.com/rohit483" target="_blank" rel="noopener noreferrer" class="btn btn-primary"
+                    style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 2rem; font-size: 1.1rem; text-decoration: none; margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="currentColor" stroke="none">
+                        <path
+                            d="M20.895 5.568C20.67 5.15 20.315 4.846 19.86 4.69c-2.315-.792-6.527-.518-8.243-.243-1.716-.275-5.928-.549-8.243.243-.455.156-.81.46-1.035.878-.235.437-.282.97-.132 1.503l2.09 7.426c.264.939 1.11 1.583 2.083 1.583h5.247c.97 0 1.815-.644 2.08-1.583l2.09-7.426c.15-.533.103-1.066-.13-1.503z" />
+                        <path opacity=".5" d="M12 6.5s-2 3-5 3c0 0 3-1.5 5-4.5 2 3 5 4.5 5 4.5-3 0-5-3-5-3z" />
+                    </svg>
+                    Support on Ko-fi
+                </a>
+
+                <div class="transparency-box"
+                    style="border-radius: 8px; padding: 1rem; text-align: left; font-size: 0.95rem; line-height: 1.5;">
+                    <strong>Transparency:</strong> Placify is independently developed and maintained by a single
+                    developer. All contributions are used exclusively for AI API usage, job data services, hosting,
+                    infrastructure, and ongoing platform development.
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- =========== FOOTER =========== -->
+    <footer class="footer-professional">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div style="margin-bottom: 0.25rem;">
+                        <a href="/"><img src="/image/placify_logo.svg" alt="Placify" class="footer-logo"></a>
+                    </div>
+                    <p class="footer-description">AI-powered placement readiness platform for careers in Central India
+                        IT ecosystem.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/#about">About Us</a></li>
+                        <li><a href="/support">Support</a></li>
+                        <li><a href="/#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms & Conditions</a></li>
+                        <li><a href="/license">License</a></li>
+                    </ul>
+                </div>
+                <div id="contact" class="footer-section">
+                    <h4 class="footer-title">Contact</h4>
+                    <p class="footer-text" style="margin-bottom: 0.4rem;"><img
+                            src="https://img.icons8.com/color/48/gmail--v1.png" alt="Email"
+                            style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;"><a
+                            href="mailto:contact@rohitchawda.me">contact@rohitchawda.me</a></p>
+                    <p class="footer-text" style="margin-bottom: 0.4rem;"><img
+                            src="https://img.icons8.com/material-outlined/24/github.png" alt="GitHub"
+                            style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;"><a
+                            href="https://github.com/rohit483/Placify" target="_blank"
+                            rel="noopener noreferrer">placify_v3</a></p>
+                    <p class="footer-text" style="margin-bottom: 0;">📍 Indore, Madhya Pradesh, India</p>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p class="text-gray-400 text-sm">&copy; 2025-2026 Placify. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/script.js?v=2.4"></script>
+</body>
+
+</html>

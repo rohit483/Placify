@@ -13,6 +13,10 @@ async def read_index():
 async def read_privacy_policy():
     return FileResponse(TEMPLATE_DIR / 'privacy-policy.html')
 
+@router.get("/support")
+async def read_support():
+    return FileResponse(TEMPLATE_DIR / 'support.html')
+
 @router.get("/terms")
 async def read_terms():
     return FileResponse(TEMPLATE_DIR / 'terms.html')

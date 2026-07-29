@@ -16,13 +16,14 @@
     <header class="app-header">
         <nav class="container flex justify-between items-center py-3">
             <div class="logo-container">
-                <img src="/image/placify_logo.svg" alt="Placify Logo" class="logo-image">
+                <a href="/"><img src="/image/placify_logo.svg" alt="Placify Logo" class="logo-image"></a>
             </div>
             <div class="header-actions">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#faq" class="nav-link">FAQ</a>
                 <a href="/privacy-policy" class="nav-link">Policy</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="/support" class="nav-link">Support</a>
+                <a href="/#contact" class="nav-link">Contact</a>
                 <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">
                     <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2">
@@ -50,6 +51,17 @@
 
     <!-- =========== MAIN CONTENT =========== -->
     <main class="container py-6">
+
+        <!-- DEVELOPMENT NOTICE -->
+        <details open class="card-base mb-6" style="padding: 1.5rem; border-left: 4px solid var(--blue-600);">
+            <summary style="font-weight: bold; font-size: 1.2rem; cursor: pointer; list-style-position: inside;">⚠️ Development Notice</summary>
+            <div style="margin-top: 1rem; line-height: 1.6; font-size: 0.95rem;">
+                <p class="mb-3">Placify started as a final-year engineering project and is now being actively developed as an independent platform. While the assessment system is fully functional, some recommendations may be limited because the platform currently uses a manually maintained company database and development-tier AI services instead of real-time job market APIs and production AI models.</p>
+                <p class="mb-3">As a result, recommendations may not always reflect the latest hiring requirements or job openings, and similar profiles may receive similar suggestions.</p>
+                <p class="mb-3">I'm continuously improving Placify through better datasets, real-time integrations, and more capable AI services. If you find the project useful, please consider supporting its development on the <a href="/support" style="color: var(--blue-600); text-decoration: underline;">Support page</a>.</p>
+                <p>Before using Placify, please review our <a href="/privacy-policy" style="color: var(--blue-600); text-decoration: underline;">Privacy Policy</a> and <a href="/terms" style="color: var(--blue-600); text-decoration: underline;">Terms & Conditions</a> to understand how your data is processed.</p>
+            </div>
+        </details>
 
         <!--
         ==================================================
@@ -288,7 +300,7 @@
                 <div class="flex items-center justify-center" style="gap: 0.5rem;">
                     <input type="checkbox" id="terms-checkbox" onchange="toggleAnalyzeButton()" style="cursor: pointer; width: 16px; height: 16px; accent-color: var(--blue-600);">
                     <label for="terms-checkbox" class="text-sm text-gray-600" style="cursor: pointer;">
-                        I agree to the <a href="/privacy-policy" target="_blank" class="nav-link" style="display: inline; padding: 0; color: var(--blue-600);">Privacy Policy</a> and <a href="/terms" target="_blank" class="nav-link" style="display: inline; padding: 0; color: var(--blue-600);">Terms</a>.
+                        I agree to the <a href="/privacy-policy" target="_blank" style="display: inline; padding: 0; color: var(--blue-600); text-decoration: underline;">Privacy Policy</a> and <a href="/terms" target="_blank" style="display: inline; padding: 0; color: var(--blue-600); text-decoration: underline;">Terms</a>.
                     </label>
                 </div>
                 <button id="upload-analyze-btn" onclick="uploadAndAnalyze()" class="btn btn-primary"
@@ -734,7 +746,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div style="margin-bottom: 0.25rem;">
-                        <img src="/image/placify_logo.svg" alt="Placify" class="footer-logo">
+                        <a href="/"><img src="/image/placify_logo.svg" alt="Placify" class="footer-logo"></a>
                     </div>
                     <p class="footer-description">AI-powered placement readiness platform for careers in Central India
                         IT ecosystem.</p>
@@ -742,9 +754,9 @@
                 <div class="footer-section">
                     <h4 class="footer-title">Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#team">Our Team</a></li>
-                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="/#about">About Us</a></li>
+                        <li><a href="/support">Support</a></li>
+                        <li><a href="/#faq">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
