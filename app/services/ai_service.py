@@ -37,7 +37,7 @@ def call_gemini(prompt):
     for attempt in range(GEMINI_MAX_RETRIES):
         try:
             response = gemini_client.models.generate_content(
-                model='gemini-2.0-flash-lite',
+                model='gemini-3.1-flash-lite',
                 contents=prompt
             )
             return response.text
@@ -79,7 +79,7 @@ Output ONLY valid JSON. No markdown, no code blocks."""
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": prompt}
         ],
-        model="llama-3.3-70b-versatile",
+        model="Qwen3.8-27B",
         response_format={"type": "json_object"},
         temperature=0.7,  # Slightly more creative for better emails
         max_tokens=4000   # Allow longer responses for complete emails

@@ -35,7 +35,7 @@ def test_groq_connection():
             messages=[
                 {"role": "user", "content": "Say 'Hello from Groq!'"}
             ],
-            model="llama-3.3-70b-versatile",
+            model="Qwen3.8-27B",
         )
         
         print("\n---------------- RESPONSE ----------------")
