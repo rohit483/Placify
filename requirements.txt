@@ -9,7 +9,9 @@ python-multipart
 pandas
 groq
 requests
+psycopg[binary]
 psycopg2-binary
 sqlalchemy
 scikit-learn
 numpy
+jinja2

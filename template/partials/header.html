@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title | default("Placify") }}</title>
+    <link rel="icon" href="/image/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/image/favicon.ico" type="image/x-icon">
+    <!-- Custom CSS (Replacing Tailwind) -->
+    <link rel="stylesheet" href="/static/style.css?v=3.2">
+    <!-- Using System Fonts per LinkedIn Design -->
+</head>
+
+<body>
+
+    <!-- =========== HEADER =========== -->
+    <header class="app-header">
+        <nav class="container flex justify-between items-center py-3">
+            <div class="logo-container">
+                <a href="/"><img src="/image/placify_logo.svg" alt="Placify Logo" class="logo-image"></a>
+            </div>
+            <div class="header-actions">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#faq" class="nav-link">FAQ</a>
+                <a href="/privacy-policy" class="nav-link">Policy</a>
+                <a href="/support" class="nav-link">Support</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div class="header-tagline">
+            <span class="tagline-text">PREPARE. <span class="tagline-highlight">MATCH.</span> SUCCEED.</span>
+        </div>
+    </header>
+
+    <!-- =========== MAIN CONTENT =========== -->
